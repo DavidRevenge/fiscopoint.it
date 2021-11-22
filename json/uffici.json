@@ -1,0 +1,72 @@
+[
+    {
+        "etichetta" : "Sigla Ufficio",
+        "name" : "Sigla",
+        "tipo" : "text",        
+        "opzioni_add" : "placeholder = \"Inserisci la sigla dell'ufficio\" required",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica la sigla\" required ",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Capo ufficio",
+        "name" : "Referente",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci il Nome e cognome del capo dell'ufficio\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica il Nome e cognome del capo dell'ufficio\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Indirizzo",
+        "name" : "Indirizzo",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci l'indirizzo\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica l'indirizzo\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Località",
+        "name" : "Localita",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci la Località\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica la Località\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Cap",
+        "name" : "Cap",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci il Codice Avviamento Postale\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica il Codice di Avviamento Postale\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "E-Mail",
+        "name" : "Email",
+        "tipo" : "email",
+        "opzioni_add" : "placeholder = \"Inserisci L'E-mail\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica L'E-mail\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Telefono dell'ufficio",
+        "name" : "Telefono",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci il Telefono d'ufficio\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica il Telefono d'ufficio\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    }
+]

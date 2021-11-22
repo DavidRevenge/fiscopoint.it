@@ -1,0 +1,13 @@
+
+    {
+        "etichetta" : "Nome",
+        "name" : "Nome",
+        "tipo" : "text",        
+        "value" : "",
+        "opzioni_add" : "placeholder = \"Inserisci il Nome\" required",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica il Nome\" required",
+        "descrizione_mod" : "",
+        "modificabile" : "si",
+        "bind" : "s"
+    }

@@ -1,0 +1,106 @@
+{
+    "logo" : [
+        {
+            "image" : "media/img/logo.png",
+            "webp" : "media/webp/logo.webp"
+        }       
+
+    ],
+    
+    "menu": [
+        {
+            "etichetta": "Home",
+            "sito": ""
+        },
+        {
+            "etichetta": "Fis.Co. Point",
+            "sito": "submenu"
+        },
+        {
+            "etichetta": "Servizi",
+            "sito": "submenu"
+        },
+        {
+            "etichetta": "Contattaci",
+            "sito": "Contattaci.html"
+        },
+        {
+            "etichetta": "Download",
+            "sito": "Download.html"
+        },
+        {
+            "etichetta": "Pagamenti online",
+            "sito": "Paypal.html"
+        }
+    ],
+
+    "Fis.Co. Point" : [
+        {           
+            "_commento" : "Questa è il sotto menu -Fis.Co. Point-",
+            "etichetta" : "Chi Siamo",
+            "sito" : "Chi-Siamo.html"
+        },
+        {            
+            "etichetta" : "Perchè Collaborare",
+            "sito" : "Collaborare.html"
+        }  
+    ],
+
+    "Servizi" : [
+        {
+            "_commento" : "Questa è il sotto menu -Servizi-",
+            "etichetta" : "Servizi Caf",
+            "sito" : "Servizi-Caf.html"
+        },
+    
+        {
+            "etichetta" : "Servizio di Patronato",
+            "sito" : "Servizi-Patronato.html"
+        },
+    
+        {
+            "etichetta" : "Paghe",
+            "sito" : "Paghe.html"
+        },
+        
+        {
+            "etichetta" :"Contabilità",
+            "sito" : "Contabilita.html"
+        },
+        
+        {
+            "etichetta" : "Colf e Badanti",
+            "sito" : "Colf-e-Badanti.html"
+        },
+    
+        {
+            "etichetta" : "Pratiche telematiche",
+            "sito" : "Pratiche-Telematiche.html"
+        },
+    
+        {
+            "etichetta" : "Fatturazione Elettronica",
+            "sito" : "Fatturazione-Elettronica.html"
+        },
+    
+        {
+            "etichetta" : "Formazione",
+            "sito" : "Formazione.html"
+        },   
+    
+        {
+            "etichetta" : "Assicurazioni",
+            "sito" : "Assicurazioni.html"
+        },
+    
+        {
+            "etichetta" : "Accesso al Credito",
+            "sito" : "Accesso-al-Credito.html"
+        },
+    
+        {
+            "etichetta" : "Moneta Elettronica",
+            "sito" : "Moneta-Elettronica.html"
+        }
+    ]
+}

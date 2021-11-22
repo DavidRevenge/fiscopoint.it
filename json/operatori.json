@@ -1,0 +1,137 @@
+[
+    {
+        "etichetta" : "Username",
+        "name" : "Username",
+        "tipo" : "text",        
+        "opzioni_add" : "placeholder = \"Inserisci username\" required  maxlength=\"10\"",
+        "descrizione_add" : "L'username deve avere una lunghezza non superiore a 10 caratteri",
+        "opzioni_mod" : "placeholder = \"Modifica username\" required  maxlength=\"10\"",
+        "descrizione_mod" : "L'username deve avere una lunghezza non superiore a 10 caratteri",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Password",
+        "name" : "Password",
+        "tipo" : "password",
+        "opzioni_add" : "placeholder = \"Inserisci la password\" autocomplete=\"new-password\" pattern=\"(?=.*\\d)(?=.*[a-z\\W+])(?=.*[A-Z]).{8,}\" required",
+        "descrizione_add" : "Deve contenere almeno un numero, una lettera maiuscola e minuscola, un carattere speciale e deve avere una lunghezza non inferiore a 8 caratteri",
+        "opzioni_mod" : "placeholder = \"Modifica la password - Lascia il campo vuoto se non vuoi modificare la password\" autocomplete=\"new-password\" pattern=\"(?=.*\\d)(?=.*[a-z\\W+])(?=.*[A-Z]).{8,}\"",
+        "descrizione_mod" : "Deve contenere almeno un numero, una lettera maiuscola e minuscola, un carattere speciale e deve avere una lunghezza non inferiore a 8 caratteri<br>Lascia il campo vuoto se non vuoi modificare la password",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Nome",
+        "name": "Nome",
+        "tipo" : "text",        
+        "opzioni_add" : "placeholder = \"Inserisci il nome\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica il nome\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Cognome",
+        "name" : "Cognome",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci il cognome\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica il cognome\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Indirizzo",
+        "name" : "Indirizzo",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci l'indirizzo\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica l'indirizzo\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Località",
+        "name" : "Localita",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci la Località\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica la Località\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Cap",
+        "name" : "Cap",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci il Codice Avviamento Postale\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica il Codice di Avviamento Postale\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Codice Fiscale",
+        "name" : "CodiceFiscale",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci il Codice Fiscale\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica il Codice Fiscale\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Partita Iva",
+        "name" : "PartitaIva",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci la Partita Iva\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica la Partita Iva\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "E-Mail",
+        "name" : "Email",
+        "tipo" : "email",
+        "opzioni_add" : "placeholder = \"Inserisci L'E-mail\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica L'E-mail\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Telefono dell'ufficio",
+        "name" : "Telefono",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci il Telefono d'ufficio\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica il Telefono d'ufficio\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Cellulare",
+        "name" : "Cellulare",
+        "tipo" : "text",
+        "opzioni_add" : "placeholder = \"Inserisci il Cellulare\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica il Cellulare\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    },
+    {
+        "etichetta" : "Pec",
+        "name" : "Pec",
+        "tipo" : "email",
+        "opzioni_add" : "placeholder = \"Inserisci la PEC\"",
+        "descrizione_add" : "",
+        "opzioni_mod" : "placeholder = \"Modifica la PEC\"",
+        "descrizione_mod" : "",
+        "bind" : "s"
+    }
+]
+
+
+
+
+

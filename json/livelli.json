@@ -1,0 +1,18 @@
+[
+    {
+        "etichetta" : "Livello: 0",
+        "descrizione" : "Amministratore",
+        "livello" : "0"
+    },
+
+    {
+        "etichetta" : "Livello: 1",
+        "descrizione" : "Operatore",
+        "livello" : "1"
+    },
+    {
+        "etichetta" : "Livello: 2",
+        "descrizione" : "Operatore_CED",
+        "livello" : "2"
+    }
+]

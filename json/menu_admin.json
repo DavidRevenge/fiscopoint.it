@@ -1,0 +1,23 @@
+[
+        
+        {
+            "etichetta" : "Uffici",
+            "sito" : "Uffici.html"
+        },
+        {
+            "etichetta" : "Operatori",
+            "sito" : "Operatori.html"
+        },
+        {
+            "etichetta" : "Utenti",
+            "sito" : "Utenti.html"
+        },
+        {
+            "etichetta" : "CED",
+            "sito" : "Ced.html"
+        },
+        {
+            "etichetta" : "Operatori_CED",
+            "sito" : "Operatori_Ced.html"
+        }
+]
