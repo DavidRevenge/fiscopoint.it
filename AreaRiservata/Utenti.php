@@ -80,8 +80,13 @@
         <?php   
 
         
+        $opr = ($livello == 0) ? "" : "AND utenti.id_Operatore = $id_operatore";
             
-        $sql = "SELECT utenti.*, utenti.id as utente_id, operatori.Nome as Operatore_Nome, operatori.Cognome as Operatore_Cognome, uffici.Sigla as Sigla_Ufficio, concat(utenti.Cognome, ' ' , utenti.Nome) as CognomeNome FROM utenti JOIN operatori ON utenti.id_Operatore = operatori.indice JOIN uffici ON uffici.id = operatori.Ufficio WHERE utenti.CodiceFiscale like concat('%', ?, '%')";// AND utenti.id_Operatore = "//.$_SESSION['id_operatore'];
+        $sql = "SELECT utenti.*, utenti.id as utente_id, operatori.Nome as Operatore_Nome, operatori.Cognome as Operatore_Cognome, ";
+        $sql .= "uffici.Sigla as Sigla_Ufficio, concat(utenti.Cognome, ' ' , utenti.Nome) as CognomeNome FROM utenti JOIN operatori ON ";
+        $sql .= "utenti.id_Operatore = operatori.indice JOIN uffici ON uffici.id = operatori.Ufficio WHERE utenti.CodiceFiscale like concat('%', ?, '%') ";
+        $sql .= $opr;
+
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $cond);    
         $stmt->execute();

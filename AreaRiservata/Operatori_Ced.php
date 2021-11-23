@@ -65,7 +65,7 @@
 
         
         $cond = isset($_POST["cerca"]) ? $_POST["testo"] : "";      
-        $sql = "SELECT * FROM operatori-ced WHERE (Username like CONCAT('%', ?, '%') OR Nome like CONCAT('%', ?, '%') OR Cognome like CONCAT('%', ?, '%')) AND indice > 1";
+        $sql = "SELECT * FROM `operatori ced` WHERE (Username like CONCAT('%', ?, '%') OR Nome like CONCAT('%', ?, '%') OR Cognome like CONCAT('%', ?, '%')) AND id > 1";
         $stmt = $conn->prepare($sql);  
         $stmt->bind_param("sss", $cond, $cond, $cond);    
         $stmt->execute();
