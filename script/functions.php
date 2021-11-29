@@ -16,7 +16,7 @@ function getOperatorUsers($operator_id)
 {
     global $needCreateTables, $conn;
 
-    if ($needCreateTables) {create_utenti_operatore_table($conn);}
+    if ($needCreateTables) { create_utenti_operatore_table($conn); }
 
     global $conn;
     $sql = "SELECT u.*, u.id as utente_id, concat(u.Nome, ' ' , u.Cognome) as NomeCognome, u.CodiceFiscale, u.DataNascita,
