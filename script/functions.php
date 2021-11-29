@@ -93,7 +93,7 @@ function create_utenti_operatore_table($conn)
             `id_operatore` int DEFAULT NULL,
             `id_utente` int DEFAULT NULL,
             PRIMARY KEY (`id`)
-          ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
+          )";// ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
 
     $conn->query($sql);
 }
