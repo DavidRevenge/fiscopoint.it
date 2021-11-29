@@ -1,6 +1,6 @@
 <?php     
 
-//var_dump($_SESSION);
+    require_once('script/functions.php');
 
     if($livello == 100) {
         echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
@@ -83,8 +83,10 @@
         $opr = ($livello == 0) ? "" : "AND utenti.id_Operatore = $id_operatore";
             
         $sql = "SELECT utenti.*, utenti.id as utente_id, operatori.Nome as Operatore_Nome, operatori.Cognome as Operatore_Cognome, ";
-        $sql .= "uffici.Sigla as Sigla_Ufficio, concat(utenti.Cognome, ' ' , utenti.Nome) as CognomeNome FROM utenti JOIN operatori ON ";
-        $sql .= "utenti.id_Operatore = operatori.indice JOIN uffici ON uffici.id = operatori.Ufficio WHERE utenti.CodiceFiscale like concat('%', ?, '%') ";
+     // $sql .= "uffici.Sigla as Sigla_Ufficio, concat(utenti.Cognome, ' ' , utenti.Nome) as CognomeNome FROM utenti JOIN operatori ON "; //La tabella prima il nome e poi il cognome :-D!
+        $sql .= "uffici.Sigla as Sigla_Ufficio, concat(utenti.Nome, ' ' , utenti.Cognome) as NomeCognome FROM utenti JOIN operatori ON ";
+        $sql .= "utenti.id_Operatore = operatori.indice JOIN uffici ON uffici.id = operatori.Ufficio "; // INNER JOIN utenti_operatore as uo ON utenti.id = uo.id_utente ";
+        $sql .= "WHERE utenti.CodiceFiscale like concat('%', ?, '%')";
         $sql .= $opr;
 
         $stmt = $conn->prepare($sql);
@@ -92,10 +94,17 @@
         $stmt->execute();
         $result = $stmt->get_result(); 
 
+        $merged_result = [];
 
-        while ($row = $result->fetch_assoc()){
+        while ($row = $result->fetch_assoc())  $merged_result[] = $row;
+        /** Task - Ogni operatore deve vedere solo gli utenti e le pratiche da lui registrate. */
+        $operator_users_result = getOperatorUsers($id_operatore);
+        if ( !! $operator_users_result) while ($row = $operator_users_result->fetch_assoc())  $merged_result[] = $row;
+
+        foreach ($merged_result as $row){
             $id = $row["utente_id"];
-            $cognome_nome = $row["CognomeNome"];
+           // $cognome_nome = $row["CognomeNome"];
+            $nome_cognome = $row["NomeCognome"];
             $cf = strtoupper($row["CodiceFiscale"]);
             $creato = "{$row["Operatore_Nome"]} {$row["Operatore_Cognome"]}" ;
             $datanascita =str_replace("/", " " , $row["DataNascita"]);
@@ -106,7 +115,7 @@
             $status = "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Area-Riservata/Modifica-Utente-$id.html\">Modifica</a>";
             $status .= "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Area-Riservata/Pratiche-$id.html\">Pratiche</a>";
             echo "<tr> 
-                    <td class=\"\">$cognome_nome</td>                    
+                    <td class=\"\">$nome_cognome</td>                    
                     <td>$cf</td>
                     <td>$datanascita</td>";
                     if ($livello == 0) { echo "<td>$creato<br>$sigla</td>"; }
