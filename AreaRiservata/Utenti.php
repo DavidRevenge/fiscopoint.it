@@ -101,6 +101,8 @@
         $operator_users_result = getOperatorUsers($id_operatore);
         if ( !! $operator_users_result) while ($row = $operator_users_result->fetch_assoc())  $merged_result[] = $row;
 
+        $merged_result = removeDuplicateArrayElement($merged_result, 'utente_id');
+
         foreach ($merged_result as $row){
             $id = $row["utente_id"];
            // $cognome_nome = $row["CognomeNome"];
