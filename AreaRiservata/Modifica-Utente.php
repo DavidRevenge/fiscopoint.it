@@ -48,7 +48,7 @@
 
         echo "
         <div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">
-            <strong>Operatore {$_POST["Nome"]} {$_POST["Cognome"]} Modificato</strong>.
+            <strong>Utente {$_POST["Nome"]} {$_POST["Cognome"]} Modificato</strong>.
             <button type=\button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
         </div>";
 

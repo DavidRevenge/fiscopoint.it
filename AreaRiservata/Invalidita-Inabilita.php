@@ -53,7 +53,7 @@
 						</li>
 						<li>Numero di telefono Cellulare per SMS dell&#8217;invito a visita &ensp; <label><input name="phone" type="Tel" /></label></li>
 						<li>In caso di domanda di aggravamento se la domanda è stata fatta dal 2010 in poi, occorre il verbale precedente;</li>
-						<li>IBAN (non scritto a mano) e indirizzo della banco o posta; <i><b>Se viene richiesto l&#8217;accompagno</b></i></li>
+						<li>IBAN (non scritto a mano) e indirizzo della Filiale; <i><b>Se viene richiesto l&#8217;accompagno</b></i></li>
 						<li>
 							Eventuali ricoveri:
 							<ul>
@@ -115,7 +115,7 @@
 						</li>
 						<li>Numero di telefono Cellulare per SMS dell&#8217;invito a visita<label>&ensp;<input name="phone" type="Tel" /></label></li>
 						<li>In caso di domanda di aggravamento se la domanda è stata fatta dal 2010 in poi, occorre il verbale precedente;</li>
-						<li>IBAN (non scritto a mano) e indirizzo della banco o posta; <i><b>Se viene richiesto l&#8217;accompagno</b></i></li>
+						<li>IBAN (non scritto a mano) e indirizzo della Filiale; <i><b>Se viene richiesto l&#8217;accompagno</b></i></li>
 						<li>
 							Eventuali ricoveri:
 							<ul>
@@ -177,7 +177,7 @@
 						</li>
 						<li>Numero di telefono Cellulare per SMS dell&#8217;invito a visita<label>&ensp;<input name="phone" type="Tel" /></label></li>
 						<li>In caso di domanda di aggravamento se la domanda è stata fatta dal 2010 in poi, occorre il verbale precedente;</li>
-						<li>IBAN (non scritto a mano) e indirizzo della banco o posta; <i><b>Se viene richiesto l&#8217;accompagno</b></i></li>
+						<li>IBAN (non scritto a mano) e indirizzo della Filiale; <i><b>Se viene richiesto l&#8217;accompagno</b></i></li>
 						<li>
 							Eventuali ricoveri:
 							<ul>
@@ -239,7 +239,7 @@
 						</li>
 						<li>Numero di telefono Cellulare per SMS dell&#8217;invito a visita &ensp;<label><input name="phone" type="Tel" /></label></li>
 						<li>In caso di domanda di aggravamento se la domanda è stata fatta dal 2010 in poi, occorre il verbale precedente;</li>
-						<li>IBAN (non scritto a mano) e indirizzo della banco o posta; <i><b>Se viene richiesto l&#8217;accompagno</b></i></li>
+						<li>IBAN (non scritto a mano) e indirizzo della Filiale; <i><b>Se viene richiesto l&#8217;accompagno</b></i></li>
 						<li>
 							Eventuali ricoveri:
 							<ul>
@@ -301,7 +301,7 @@
 						</li>
 						<li>Numero di telefono Cellulare per SMS dell&#8217;invito a visita&ensp;<label><input name="phone" type="Tel" /></label></li>
 						<li>In caso di domanda di aggravamento se la domanda è stata fatta dal 2010 in poi, occorre il verbale precedente;</li>
-						<li>IBAN (non scritto a mano) e indirizzo della banco o posta; <i><b>Se viene richiesto l&#8217;accompagno</b></i></li>
+						<li>IBAN (non scritto a mano) e indirizzo della Filiale; <i><b>Se viene richiesto l&#8217;accompagno</b></i></li>
 						<li>
 							Eventuali ricoveri:
 							<ul>
@@ -314,8 +314,8 @@
 								<option value="Si">Si</option>
 								<option value="No">No</option>
 							</select>
+						</li>	
 							<b><i>RICONOSCIMENTO DEL COLLOCAMENTO MIRATO L. 68 DI UNA PERSONA GIA&#8217; IN POSSESSO DEL VERBALE CON LA PERCENTUALE DI INVALIDITA&#8217;</i></b>
-						</li>
 						<li>Documento di identità in corso di validità e tessera sanitaria del richiedente e indirizzo di residenza<b><i>-se straniero permesso o carta di soggiorno-</i></b></li>
 						<li>Stato Civile:</li>
 						<li style="list-style-type: none;">
@@ -365,7 +365,7 @@
 			<li style="list-style-type: none;">
 				<ul>
 					<li><a href="<?php echo $sito ?>Generici/2019/11/AP70_mod_autocert.pdf" target="_blank" rel="noopener"><span style="color: #0000ff;"><b><i>Compilare AP 70</i></b></span></a></li>
-					<li>Documento di identità in corso di validità e tessera sanitaria del richiedente e del coniuge<i>-se straniero permesso o carta di soggiorno-</i></li>
+					<li>Documento di identità in corso di validità e tessera sanitaria del richiedente e del coniuge<i><b>-se straniero permesso o carta di soggiorno-</b></i></li>
 					<li>Stato Civile:</li>
 					<li style="list-style-type: none;">
 					    <select name="mydropdown">
@@ -384,7 +384,7 @@
 					<li>Atto relativo alla nomina del medesimo;</li>
 				</ul>
 					<li>Verbale della commissione medica;</li>
-					<li>IBAN (non scritto a mano) e indirizzo della banco o posta;</li>
+					<li>IBAN (non scritto a mano) e indirizzo della Filiale;</li>
 					<li>Il conto è cointestato?</li>
 					<li style="list-style-type: none;">
 					    <select name="mydropdown">
@@ -420,7 +420,7 @@
 					<li>IBAN (non scritto a mano) di un libretto o conto <b>NOMINATIVO PER MINORI;</b></li>
 					<li style="list-style-type: none;">
 						<ul>
-							<li>Indirizzo della banca o posta;</li>
+							<li>indirizzo della Filiale;</li>
 						</ul>
 					</li>
 					<li>Eventuali ricoveri:</li>
@@ -541,7 +541,7 @@
 							<li>sentenza e omologa del tribunale</li>
 						</ul>
 					</li>
-					<li>IBAN (non scritto a mano) e indirizzo della banco o posta;</li>
+					<li>IBAN (non scritto a mano) e indirizzo della Filiale;</li>
 					<li>Il conto è cointestato?</li>
 					<li style="list-style-type: none;">
 						<select name="mydropdown">
@@ -584,7 +584,7 @@
 							<li>sentenza e omologa del tribunale</li>
 						</ul>
 					</li>
-					<li>IBAN <i>(non scritto a mano)</i> e indirizzo della banco o posta;</li>
+					<li>IBAN (non scritto a mano) e indirizzo della Filiale;</li>
 					<li>Il conto è cointestato?</li>
 					<li style="list-style-type: none;">
 						<select name="mydropdown">

@@ -20,8 +20,8 @@
                 <ul style="line-height:1.8;">
                     <li style="list-style-type: none;">
                     <ul>
-                        <li>Foglio dell&#8217;ASL dei mesi a rischio o foglio del lavoro a rischio</li>
-                        <li>Documento di identità in corso di validità e tessera sanitaria <i>-se straniero permesso o carta di soggiorno-</i></li>
+                        <li>Foglio dell&#8217;ASL dei mesi a rischio o foglio del lavoro a rischio;</li>
+                        <li>Documento di identità in corso di validità e tessera sanitaria <i>-se straniero permesso o carta di soggiorno-;</i></li>
                         <li>Busta paga;</li>
                         <li>Certificato del ginecologo con la data presunta del parto;</li>
                         <li>Numero di telefono Cellulare&ensp;<label><input name="phone" type="Tel" /></label></li>
@@ -40,13 +40,13 @@
                 <ul style="line-height:1.8;">
                     <li style="list-style-type: none;">
                     <ul>
-                        <li>Documento di identità in corso di validità e tessera sanitaria <i>-se straniero permesso o carta di soggiorno-</i></li>
+                        <li>Documento di identità in corso di validità e tessera sanitaria <i>-se straniero permesso o carta di soggiorno-;</i></li>
                         <li>Busta paga;</li>
                         <li>Certificato del ginecologo con la data presunta del parto;</li>
                         <li>Numero di telefono Cellulare&ensp;<label><input name="phone" type="Tel" /></label></li>
                         <li style="list-style-type: none;">
                             <p><b>POSSIBILITA&#8217;:</b> &#8211; 2 Mesi prima e 3 dopo il parto; &#8211; 1 mese prima e 4 dopo il parto &#8211; Flessibilità <i>solo con il certificato dell&#8217;ASL</i></p>
-                            <p><b>N.B.: Per chi ha i contributi a gestione separata (esempio COCOCO, COCOPRO E COLF) serve l&#8217;IBAN del C/C e il modello <a href="<?php echo $sito ?>Generici/2019/11/SR163_Rich_Pag_Prest.pdf" target="_blank"><em><span style="color: #0000ff;">SR 163</span></em></a></b> <i>se il conto è online serve il documento rilasciato on line dalla procedura di collegamento al conto nel quale appare l&#8217;intestazione</i></p>
+                            <p><b>N.B.: Per chi ha i contributi a gestione separata (esempio COCOCO, COCOPRO E COLF) serve l&#8217;IBAN del C/C e il modello <a href="<?php echo $sito ?>media/PDF/SR188.pdf" target="_blank"><em><span style="color: #0000ff;">SR 188</span></em></a></b> <i>se il conto è online serve il documento rilasciato on line dalla procedura di collegamento al conto nel quale appare l&#8217;intestazione</i></p>
                             <h4>Dopo la nascita:</h4>
                         </li>
                         <li>certificato di nascita;</li>
@@ -77,13 +77,13 @@
                         <li style="list-style-type: none;">
                             <ul>
                                 <li>Attività lavorativa</li>
-                                <li>Nel caso avesse fruito dei giorni, fornire documentazione che lo attesta<br /><i><b>&#8211; Quanti e quali giorni ha preso fino ad oggi &#8211;</b></i></li>
+                                <li>Nel caso avesse fruito dei giorni, fornire documentazione che lo attesta<br /><i><b>&#8211; Quanti e quali giorni ha preso fino ad oggi? &#8211;</b></i></li>
                             </ul>
                         </li>
                         <li>Nel caso di minori adottati:</li>
                         <li style="list-style-type: none;">
                             <ul>
-                                <li>N° provvediamento e tribunale che lo ha emesso <i>(omologa adozione)<></li>
+                                <li>N° provvediamento e tribunale che lo ha emesso <i>(omologa adozione)</li>
                                 <li>Data ingresso in Italia<br><label><input name="Data" type="date" /></label></li>
                                 <li>Data ingresso in famiglia<br><label><input name="Data" type="date" /></label></li>
                             </ul>
@@ -111,7 +111,7 @@
                         <li>Certificato o atto di nascita del minore;</li>
                         <li>Attestazione ISEE che non superi <b><u>€ 25.000</u></b><i>&#8211; e che riporti il nucleo familiare compreso il neonato &#8211;</i></li>
                         <li>IBAN c/c intestato al genitore richiedente</li>
-                        <li><a href="<?php echo $sito ?>Generici/2019/11/SR163_Rich_Pag_Prest.pdf"target="_blank"><em><strong><span style="color: #0000ff;">Modello SR 163</span></strong></em></a>
+                        <li><a href="<?php echo $sito ?>media/PDF/SR188.pdf"target="_blank"><em><strong><span style="color: #0000ff;">Modello SR 188</span></strong></em></a>
                         <i>&#8211; Se il conto è online serve il documento rilasciato on line dalla procedura di collegamento al conto nel quale appare l&#8217;intestazione &#8211;</i></li>
                         <li>Numero di telefono Cellulare&ensp;<label><input name="phone" type="Tel" /></label></li>
                     </ul>
@@ -142,9 +142,10 @@
                         <li>Certificato medico con protocollo telematico attestante la settimana di gravidanza per le lavoratrici dipendenti;</li>
                         <li>Numero identificativo a 15 cifre e la data di rilascio di una prescrizione medica <b>&#8211; ricetta rossa &#8211;</b> con indicazione del codice di esenzione compreso <b>tra M31 e M42</b> per le disoccupate;</li>
                         <li>IBAN del c/c intestato alla richiedente;</li>
-                        <li><a href="<?php echo $sito ?>Generici/2019/11/SR163_Rich_Pag_Prest.pdf"target="_blank"><em><strong><span style="color: #0000ff;">Modello SR 163</span></strong></em></a>&ensp;<i>&#8211; Se il conto è online serve il documento rilasciato on line dalla procedura di collegamento al conto nel quale appare l&#8217;intestazione &#8211;</i></li>
+                        <li><a href="<?php echo $sito ?>media/PDF/SR188.pdf"target="_blank"><em><strong><span style="color: #0000ff;">Modello SR 188</span></strong></em></a>&ensp;<i>&#8211; Se il conto è online serve il documento rilasciato on line dalla procedura di collegamento al conto nel quale appare l&#8217;intestazione &#8211;</i></li>
                         <li>Numero di telefono Cellulare&ensp;<label><input name="phone" type="Tel" /></label></li>
                         <li style="list-style-type: none;">
+                        <br>
                             <h4>Dopo la nascita:</h4>
                         </li>
                         <li><b>Della mamma<b></b></b></li>
@@ -162,7 +163,7 @@
                                 <li>Codice Fiscale;</li>
                             </ul>
                         </li>
-                        <li><a href="<?php echo $sito ?>Generici/2019/11/SR163_Rich_Pag_Prest.pdf"target="_blank"><span style="color: #0000ff;"><em><strong>Modello SR 163</strong></em></span>&ensp;</a><i>&#8211; Se il conto è online serve il documento rilasciato on line dalla procedura di collegamento al conto nel quale appare l&#8217;intestazione &#8211;</i></li>
+                        <li><a href="<?php echo $sito ?>media/PDF/SR188.pdf"target="_blank"><span style="color: #0000ff;"><em><strong>Modello SR 188</strong></em></span>&ensp;</a><i>&#8211; Se il conto è online serve il documento rilasciato on line dalla procedura di collegamento al conto nel quale appare l&#8217;intestazione &#8211;</i></li>
                         <li>Numero di telefono Cellulare&ensp;<label><input name="phone" type="Tel" /></label></li>
                     </ul>
                 </li>

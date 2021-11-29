@@ -92,7 +92,7 @@
                         <a href="<?php echo $sito ?>Generici/2019/11/MANDATO-ENASC.pdf" target="_blank" rel="noopener">Mandato ENASC</a><br>
                         <a href="<?php echo $sito ?>media/PDF/18.pdf" target="_blank" rel="noopener">Presa Pratica</a><br>
                         <a href="<?php echo $sito ?>Generici/2019/11/SR16.pdf" target="_blank" rel="noopener">SR 16</a><br>
-                        <a href="<?php echo $sito ?>Generici/2019/11/SR163_Rich_Pag_Prest.pdf" target="_blank" rel="noopener">SR 163</a><br>
+                        <a href="<?php echo $sito ?>media/PDF/SR188.pdf" target="_blank" rel="noopener">SR 188</a><br>
                         <a href="<?php echo $sito ?>Generici/2019/11/SS3.pdf" target="_blank" rel="noopener">SS3</a><br>
                         <a href="<?php echo $sito ?>media/PDF/Recesso.pdf" target="_blank" rel="noopener">Modulo Recesso Rapporto di Lavoro</a><br>
                     </p> 
