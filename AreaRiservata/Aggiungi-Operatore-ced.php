@@ -7,10 +7,10 @@
     $titolo_pagina = "Operatori CED";
     include("template/titolo_pagina.php");
     
-    $operatori = json_decode(file_get_contents("json/operatori_ced.json"), true);
+    $operatori_ced = json_decode(file_get_contents("json/operatori_ced.json"), true);
     $mn_servizi = json_decode(file_get_contents("json/servizi.json"), true);
 
-    if(isset($_POST["operatori_ced"])) {
+    if(isset($_POST["oper"])) {
         // leggi i menu         
         $servizi = "";
         foreach($mn_servizi as $key=>$value) {
@@ -35,11 +35,11 @@
         array_push($pm, $servizi);
        
         
-        if(isset($_POST["ced"])) {
-            $insert .= ", ced";
+        if(isset($_POST["ufficio"])) {
+            $insert .= ", Ufficio";
             $val_par .= "i"; 
             $values .= ", ?";
-            array_push($pm, intval($_POST["ced"]));
+            array_push($pm, intval($_POST["ufficio"]));
         }
 
         $insert .= ", Livello";
@@ -48,7 +48,7 @@
         array_push($pm, intval($_POST["livello"]));
 
         
-        $sql = "INSERT INTO operatori-ced ($insert) VALUES ($values)";
+        $sql = "INSERT INTO operatori ($insert) VALUES ($values)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param($val_par , ...$pm);
         $stmt->execute();        
@@ -65,7 +65,7 @@
 
 ?>
 
-<form action="<?php echo $sito ?>Area-Riservata/Aggiungi-Operatore_Ced.html" method="POST">  
+<form action="<?php echo $sito ?>Area-Riservata/Aggiungi-Operatore.html" method="POST">  
 
     <?php
     foreach($operatori as $value) {
@@ -86,12 +86,12 @@
     <!-- Ufficio -->
     <div class="m-1 m-md-2 row g-md-2 align-items-center">
             <div class="col-md-2 text-md-end">
-                <label for="nick" class="col-form-label">CED</label>
+                <label for="nick" class="col-form-label">Ufficio</label>
             </div>
             <div class="col-md-10">
     <?php
         // ufficio di lavoro
-        $sql = "SELECT * FROM ced";
+        $sql = "SELECT * FROM uffici";
         $stmt = $conn->prepare($sql);
         $stmt->execute();   
         $result = $stmt->get_result(); 

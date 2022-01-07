@@ -23,7 +23,6 @@
 
     // inizio body
     include("template/menu.php");
-
     
 
     // caricamento corpo della pagina.

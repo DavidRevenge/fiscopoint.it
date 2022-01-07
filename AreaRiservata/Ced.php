@@ -71,7 +71,7 @@
             $email = $row["Email"];
             $telefono = $row["Telefono"];
             
-            $status = "<a class=\"ms-2 btn btn-primary lista_operatori_Ced\" href=\"{$sito}Area-Riservata/Modifica-Ced-$id.html\">Modifica</a>";
+            $status = "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Area-Riservata/Modifica-Ced-$id.html\">Modifica</a>";
 
              echo "<tr> 
                     <td>$sigla</td>

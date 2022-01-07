@@ -4,7 +4,7 @@
         return;
     } 
     // titolo della pagina
-    $titolo_pagina = "Operatori_CED";
+    $titolo_pagina = "Operatori CED";
     include("template/titolo_pagina.php");
 
     $livelli_json = json_decode(file_get_contents("json/livelli.json"), true);
@@ -20,13 +20,13 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-3">
-                <a class="btn btn-primary" href="<?php echo $sito ?>Area-Riservata/Aggiungi-Operatore_Ced.html">Aggiungi operatore CED</a>
+                <a class="btn btn-primary" href="<?php echo $sito ?>Area-Riservata/Aggiungi-Operatore-ced.html">Aggiungi operatore CED</a>
             </div>
             <div class="col-md-9">
-                <form action="<?php echo $sito ?>Area-Riservata/Operatori_Ced.html" method="POST"> 
+                <form action="<?php echo $sito ?>Area-Riservata/Operatori_ced.html" method="POST"> 
                     <div class="row justify-content-end">
                         <div class="col-auto">
-                            <label for="cerca-operatore" class="col-form-label">Cerca Operatore CED</label>
+                            <label for="cerca-operatore-ced" class="col-form-label">Cerca Operatore CED</label>
                         </div>
                         <div class="col-auto">
                             <input type="text" name="testo" class="form-control" aria-describedby="" title="">
@@ -65,7 +65,7 @@
 
         
         $cond = isset($_POST["cerca"]) ? $_POST["testo"] : "";      
-        $sql = "SELECT * FROM `operatori ced` WHERE (Username like CONCAT('%', ?, '%') OR Nome like CONCAT('%', ?, '%') OR Cognome like CONCAT('%', ?, '%')) AND id > 1";
+        $sql = "SELECT * FROM operatori WHERE (Username like CONCAT('%', ?, '%') OR Nome like CONCAT('%', ?, '%') OR Cognome like CONCAT('%', ?, '%')) AND indice > 1";
         $stmt = $conn->prepare($sql);  
         $stmt->bind_param("sss", $cond, $cond, $cond);    
         $stmt->execute();
@@ -82,8 +82,8 @@
             $stato = $row["Stato"];
             
 
-            $status = ($stato) ? "<a href=\"{$sito}Area-Riservata/Operatori_Ced-$id.html\" class=\"btn btn-primary\">Disabilita</a>" : "<a href=\"{$sito}Area-Riservata/Operatori_Ced-$id.html\" class=\"btn btn-primary\">Abilita</a>";
-            $status .= "<a class=\"ms-2 btn btn-primary lista_operatori_Ced\" href=\"{$sito}Area-Riservata/Modifica-Operatore_Ced-$id.html\">Modifica</a>";
+            $status = ($stato) ? "<a href=\"{$sito}Area-Riservata/Operatori-$id.html\" class=\"btn btn-primary\">Disabilita</a>" : "<a href=\"{$sito}Area-Riservata/Operatori-$id.html\" class=\"btn btn-primary\">Abilita</a>";
+            $status .= "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Area-Riservata/Modifica-Operatore-$id.html\">Modifica</a>";
             $row_color = (!$stato) ? "bg-danger text-white" : "";
             echo "<tr class=\"$row_color\" > 
                     <td>$username</td>

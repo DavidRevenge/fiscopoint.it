@@ -28,14 +28,14 @@
         
         echo "
         <div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">
-            <strong>CED {$_POST["Sigla"]} Modificato</strong>.
+            <strong>Ced {$_POST["Sigla"]} Modificato</strong>.
             <button type=\button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
         </div>";
 
     }
     
 
-    $sql = "SELECT * FROM uffici where id = ? limit 1";
+    $sql = "SELECT * FROM ced where id = ? limit 1";
     $stmt = $conn->prepare($sql);  
     $stmt->bind_param("i", $_GET["id"]);      
     $stmt->execute();
@@ -43,7 +43,7 @@
     $row = $result->fetch_assoc();
 ?>
 
-<form action="<?php echo $sito ?>Area-Riservata/Modifica-CED-<?php echo $_GET["id"] ?>.html" method="POST">
+<form action="<?php echo $sito ?>Area-Riservata/Modifica-Ced-<?php echo $_GET["id"] ?>.html" method="POST">
     <?php
     foreach($ced_json as $value) {
         $tmp = $row[$value["name"]];
