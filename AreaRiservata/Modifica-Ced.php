@@ -7,13 +7,13 @@
     $titolo_pagina = "Modifica CED";    
     include("template/titolo_pagina.php");
     
-    $uffici_json = json_decode(file_get_contents("json/ced.json"), true);    
+    $ced_json = json_decode(file_get_contents("json/ced.json"), true);    
 
     if(isset($_POST["oper"])){
         $set = "";
         $pm = array();
         $val_par = "";
-        foreach($uffici_json as $value ) {
+        foreach($ced_json as $value ) {
             $set .= "{$value["name"]} = ?, ";    
             array_push($pm, $_POST[$value["name"]]);
             $val_par .= $value["bind"];
