@@ -81,7 +81,7 @@
     },
     {
         "etichetta" : "Partita Iva",
-        "name" : "PartitaIva",
+        "name" : "PartitaIVA",
         "tipo" : "text",
         "opzioni_add" : "placeholder = \"Inserisci la Partita Iva\"",
         "descrizione_add" : "",

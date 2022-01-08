@@ -97,3 +97,28 @@ function create_utenti_operatore_table($conn)
 
     $conn->query($sql);
 }
+function create_operatori_ced_table($conn)
+{
+    $sql = "CREATE TABLE `operatori_ced` (
+        `id` bigint NOT NULL AUTO_INCREMENT,
+        `Username` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+        `Password` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+        `Nome` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+        `Cognome` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+        `Indirizzo` text CHARACTER SET utf32 COLLATE utf32_unicode_ci NOT NULL,
+        `Localita` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+        `Cap` text CHARACTER SET ucs2 COLLATE ucs2_unicode_ci NOT NULL,
+        `CodiceFiscale` text CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+        `PartitaIVA` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+        `Email` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+        `Telefono` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+        `Cellulare` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+        `Pec` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+        `Livello` int NOT NULL,
+        `Servizi` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+        `Ced` int NOT NULL,
+        PRIMARY KEY (`id`)
+      );";
+
+    $conn->query($sql);
+}

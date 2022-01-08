@@ -5,4 +5,5 @@
     $conn->set_charset("utf8");
 
     $needCreateTables = true;
+    $needRemoveColumn = false;
 ?>

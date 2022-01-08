@@ -7,7 +7,7 @@
     $titolo_pagina = "Operatori";
     include("template/titolo_pagina.php");
     
-    $operatori = json_decode(file_get_contents("json/operatori.json"), true);
+    $operatori = json_decode(file_get_contents("json/operatori_ced.json"), true);
     $mn_servizi = json_decode(file_get_contents("json/servizi.json"), true);
 
     if(isset($_POST["oper"])) {
