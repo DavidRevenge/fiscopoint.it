@@ -39,56 +39,7 @@
         "descrizione_mod" : "",
         "bind" : "s"
     },
-    {
-        "etichetta" : "Indirizzo",
-        "name" : "Indirizzo",
-        "tipo" : "text",
-        "opzioni_add" : "placeholder = \"Inserisci l'indirizzo\"",
-        "descrizione_add" : "",
-        "opzioni_mod" : "placeholder = \"Modifica l'indirizzo\"",
-        "descrizione_mod" : "",
-        "bind" : "s"
-    },
-    {
-        "etichetta" : "Località",
-        "name" : "Localita",
-        "tipo" : "text",
-        "opzioni_add" : "placeholder = \"Inserisci la Località\"",
-        "descrizione_add" : "",
-        "opzioni_mod" : "placeholder = \"Modifica la Località\"",
-        "descrizione_mod" : "",
-        "bind" : "s"
-    },
-    {
-        "etichetta" : "Cap",
-        "name" : "Cap",
-        "tipo" : "text",
-        "opzioni_add" : "placeholder = \"Inserisci il Codice Avviamento Postale\"",
-        "descrizione_add" : "",
-        "opzioni_mod" : "placeholder = \"Modifica il Codice di Avviamento Postale\"",
-        "descrizione_mod" : "",
-        "bind" : "s"
-    },
-    {
-        "etichetta" : "Codice Fiscale",
-        "name" : "CodiceFiscale",
-        "tipo" : "text",
-        "opzioni_add" : "placeholder = \"Inserisci il Codice Fiscale\"",
-        "descrizione_add" : "",
-        "opzioni_mod" : "placeholder = \"Modifica il Codice Fiscale\"",
-        "descrizione_mod" : "",
-        "bind" : "s"
-    },
-    {
-        "etichetta" : "Partita Iva",
-        "name" : "PartitaIVA",
-        "tipo" : "text",
-        "opzioni_add" : "placeholder = \"Inserisci la Partita Iva\"",
-        "descrizione_add" : "",
-        "opzioni_mod" : "placeholder = \"Modifica la Partita Iva\"",
-        "descrizione_mod" : "",
-        "bind" : "s"
-    },
+    
     {
         "etichetta" : "E-Mail",
         "name" : "Email",
@@ -99,16 +50,7 @@
         "descrizione_mod" : "",
         "bind" : "s"
     },
-    {
-        "etichetta" : "Telefono dell'ufficio",
-        "name" : "Telefono",
-        "tipo" : "text",
-        "opzioni_add" : "placeholder = \"Inserisci il Telefono d'ufficio\"",
-        "descrizione_add" : "",
-        "opzioni_mod" : "placeholder = \"Modifica il Telefono d'ufficio\"",
-        "descrizione_mod" : "",
-        "bind" : "s"
-    },
+    
     {
         "etichetta" : "Cellulare",
         "name" : "Cellulare",
@@ -116,16 +58,6 @@
         "opzioni_add" : "placeholder = \"Inserisci il Cellulare\"",
         "descrizione_add" : "",
         "opzioni_mod" : "placeholder = \"Modifica il Cellulare\"",
-        "descrizione_mod" : "",
-        "bind" : "s"
-    },
-    {
-        "etichetta" : "Pec",
-        "name" : "Pec",
-        "tipo" : "email",
-        "opzioni_add" : "placeholder = \"Inserisci la PEC\"",
-        "descrizione_add" : "",
-        "opzioni_mod" : "placeholder = \"Modifica la PEC\"",
         "descrizione_mod" : "",
         "bind" : "s"
     }

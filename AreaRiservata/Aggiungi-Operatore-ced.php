@@ -92,7 +92,7 @@ foreach ($operatori as $value) {
     <!-- Ufficio -->
     <div class="m-1 m-md-2 row g-md-2 align-items-center">
             <div class="col-md-2 text-md-end">
-                <label for="nick" class="col-form-label">CED</label>
+                <label for="nick" class="col-form-label">Ufficio</label>
             </div>
             <div class="col-md-10">
     <?php
