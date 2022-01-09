@@ -177,7 +177,7 @@ $buttonLabel = $is_opc_edit ? 'Modifica Operatore' : 'Aggiungi Operatore';
             <input type="hidden" name="opc_edit" value="0">
             <?php endif;?>
 
-            <button type="submit" class="btn btn-primary"><?php echo $buttonLabel; ?></button>
+            <button type="submit" class="btn btn-primary mb-2"><?php echo $buttonLabel; ?></button>
         </div>
     </div>
 </form>
