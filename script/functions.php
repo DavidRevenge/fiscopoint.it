@@ -1,5 +1,48 @@
 <?php
 
+require_once 'functions/sql.php';
+require_once 'functions/db.php';
+
+function getJsonSelect($value, $optionToSelect = false)
+{
+    global $conn;
+    $return = '
+    <div class="m-1 m-md-2 row g-md-2 align-items-center">
+            <div class="col-md-2 text-md-end">
+                <label for="nick" class="col-form-label">' . $value['etichetta'] . '</label>
+            </div>
+            <div class="col-md-10"> ';
+
+    $sqlWhere = (isset($value['sqlWhere'])) ? $value['sqlWhere'] : '';
+    $sqlId = (isset($value['sqlId'])) ? $value['sqlId'] : 'id';
+
+    $sql = 'SELECT * FROM '.$value['sqlTable'].' '.$sqlWhere;
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $return .= '<select name="'.$value['name'].'" class="form-select">';
+    
+    while ($row = $result->fetch_assoc()) {
+        $sqlSelectOptionValue = '';
+
+        $selected = ($row[$sqlId] === $optionToSelect) ? 'selected': '';
+
+        if (is_array($value['sqlSelectOptionValue'])) {
+            foreach ($value['sqlSelectOptionValue'] as $ssov) $sqlSelectOptionValue .= ' '.$row[$ssov];
+        } else $sqlSelectOptionValue = $row[$value['sqlSelectOptionValue']];
+        $return .= '
+                <option value="'.$row[$sqlId].'" '.$selected.'>'
+                .$sqlSelectOptionValue.'
+                </option>
+                ';
+    }
+    $return .= "</select>
+            </div>
+        </div>";
+
+    return $return;
+}
+
 function removeDuplicateArrayElement($array, $key)
 {
     $array_to_return = array();
@@ -16,7 +59,7 @@ function getOperatorUsers($operator_id)
 {
     global $needCreateTables, $conn;
 
-    if ($needCreateTables) { create_utenti_operatore_table($conn); }
+    if ($needCreateTables) {create_utenti_operatore_table($conn);}
 
     global $conn;
     $sql = "SELECT u.*, u.id as utente_id, concat(u.Nome, ' ' , u.Cognome) as NomeCognome, u.CodiceFiscale, u.DataNascita,
@@ -93,32 +136,20 @@ function create_utenti_operatore_table($conn)
             `id_operatore` int DEFAULT NULL,
             `id_utente` int DEFAULT NULL,
             PRIMARY KEY (`id`)
-          )";// ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
+          )"; // ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
 
     $conn->query($sql);
 }
-function create_operatori_ced_table($conn)
+function create_operatori_ced_table()
 {
-    $sql = "CREATE TABLE `operatori_ced` (
+    global $conn;
+    $sql = "CREATE TABLE IF NOT EXISTS `operatori_ced` (
         `id` bigint NOT NULL AUTO_INCREMENT,
         `Username` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-        `Password` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-        `Nome` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-        `Cognome` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-        `Indirizzo` text CHARACTER SET utf32 COLLATE utf32_unicode_ci NOT NULL,
-        `Localita` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-        `Cap` text CHARACTER SET ucs2 COLLATE ucs2_unicode_ci NOT NULL,
-        `CodiceFiscale` text CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-        `PartitaIVA` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-        `Email` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-        `Telefono` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-        `Cellulare` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-        `Pec` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-        `Livello` int NOT NULL,
-        `Servizi` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-        `Ced` int NOT NULL,
+        `id_ced` bigint DEFAULT NULL,
+        `id_operatore` bigint DEFAULT NULL,
         PRIMARY KEY (`id`)
-      );";
+      )";
 
     $conn->query($sql);
 }

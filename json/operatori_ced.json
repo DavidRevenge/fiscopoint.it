@@ -3,63 +3,37 @@
         "etichetta" : "Username",
         "name" : "Username",
         "tipo" : "text",        
-        "opzioni_add" : "placeholder = \"Inserisci username\" required  maxlength=\"10\"",
-        "descrizione_add" : "L'username deve avere una lunghezza non superiore a 10 caratteri",
-        "opzioni_mod" : "placeholder = \"Modifica username\" required  maxlength=\"10\"",
-        "descrizione_mod" : "L'username deve avere una lunghezza non superiore a 10 caratteri",
+        "opzioni_add" : "placeholder = \"Inserisci username\" required  maxlength=\"20\"",
+        "descrizione_add" : "L'username deve avere una lunghezza non superiore a 20 caratteri",
+        "opzioni_mod" : "placeholder = \"Modifica username\" required  maxlength=\"20\"",
+        "descrizione_mod" : "L'username deve avere una lunghezza non superiore a 20 caratteri",
         "bind" : "s"
     },
     {
-        "etichetta" : "Password",
-        "name" : "Password",
-        "tipo" : "password",
-        "opzioni_add" : "placeholder = \"Inserisci la password\" autocomplete=\"new-password\" pattern=\"(?=.*\\d)(?=.*[a-z\\W+])(?=.*[A-Z]).{8,}\" required",
-        "descrizione_add" : "Deve contenere almeno un numero, una lettera maiuscola e minuscola, un carattere speciale e deve avere una lunghezza non inferiore a 8 caratteri",
-        "opzioni_mod" : "placeholder = \"Modifica la password - Lascia il campo vuoto se non vuoi modificare la password\" autocomplete=\"new-password\" pattern=\"(?=.*\\d)(?=.*[a-z\\W+])(?=.*[A-Z]).{8,}\"",
-        "descrizione_mod" : "Deve contenere almeno un numero, una lettera maiuscola e minuscola, un carattere speciale e deve avere una lunghezza non inferiore a 8 caratteri<br>Lascia il campo vuoto se non vuoi modificare la password",
-        "bind" : "s"
-    },
-    {
-        "etichetta" : "Nome",
-        "name": "Nome",
-        "tipo" : "text",        
-        "opzioni_add" : "placeholder = \"Inserisci il nome\"",
+        "etichetta" : "Operatore",
+        "name" : "id_operatore",
+        "tipo" : "select",
+        "sqlSelectOptionValue": ["Nome", "Cognome"],
+        "sqlTable": "operatori",
+        "sqlWhere": "where livello > 0",
+        "sqlId": "indice",
+        "opzioni_add" : "placeholder = \"Seleziona l'operatore \" required",
         "descrizione_add" : "",
-        "opzioni_mod" : "placeholder = \"Modifica il nome\"",
+        "opzioni_mod" : "placeholder = \"Modifica l'operatore\" required",
         "descrizione_mod" : "",
-        "bind" : "s"
+        "bind" : "i"
     },
     {
-        "etichetta" : "Cognome",
-        "name" : "Cognome",
-        "tipo" : "text",
-        "opzioni_add" : "placeholder = \"Inserisci il cognome\"",
+        "etichetta" : "Ufficio",
+        "name" : "id_ced",
+        "tipo" : "select",
+        "sqlSelectOptionValue": "Sigla",
+        "sqlTable": "ced",
+        "opzioni_add" : "placeholder = \"Seleziona il ced \" required",
         "descrizione_add" : "",
-        "opzioni_mod" : "placeholder = \"Modifica il cognome\"",
+        "opzioni_mod" : "placeholder = \"Modifica il ced\" required",
         "descrizione_mod" : "",
-        "bind" : "s"
-    },
-    
-    {
-        "etichetta" : "E-Mail",
-        "name" : "Email",
-        "tipo" : "email",
-        "opzioni_add" : "placeholder = \"Inserisci L'E-mail\"",
-        "descrizione_add" : "",
-        "opzioni_mod" : "placeholder = \"Modifica L'E-mail\"",
-        "descrizione_mod" : "",
-        "bind" : "s"
-    },
-    
-    {
-        "etichetta" : "Cellulare",
-        "name" : "Cellulare",
-        "tipo" : "text",
-        "opzioni_add" : "placeholder = \"Inserisci il Cellulare\"",
-        "descrizione_add" : "",
-        "opzioni_mod" : "placeholder = \"Modifica il Cellulare\"",
-        "descrizione_mod" : "",
-        "bind" : "s"
+        "bind" : "i"
     }
 ]
 

@@ -18,6 +18,7 @@ RewriteBase /
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d  
   RewriteRule ^Area-Riservata/Modifica-Ced-([^/]+).html$ %{ENV:BASE}index.php?page=Modifica-Ced&ris=1$&id=$1 [L]
+  RewriteRule ^Area-Riservata/Modifica-Operatore-ced-([^/]+).html$ %{ENV:BASE}index.php?page=Modifica-Operatore-ced&ris=1$&id=$1 [L]
   RewriteRule ^Area-Riservata/Modifica-Operatore-([^/]+).html$ %{ENV:BASE}index.php?page=Modifica-Operatore&ris=1$&id=$1 [L]
   RewriteRule ^Area-Riservata/Modifica-Utente-([^/]+).html$ %{ENV:BASE}index.php?page=Modifica-Utente&ris=1$&id=$1 [L]
   RewriteRule ^Area-Riservata/Modifica-Ufficio-([^/]+).html$ %{ENV:BASE}index.php?page=Modifica-Ufficio&ris=1$&id=$1 [L]

@@ -1,4 +1,7 @@
 <?php
+
+require_once 'script/functions.php';
+
 if ($livello != 0) {
     echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
     return;
@@ -55,8 +58,7 @@ if (isset($_GET["oper"])) {
                 <tr>
                     <th scope="col">Username</th>
                     <th scope="col">Operatore</th>
-                    <th scope="col">Email</th>
-                    <td scope="col">Livello</th>
+                    <th scope="col">Ufficio</th>
                     <th scope="col">Azione</th>
                 </tr>
             </thead>
@@ -64,8 +66,14 @@ if (isset($_GET["oper"])) {
         <?php
 
 $cond = isset($_POST["cerca"]) ? $_POST["testo"] : "";
+
+if ($needCreateTables) {
+    create_operatori_ced_table();
+}
+
 // $sql = "SELECT * FROM operatori_ced WHERE (Username like CONCAT('%', ?, '%') OR Nome like CONCAT('%', ?, '%') OR Cognome like CONCAT('%', ?, '%')) AND id > 1";
-$sql = "SELECT * FROM operatori_ced WHERE (Username like CONCAT('%', ?, '%') OR Nome like CONCAT('%', ?, '%') OR Cognome like CONCAT('%', ?, '%'))";
+// $sql = "SELECT * FROM operatori_ced WHERE (Username like CONCAT('%', ?, '%') OR Operatore like CONCAT('%', ?, '%') OR Ced like CONCAT('%', ?, '%'))";
+$sql = getOperatoriCedSelect();
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("sss", $cond, $cond, $cond);
 $stmt->execute();
@@ -74,21 +82,18 @@ $result = $stmt->get_result();
 while ($row = $result->fetch_assoc()) {
     $id = $row["id"];
     $username = $row["Username"];
-    $nome = $row["Nome"];
-    $cognome = $row["Cognome"];
-    $email = $row["Email"];
-    $liv = $livelli_json[$row["Livello"]]["descrizione"];
+    $operatore = $row["NomeOperatore"] . ' ' . $row["CognomeOperatore"];
+    $ced = $row["SiglaCed"];
     // $stato = $row["Stato"];
 
     // $status = ($stato) ? "<a href=\"{$sito}Area-Riservata/Operatori-$id.html\" class=\"btn btn-primary\">Disabilita</a>" : "<a href=\"{$sito}Area-Riservata/Operatori-$id.html\" class=\"btn btn-primary\">Abilita</a>";
-    $status = "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Area-Riservata/Modifica-Operatore-$id.html\">Modifica</a>";
+    $status = "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Area-Riservata/Modifica-Operatore-ced-$id.html\">Modifica</a>";
     // $row_color = (!$stato) ? "bg-danger text-white" : "";
     // echo "<tr class=\"$row_color\" >
     echo "<tr >
                     <td>$username</td>
-                    <td class=\"\">$nome $cognome</td>
-                    <td>$email</td>
-                    <td>$liv</td>
+                    <td>$operatore</td>
+                    <td>$ced</td>
                     <td>$status</td>
                 </tr>";
 }
