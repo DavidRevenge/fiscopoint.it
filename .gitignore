@@ -1,2 +1,9 @@
 script/config.php
-.htaccess
+json/.htaccess
+AreaRiservata/.htaccess
+Documenti/.htaccess
+Generici/CRMdocuments/.htaccess
+Generici/front-end-pm/.htaccess
+script/.htaccess
+pagine/.htaccess
+template/.htaccess

@@ -1,0 +1,30 @@
+FileETag None
+<ifModule mod_headers.c>
+Header unset ETag
+Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+Header set Pragma "no-cache"
+Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+</ifModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+ # SetEnvIf Request_URI ^.*$ CURRENT_DIR=altro/fiscopoint.it/
+
+  RewriteCond %{REQUEST_URI}::$1 ^(.*?/)(.*)::\2$
+  RewriteRule ^(.*)$ - [E=BASE:%1]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d  
+  RewriteRule ^Area-Riservata/Modifica-Ced-([^/]+).html$ %{ENV:BASE}index.php?page=Modifica-Ced&ris=1$&id=$1 [L]
+  RewriteRule ^Area-Riservata/Modifica-Operatore-([^/]+).html$ %{ENV:BASE}index.php?page=Modifica-Operatore&ris=1$&id=$1 [L]
+  RewriteRule ^Area-Riservata/Modifica-Utente-([^/]+).html$ %{ENV:BASE}index.php?page=Modifica-Utente&ris=1$&id=$1 [L]
+  RewriteRule ^Area-Riservata/Modifica-Ufficio-([^/]+).html$ %{ENV:BASE}index.php?page=Modifica-Ufficio&ris=1$&id=$1 [L]
+  RewriteRule ^Area-Riservata/Operatori-([^/]+).html$ %{ENV:BASE}index.php?page=Operatori&ris=1$&oper=0&id=$1 [L]
+  RewriteRule ^Area-Riservata/Pratiche-([^/]+).html$ %{ENV:BASE}index.php?page=Pratiche&ris=1$&oper=0&id=$1 [L]
+  RewriteRule ^Area-Riservata/Pratica-([^/]+).html$ %{ENV:BASE}index.php?page=Pratica&ris=1$&oper=0&id=$1 [L]  
+  RewriteRule ^Area-Riservata/([^/]+).html$ %{ENV:BASE}index.php?page=$1&ris=1 [L]
+  RewriteRule ^Anteprima-([^/]+).html$ %{ENV:BASE}anteprima.php?&id=$1&file=$2 [L]
+  RewriteRule ^([^/]+).html$ %{ENV:BASE}index.php?page=$1 [L]
+</IfModule>
