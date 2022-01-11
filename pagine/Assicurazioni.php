@@ -7,7 +7,7 @@
 
 <div class="row p-3">
     <p class="mt-3">        
-        La <strong>Fis.Co. Point S.r.l.s.</strong> in collaborazione con un broker Assicurativo leader a livello Nazionale, offre ai propri associati un servizio di consulenza e assistenza in tutti i rami assicurativi con presenza capillare in tutte le Regioni d’Italia.<br>
+        La <strong>Fis.Co. Point S.r.l.s.</strong> in collaborazione con un broker Assicurativo leader a livello Nazionale, offre un servizio di consulenza e assistenza in tutti i rami assicurativi con presenza capillare in tutte le Regioni d’Italia.<br>
         <br>
         Si è scelto di collaborare con un <strong>broker assicurativo</strong> perché è un professionista il cui compito è quello di mediare tra le compagnie di assicurazioni e i propri clienti, analizzare il rischio da assicurare, allo scopo di fornire una copertura su misura, e ricercare le condizioni più idonee per il cliente; la ricerca è basata prevalentemente sulla conoscenza del mercato assicurativo (italiano ed estero) e sulla capacità di mantenere buoni rapporti con le compagnie.<br>
         <br>
