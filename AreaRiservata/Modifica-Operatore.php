@@ -2,6 +2,15 @@
 
     require_once 'script/functions.php';
 
+    if (isset($_POST['popolaTabelle']) && $_POST['popolaTabelle'] === "1" && $livello === 0) {
+        populateServiziSezioniTipologiaPratica();
+        echo '
+            <script>
+                window.location.replace("Modifica-Operatore-'.$_GET["id"].'.html");
+            </script>
+        ';
+    }
+
     if($livello != 0) {
         echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
         return;
@@ -181,7 +190,7 @@
             $mn_servizi = getServizi();
         }
 
-        if ($mn_servizi->num_rows === 0) echo alert('danger', 'Popolare la tabella servizi e operatori_servizio (contattare l\'amministratore)');
+        if ($mn_servizi->num_rows === 0) echo alert('danger', ' Popolare la tabella servizi cliccando sul bottone "Popola tabelle" sottostante');
 
         while ( $value = $mn_servizi->fetch_assoc()) {
 
@@ -206,3 +215,9 @@
         </div>
     </div>
 </form>
+<?php if ($mn_servizi->num_rows === 0) : ?>
+    <form action="<?php echo $sito ?>Area-Riservata/Modifica-Operatore-<?php echo $_GET['id'] ?>.html" method="POST">  
+        <input type="hidden" name="popolaTabelle" value="1">
+        <button type="submit" class="btn btn-primary w-100 my-4">Popola tabelle</button>
+    </form>
+<?php endif; ?>

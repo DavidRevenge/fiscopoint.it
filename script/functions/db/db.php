@@ -2,6 +2,20 @@
 
 require_once 'create.php';
 
+
+function getOperatoreCedServizio($id_operatore, $id_servizio) {
+    global $conn;
+
+    if (NEED_CREATE_TABLES) create_servizio_operatori_ced_table();
+
+    $sql = getOperatoreCedServizioSelect();    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $id_operatore, $id_servizio);
+    $stmt->execute();
+
+    return $stmt->get_result();
+}
+
 function getServiziOperatore($id) {
     global $conn;
 

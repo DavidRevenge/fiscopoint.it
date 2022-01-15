@@ -10,6 +10,10 @@ function getServizioOperatoreInsert($id_operatore, $id_servizio) {
              VALUES (?, ?);";
     return $sql;
 }
+function getOperatoreCedServizioSelect() {
+    $sql = "SELECT * from servizio_operatori_ced WHERE id_operatore = ? AND id_servizio = ?;";
+    return $sql;
+}
 function getServiziOperatoreSelect() {
     $sql = "SELECT * from operatori_servizio WHERE id_operatore = ?;";
     return $sql;

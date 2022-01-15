@@ -1,8 +1,15 @@
 <?php
-/**
- * 
- */
 
+function create_servizio_operatori_ced_table()
+{
+    global $conn;
+    $sql = "CREATE TABLE IF NOT EXISTS `servizio_operatori_ced` (
+        `id_operatore` INT NOT NULL,
+        `id_servizio` INT NOT NULL,
+        `id_operatore_ced` INT NOT NULL)";
+
+    $conn->query($sql);
+}
 function create_servizi_table()
 {
     global $conn;
@@ -68,4 +75,13 @@ function create_operatori_ced_table()
       )";
 
     $conn->query($sql);
+}
+function populateServiziSezioniTipologiaPratica()
+{
+    global $livello;
+    if (isset($_POST['popolaTabelle']) && $_POST['popolaTabelle'] === "1" && $livello === 0) {
+        global $conn;   
+        $commands = file_get_contents(__DIR__.'/export/new_tables_servizi_sezioni_tipologia_pratica.sql');
+        $conn->multi_query($commands);
+    }
 }
