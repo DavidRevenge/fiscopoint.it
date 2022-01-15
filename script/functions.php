@@ -4,6 +4,7 @@ require_once('functions/constants.php');
 
 require_once 'functions/sql.php';
 require_once 'functions/db/db.php';
+require_once 'functions/alerts.php';
 
 function getJsonSelect($value, $optionToSelect = false)
 {

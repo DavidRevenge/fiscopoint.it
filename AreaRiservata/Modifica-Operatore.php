@@ -180,6 +180,9 @@
         if(isset($_POST["oper"])) { 
             $mn_servizi = getServizi();
         }
+
+        if ($mn_servizi->num_rows === 0) echo alert('danger', 'Popolare la tabella servizi (contattare l\'amministratore)');
+
         while ( $value = $mn_servizi->fetch_assoc()) {
 
             //$tmp = ($servizi[$key]) ? "checked" : "";

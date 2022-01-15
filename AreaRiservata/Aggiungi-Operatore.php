@@ -164,6 +164,9 @@
     <div class="m-1 m-md-2 row g-md-2">        
     <?php
       // foreach($mn_servizi as $key=>$value) {
+
+        if ($mn_servizi->num_rows === 0) echo alert('danger', 'Popolare la tabella servizi (contattare l\'amministratore)');
+
         while ( $value = $mn_servizi->fetch_assoc()) {
 
             echo "
