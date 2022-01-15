@@ -15,7 +15,7 @@ include "template/titolo_pagina.php";
 $operatori = json_decode(file_get_contents("json/operatori_ced.json"), true);
 $mn_servizi = json_decode(file_get_contents("json/servizi.json"), true);
 
-if ($needCreateTables) {
+if (NEED_CREATE_TABLES) {
     create_operatori_ced_table();
 }
 

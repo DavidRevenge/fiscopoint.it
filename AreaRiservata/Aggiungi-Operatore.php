@@ -1,5 +1,5 @@
 <?php
-    require_once 'script/functions.php';
+    require_once 'script/functions.php'; 
 
     if($livello != 0) {
         echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";

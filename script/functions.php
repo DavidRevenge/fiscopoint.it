@@ -1,5 +1,7 @@
 <?php
 
+require_once('functions/constants.php');
+
 require_once 'functions/sql.php';
 require_once 'functions/db/db.php';
 
@@ -57,9 +59,9 @@ function removeDuplicateArrayElement($array, $key)
 }
 function getOperatorUsers($operator_id)
 {
-    global $needCreateTables, $conn;
+    global $conn;
 
-    if ($needCreateTables) {create_utenti_operatore_table($conn);}
+    if (NEED_CREATE_TABLES) {create_utenti_operatore_table($conn);}
 
     global $conn;
     $sql = "SELECT u.*, u.id as utente_id, concat(u.Nome, ' ' , u.Cognome) as NomeCognome, u.CodiceFiscale, u.DataNascita,

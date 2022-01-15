@@ -24,7 +24,7 @@ if (isset($_POST["ver_cf"])) {
         $row = $result->fetch_assoc();
         $id_utente = $row["id"];
 
-        if ($needCreateTables) {
+        if (NEED_CREATE_TABLES) {
             create_utenti_operatore_table($conn);
         }
 

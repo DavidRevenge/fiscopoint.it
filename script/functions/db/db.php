@@ -4,7 +4,10 @@ require_once 'create.php';
 
 function getServiziOperatore($id) {
     global $conn;
-    $sql = getServiziOperatoreSelect();
+
+    if (NEED_CREATE_TABLES) create_operatori_servizio_table();
+
+    $sql = getServiziOperatoreSelect();    
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $id);
     $stmt->execute();
@@ -13,6 +16,9 @@ function getServiziOperatore($id) {
 }
 function getServizi() {
     global $conn;
+
+    if (NEED_CREATE_TABLES) create_servizi_table();
+    
     $sql = getServiziSelect();
     $stmt = $conn->prepare($sql);
     $stmt->execute();

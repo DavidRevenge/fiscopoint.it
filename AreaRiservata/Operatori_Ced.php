@@ -67,7 +67,7 @@ if (isset($_GET["oper"])) {
 
 $cond = isset($_POST["cerca"]) ? $_POST["testo"] : "";
 
-if ($needCreateTables) {
+if (NEED_CREATE_TABLES) {
     create_operatori_ced_table();
 }
 
