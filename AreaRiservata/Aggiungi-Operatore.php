@@ -172,9 +172,10 @@
 
     <div class="m-1 m-md-2 row g-md-2">        
     <?php
-      // foreach($mn_servizi as $key=>$value) {
 
-        if ($mn_servizi->num_rows === 0) { 
+        require_once('script/common/checkboxes/servizi.php');
+
+       /* if ($mn_servizi->num_rows === 0) { 
             echo alert('danger', 'Popolare la tabella servizi cliccando sul bottone "Popola tabelle" sottostante');
         }
 
@@ -187,7 +188,7 @@
                     {$value["nome"]};
                 </label>
             </div>";
-        }           
+        }           */
     ?>
     </div>
 

@@ -189,8 +189,8 @@
         if(isset($_POST["oper"])) { 
             $mn_servizi = getServizi();
         }
-
-        if ($mn_servizi->num_rows === 0) echo alert('danger', ' Popolare la tabella servizi cliccando sul bottone "Popola tabelle" sottostante');
+        require_once('script/common/checkboxes/servizi.php');
+       /* if ($mn_servizi->num_rows === 0) echo alert('danger', ' Popolare la tabella servizi cliccando sul bottone "Popola tabelle" sottostante');
 
         while ( $value = $mn_servizi->fetch_assoc()) {
 
@@ -202,8 +202,8 @@
                 <label class=\"form-check-label\" for=\"op{$value['id']}\">
                     {$value["nome"]};
                 </label>
-            </div>";
-        }        
+            </div>"; 
+        }    */    
     ?>
     </div>
 
