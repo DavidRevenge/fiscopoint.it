@@ -181,7 +181,7 @@
             $mn_servizi = getServizi();
         }
 
-        if ($mn_servizi->num_rows === 0) echo alert('danger', 'Popolare la tabella servizi (contattare l\'amministratore)');
+        if ($mn_servizi->num_rows === 0) echo alert('danger', 'Popolare la tabella servizi e operatori_servizio (contattare l\'amministratore)');
 
         while ( $value = $mn_servizi->fetch_assoc()) {
 
