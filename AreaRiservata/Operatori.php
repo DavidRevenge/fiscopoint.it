@@ -10,7 +10,7 @@
     $livelli_json = json_decode(file_get_contents("json/livelli.json"), true);
 
     if(isset($_GET["oper"])) {
-        $sql = "UPDATE operatori SET Stato = NOT Stato WHERE indice=?";
+        $sql = "UPDATE operatori SET Stato = NOT Stato WHERE id=?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i', $_GET["id"]);
         $stmt->execute();
@@ -65,7 +65,7 @@
 
         
         $cond = isset($_POST["cerca"]) ? $_POST["testo"] : "";      
-        $sql = "SELECT * FROM operatori WHERE (Username like CONCAT('%', ?, '%') OR Nome like CONCAT('%', ?, '%') OR Cognome like CONCAT('%', ?, '%')) AND indice > 1";
+        $sql = "SELECT * FROM operatori WHERE (Username like CONCAT('%', ?, '%') OR Nome like CONCAT('%', ?, '%') OR Cognome like CONCAT('%', ?, '%')) AND id > 1";
         $stmt = $conn->prepare($sql);  
         $stmt->bind_param("sss", $cond, $cond, $cond);    
         $stmt->execute();
@@ -73,7 +73,7 @@
 
 
         while ($row = $result->fetch_assoc()){
-            $id = $row["indice"];
+            $id = $row["id"];
             $username = $row["Username"];
             $nome = $row["Nome"];
             $cognome = $row["Cognome"];

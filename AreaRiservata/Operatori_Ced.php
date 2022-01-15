@@ -13,7 +13,7 @@ include "template/titolo_pagina.php";
 $livelli_json = json_decode(file_get_contents("json/livelli.json"), true);
 
 if (isset($_GET["oper"])) {
-    $sql = "UPDATE operatori SET Stato = NOT Stato WHERE indice=?";
+    $sql = "UPDATE operatori SET Stato = NOT Stato WHERE id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $_GET["id"]);
     $stmt->execute();

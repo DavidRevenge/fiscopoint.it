@@ -26,7 +26,7 @@
  
     
     // lettura note dal database x la pratica
-    $sql = "SELECT notifiche.*, operatori.*, concat(operatori.Nome, ' ' , operatori.Cognome) as NomeCognome FROM notifiche JOIN operatori ON notifiche.Operatore = operatori.indice WHERE Pratica = ? ORDER BY data DESC";
+    $sql = "SELECT notifiche.*, operatori.*, concat(operatori.Nome, ' ' , operatori.Cognome) as NomeCognome FROM notifiche JOIN operatori ON notifiche.Operatore = operatori.id WHERE Pratica = ? ORDER BY data DESC";
     $stmt = $conn->prepare($sql);   
     $stmt->bind_param("i", $id);   
     $stmt->execute();
@@ -144,7 +144,7 @@
             <tbody>   
             <?php   
 
-            $sql = "SELECT documenti.*, operatori.* FROM documenti JOIN operatori ON operatori.indice = documenti.id_Operatore WHERE Protocollo = ? ORDER BY data DESC";
+            $sql = "SELECT documenti.*, operatori.* FROM documenti JOIN operatori ON operatori.id = documenti.id_Operatore WHERE Protocollo = ? ORDER BY data DESC";
             $stmt = $conn->prepare($sql);   
             $stmt->bind_param("s", $protocollo);     
             $stmt->execute();

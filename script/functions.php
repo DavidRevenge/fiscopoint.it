@@ -1,7 +1,7 @@
 <?php
 
 require_once 'functions/sql.php';
-require_once 'functions/db.php';
+require_once 'functions/db/db.php';
 
 function getJsonSelect($value, $optionToSelect = false)
 {
@@ -66,7 +66,7 @@ function getOperatorUsers($operator_id)
         operatori.Nome as Operatore_Nome, operatori.Cognome as Operatore_Cognome, uffici.Sigla as Sigla_Ufficio
         FROM utenti_operatore
         INNER JOIN utenti as u on u.id = utenti_operatore.id_utente
-        JOIN operatori ON u.id_Operatore = operatori.indice JOIN uffici ON uffici.id = operatori.Ufficio
+        JOIN operatori ON u.id_Operatore = operatori.id JOIN uffici ON uffici.id = operatori.Ufficio
         WHERE utenti_operatore.id_operatore = ?";
 
     $stmt = $conn->prepare($sql);
@@ -128,28 +128,4 @@ function assignUserToOperator($conn, $user_id, $operator_id)
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $operator_id, $user_id);
     $stmt->execute();
-}
-function create_utenti_operatore_table($conn)
-{
-    $sql = "CREATE TABLE IF NOT EXISTS `utenti_operatore` (
-            `id` int NOT NULL AUTO_INCREMENT,
-            `id_operatore` int DEFAULT NULL,
-            `id_utente` int DEFAULT NULL,
-            PRIMARY KEY (`id`)
-          )"; // ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
-
-    $conn->query($sql);
-}
-function create_operatori_ced_table()
-{
-    global $conn;
-    $sql = "CREATE TABLE IF NOT EXISTS `operatori_ced` (
-        `id` bigint NOT NULL AUTO_INCREMENT,
-        `Username` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-        `id_ced` bigint DEFAULT NULL,
-        `id_operatore` bigint DEFAULT NULL,
-        PRIMARY KEY (`id`)
-      )";
-
-    $conn->query($sql);
 }

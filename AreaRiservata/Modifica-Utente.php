@@ -40,7 +40,7 @@
 
         if($_POST["Password"] != "") {
             $hash = password_hash($_POST["Password"], PASSWORD_BCRYPT);
-            $sql = "UPDATE operatori SET Password=? WHERE indice=?";
+            $sql = "UPDATE operatori SET Password=? WHERE id=?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param('si', $hash, $_GET["id"]);
             $stmt->execute();

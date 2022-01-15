@@ -106,7 +106,7 @@
         <?php   
 
         $opr = ($livello == 0) ? "" : "AND pratiche.id_Operatore = $id_operatore";
-        $sql = "SELECT pratiche.*, pratiche.id as idPratica, utenti.*, operatori.* FROM pratiche JOIN utenti ON utenti.id = pratiche.id_Utente JOIN operatori ON pratiche.id_Operatore = operatori.indice WHERE id_utente = ? $opr ORDER BY data DESC";
+        $sql = "SELECT pratiche.*, pratiche.id as idPratica, utenti.*, operatori.* FROM pratiche JOIN utenti ON utenti.id = pratiche.id_Utente JOIN operatori ON pratiche.id_Operatore = operatori.id WHERE id_utente = ? $opr ORDER BY data DESC";
         $stmt = $conn->prepare($sql);     
         $stmt->bind_param("i", $id);  
         $stmt->execute();

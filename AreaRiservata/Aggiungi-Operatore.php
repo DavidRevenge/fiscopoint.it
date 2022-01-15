@@ -1,4 +1,6 @@
 <?php
+    require_once 'script/functions.php';
+
     if($livello != 0) {
         echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
         return;
@@ -8,37 +10,52 @@
     include("template/titolo_pagina.php");
     
     $operatori = json_decode(file_get_contents("json/operatori.json"), true);
-    $mn_servizi = json_decode(file_get_contents("json/servizi.json"), true);
+    //$mn_servizi = json_decode(file_get_contents("json/servizi.json"), true);
+    $mn_servizi = getServizi();
 
     if(isset($_POST["oper"])) {
         // leggi i menu         
         $servizi = "";
-        foreach($mn_servizi as $key=>$value) {
-            $servizi .= isset($_POST['op' . $key]) ? "1" : "0";
-        }        
+       // foreach($mn_servizi as $key=>$value) {
+        // while ( $s = $mn_servizi->fetch_assoc()) {
+        //     // $servizi .= isset($_POST['op' . $key]) ? "1" : "0";
+        //     if (isset($_POST['op' . $s['id']])) {
+
+        //     }
+        // }        
+
         $insert = "";
         $val_par = "";
         $values = "";
         $pm = array();  
 
-        foreach($operatori as $value ) {            
+        foreach($operatori as $value ) {
             $insert .= $value["name"] . ", ";
             $val_par .= $value["bind"];
             $values .= " ?,";
             array_push($pm, (($value["name"] == "Password") ? password_hash($_POST["Password"], PASSWORD_BCRYPT) : $_POST[$value["name"]]));
         }
         
-        $insert = substr_replace($insert ,"",-2);
-        $insert .= ", Servizi";
-        $val_par .= "s"; 
-        $values .= " ?";  
-        array_push($pm, $servizi);
+        //$insert = substr_replace($insert ,"",-2);
+        // $insert .= ", Servizi";
+        // $val_par .= "s"; 
+        // $values .= " ?";  
+        // array_push($pm, $servizi);
        
+
+        /*
+            ALTER TABLE `fiscopoint`.`operatori` 
+            DROP COLUMN `Servizi`;
+
+            ALTER TABLE `fiscopoint`.`operatori` 
+            CHANGE COLUMN `indice` `id` BIGINT NOT NULL AUTO_INCREMENT ;
+
+        */
         
         if(isset($_POST["ufficio"])) {
-            $insert .= ", Ufficio";
+            $insert .= "Ufficio";
             $val_par .= "i"; 
-            $values .= ", ?";
+            $values .= " ?";
             array_push($pm, intval($_POST["ufficio"]));
         }
 
@@ -51,7 +68,14 @@
         $sql = "INSERT INTO operatori ($insert) VALUES ($values)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param($val_par , ...$pm);
-        $stmt->execute();        
+        $stmt->execute();
+
+        while ( $s = $mn_servizi->fetch_assoc()) {
+            // $servizi .= isset($_POST['op' . $key]) ? "1" : "0";
+            if (isset($_POST['op' . $s['id']])) {
+                insertServizioOperatore($stmt->insert_id, $s['id']);
+            }
+        }    
 
         echo "
         <div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">
@@ -139,12 +163,14 @@
 
     <div class="m-1 m-md-2 row g-md-2">        
     <?php
-        foreach($mn_servizi as $key=>$value) {
+      // foreach($mn_servizi as $key=>$value) {
+        while ( $value = $mn_servizi->fetch_assoc()) {
+
             echo "
             <div class=\"form-check col-md-3\">
-                <input class=\"form-check-input\" type=\"checkbox\" name=\"op$key\" >
-                <label class=\"form-check-label\" for=\"op$key\">
-                    {$value["etichetta"]};
+                <input class=\"form-check-input\" type=\"checkbox\" name=\"op{$value["id"]}\" >
+                <label class=\"form-check-label\" for=\"op{$value["id"]}\">
+                    {$value["nome"]};
                 </label>
             </div>";
         }           

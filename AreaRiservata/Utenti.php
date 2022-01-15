@@ -85,7 +85,7 @@
         $sql = "SELECT utenti.*, utenti.id as utente_id, operatori.Nome as Operatore_Nome, operatori.Cognome as Operatore_Cognome, ";
      // $sql .= "uffici.Sigla as Sigla_Ufficio, concat(utenti.Cognome, ' ' , utenti.Nome) as CognomeNome FROM utenti JOIN operatori ON "; //La tabella prima il nome e poi il cognome :-D!
         $sql .= "uffici.Sigla as Sigla_Ufficio, concat(utenti.Nome, ' ' , utenti.Cognome) as NomeCognome FROM utenti JOIN operatori ON ";
-        $sql .= "utenti.id_Operatore = operatori.indice JOIN uffici ON uffici.id = operatori.Ufficio "; // INNER JOIN utenti_operatore as uo ON utenti.id = uo.id_utente ";
+        $sql .= "utenti.id_Operatore = operatori.id JOIN uffici ON uffici.id = operatori.Ufficio "; // INNER JOIN utenti_operatore as uo ON utenti.id = uo.id_utente ";
         $sql .= "WHERE utenti.CodiceFiscale like concat('%', ?, '%')";
         $sql .= $opr;
 

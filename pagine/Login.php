@@ -17,7 +17,7 @@
             $psw = $row["Password"];
             $livello = $row["Livello"];
             $servizi = $row["Servizi"];
-            $id_operatore = $row["indice"];
+            $id_operatore = $row["id"];
         }
 
 

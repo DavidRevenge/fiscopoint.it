@@ -16,7 +16,6 @@
         "sqlSelectOptionValue": ["Nome", "Cognome"],
         "sqlTable": "operatori",
         "sqlWhere": "where livello > 0",
-        "sqlId": "indice",
         "opzioni_add" : "placeholder = \"Seleziona l'operatore \" required",
         "descrizione_add" : "",
         "opzioni_mod" : "placeholder = \"Modifica l'operatore\" required",
