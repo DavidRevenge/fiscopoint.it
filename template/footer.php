@@ -3,10 +3,10 @@
         <div class="row bg-secondary text-white p-3">
             <div class="d-flex flex-row justify-content-center">
                 <div class="p-3 align-self-center">
-                    Copyright Fis.Co. Point © 2019 <a class="btn btn-primary" href="https://www.andrea314.eu">Developer by Andrea314</a>
+                    Copyright Fis.Co. Point © 2019 <a class="btn btn-primary" href="https://www.fiscopoint.it">designed by Fiscopoint.it</a>
                 </div>
                 <div class="p-3 align-self-center">
-                    <a href="#" target="_blank" >  
+                    <a href="https://www.facebook.com/Fis.Co.Point.s.r.l.s" target="_blank" >  
                         <picture>
                             <source type="img/webp" srcset="<?php echo $sito ?>media/webp/facebook.webp">  
                             <img class="img-fluid social-flag" src="<?php echo $sito ?>media/img/facebook.png" alt="logo facebook">
@@ -18,7 +18,7 @@
                             <img class="img-fluid social-flag" src="<?php echo $sito ?>media/img/twitter.png" alt="logo twitter">
                         </picture> 
                     </a>
-                    <a href="#" target="_blank"> 
+                    <a href="https://www.instagram.com/fiscopoint/?hl=en" target="_blank"> 
                         <picture>
                             <source type="img/webp" srcset="<?php echo $sito ?>media/webp/instagram.webp">
                             <img class="img-fluid social-flag" src="<?php echo $sito ?>media/img/instagram.png" alt="logo instagram"> 
