@@ -33,18 +33,10 @@
                 </div> 
             </div>             
         </div>
-    </div>
-    
+    </div>   
 
 
-       
-        <!-- libreria jquery -->
-        <script type="text/javascript" src="<?php echo $sito ?>js/jquery-3.5.1.min.js" ></script>
-
-        <script src="<?php echo $sito ?>js/bootstrap.min.js"></script> 
-
-        <script type="text/javascript" src="<?php echo $sito ?>js/classi.js" ></script>
-        <script type="text/javascript" src="<?php echo $sito ?>js/funzioni.js" ></script>
+        <script src="<?php echo $sito ?>js/bootstrap.min.js"></script>
     </body>
 
 </html>

@@ -12,6 +12,15 @@
 
 
         <title>Fiscopoint - <?php echo str_replace("-", " ", $page); ?></title>
+
+        
+
+       
+        <!-- libreria jquery -->
+        <script type="text/javascript" src="<?php echo $sito ?>js/jquery-3.5.1.min.js" ></script>
+
+        <script type="text/javascript" src="<?php echo $sito ?>js/classi.js" ></script>
+        <script type="text/javascript" src="<?php echo $sito ?>js/funzioni.js" ></script>
         
         <!-- Global site tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=UA-213015357-1"></script>

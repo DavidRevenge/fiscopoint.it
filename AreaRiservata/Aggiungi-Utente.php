@@ -33,7 +33,7 @@ if (isset($_POST["ver_cf"])) {
             assignUserToOperator($conn, $id_utente, $id_operatore);
         }
 
-        echo "<script type=\"text/javascript\">av = new alert_view('', 'Utente già presente vai alle pratiche', '$sito/Area-Riservata/Pratiche-$id_utente.html');av.show();</script>";
+        echo "<script type=\"text/javascript\">av = new alert_view('', 'Utente già presente vai alle pratiche', '{$sito}Area-Riservata/Pratiche-$id_utente.html');av.show();</script>";
     }
 }
 
