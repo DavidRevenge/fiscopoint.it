@@ -3,7 +3,7 @@ body {
     margin-top: 0;
 }
 
-label.form-check-label, input.form-check-input { cursor: pointer; }
+label.form-check-label, input.form-check-input, select.form-select { cursor: pointer; }
 
 .navbar .dropdown-menu { 
     background-color: white; 
