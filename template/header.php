@@ -7,11 +7,6 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="<?php echo $sito ?>css/bootstrap.min.css">  
 
-        <!-- libreria jquery -->
-        <script type="text/javascript" src="<?php echo $sito ?>js/jquery-3.5.1.min.js" ></script>
-
-        <script type="text/javascript" src="<?php echo $sito ?>js/classi.js" ></script>
-        <script type="text/javascript" src="<?php echo $sito ?>js/funzioni.js" ></script>
         <!-- stile della pagina CSS -->
         <link rel="stylesheet" href="<?php echo $sito ?>css/style.css?v=<?php echo rand() ?>">
 

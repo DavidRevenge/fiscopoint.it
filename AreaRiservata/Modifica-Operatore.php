@@ -81,17 +81,34 @@
         $post_servizi_checked_key = [];
         
         while ( $row = $mn_servizi->fetch_assoc()) {
-             //$servizi .= isset($_POST['op' . $key]) ? "1" : "0";
-             if (isset($_POST['op' . $row['id']])) $post_servizi_checked_key[] = $row['id'];
+             if (isset($_POST['op' . $row['id']])) { 
+                 $post_servizi_checked_key[] = $row['id'];
+             }
          }
 
          foreach($pre_servizi_checked_key as $id_servizio) {
              unset($servizi_checked[$id_servizio]);
-            if ( ! in_array($id_servizio, $post_servizi_checked_key) ) deleteServizioOperatore($_GET["id"], $id_servizio);
+            if ( ! in_array($id_servizio, $post_servizi_checked_key) ) {
+                deleteServizioOperatore($_GET["id"], $id_servizio);
+                if ($_POST['opced_' . $id_servizio] !== 'false') deleteOperatoreCedServizio($_GET["id"], $id_servizio, $_POST['opced_' . $id_servizio]);
+            } 
          }
          foreach($post_servizi_checked_key as $id_servizio) {
             $servizi_checked[$id_servizio] = true;
-            if ( ! in_array($id_servizio, $pre_servizi_checked_key) ) insertServizioOperatore($_GET["id"], $id_servizio);
+            if ( ! in_array($id_servizio, $pre_servizi_checked_key) ) {
+                insertServizioOperatore($_GET["id"], $id_servizio);
+                if ($_POST['opced_' . $id_servizio] !== 'false') insertOperatoreCedServizio($_GET["id"], $id_servizio, $_POST['opced_' . $id_servizio]);
+            } else {
+                if ($_POST['opced_' . $id_servizio] === 'false') {
+                    if (isset($_SESSION["opced_servizio_array"][$id_servizio])) {
+                        deleteOperatoreCedServizio($_GET["id"], $id_servizio, $_SESSION["opced_servizio_array"][$id_servizio]['id_operatore_ced']);
+                    } 
+                }
+                else {
+                    if (isset($_SESSION["opced_servizio_array"][$id_servizio])) updateOperatoreCedServizio( $_POST['opced_' . $id_servizio], $_GET["id"], $id_servizio);
+                    else insertOperatoreCedServizio($_GET["id"], $id_servizio, $_POST['opced_' . $id_servizio]);
+                }
+            }
          }
 
         echo "
@@ -183,31 +200,11 @@
 
 
     <div class="m-1 m-md-2 row g-md-2">
-    <?php
-    //  foreach($mn_servizi as $key=>$value) {
-       
-        if(isset($_POST["oper"])) { 
-            $mn_servizi = getServizi();
-        }
+    <?php       
+        if(isset($_POST["oper"])) $mn_servizi = getServizi();
         require_once('script/common/checkboxes/servizi.php');
-       /* if ($mn_servizi->num_rows === 0) echo alert('danger', ' Popolare la tabella servizi cliccando sul bottone "Popola tabelle" sottostante');
-
-        while ( $value = $mn_servizi->fetch_assoc()) {
-
-            //$tmp = ($servizi[$key]) ? "checked" : "";
-            $tmp = (isset($servizi_checked[$value['id']])) ? "checked" : "";
-            echo "
-            <div class=\"form-check col-md-3\">
-                <input class=\"form-check-input\" type=\"checkbox\" name=\"op{$value['id']}\" $tmp >
-                <label class=\"form-check-label\" for=\"op{$value['id']}\">
-                    {$value["nome"]};
-                </label>
-            </div>"; 
-        }    */    
     ?>
     </div>
-
-
     <div class="m-1 m-md-2 row g-md-2 align-items-center">
         <div class="col-12 text-center">
             <input type="hidden" name="oper" value="0">

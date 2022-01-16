@@ -1,27 +1,17 @@
-$( document ).ready(function() {    
-    /*
-    $("#btn_add_user").click(
-        function(e){
-            e.preventDefault();  
-            cf = $("#ver_cf").val();
-            ck = CodiceFiscale.validate(cf);
-            console.log(ck);
-            if(ck != null) {
-                av = new alert_view();
-                av.titolo = "Codice Fiscale non valido";
-                av.url = "#";
-                av.id = "cff";
-                av.show();
-            }else{
-                $("#verifica_cf").submit(); 
+document.addEventListener("DOMContentLoaded", function(event) { 
+
+    document.querySelectorAll('.servizioCheckbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {         
+            var selectBox;   
+            if (this.checked) {
+                selectBox = this.parentElement.querySelector('.opCedBox');//.style.display = 'none';
+                selectBox.classList.remove('d-none');
+            } else {
+                selectBox = this.parentElement.querySelector('.opCedBox');//.style.display = 'block';
+                selectBox.classList.add('d-none');
             }
-        }               
-    );
-    */
-
-
-
-
+        });
+    });
 });
 
 

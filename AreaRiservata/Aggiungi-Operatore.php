@@ -24,14 +24,7 @@
 
     if(isset($_POST["oper"])) {
         // leggi i menu         
-        $servizi = "";
-       // foreach($mn_servizi as $key=>$value) {
-        // while ( $s = $mn_servizi->fetch_assoc()) {
-        //     // $servizi .= isset($_POST['op' . $key]) ? "1" : "0";
-        //     if (isset($_POST['op' . $s['id']])) {
-
-        //     }
-        // }        
+        $servizi = "";     
 
         $insert = "";
         $val_par = "";
@@ -44,23 +37,7 @@
             $values .= " ?,";
             array_push($pm, (($value["name"] == "Password") ? password_hash($_POST["Password"], PASSWORD_BCRYPT) : $_POST[$value["name"]]));
         }
-        
-        //$insert = substr_replace($insert ,"",-2);
-        // $insert .= ", Servizi";
-        // $val_par .= "s"; 
-        // $values .= " ?";  
-        // array_push($pm, $servizi);
-       
 
-        /*
-            ALTER TABLE `fiscopoint`.`operatori` 
-            DROP COLUMN `Servizi`;
-
-            ALTER TABLE `fiscopoint`.`operatori` 
-            CHANGE COLUMN `indice` `id` BIGINT NOT NULL AUTO_INCREMENT ;
-
-        */
-        
         if(isset($_POST["ufficio"])) {
             $insert .= "Ufficio";
             $val_par .= "i"; 
@@ -80,9 +57,9 @@
         $stmt->execute();
 
         while ( $s = $mn_servizi->fetch_assoc()) {
-            // $servizi .= isset($_POST['op' . $key]) ? "1" : "0";
             if (isset($_POST['op' . $s['id']])) {
                 insertServizioOperatore($stmt->insert_id, $s['id']);
+                if ($_POST['opced_' . $s['id']] !== 'false') insertOperatoreCedServizio($stmt->insert_id, $s['id'], $_POST['opced_' . $s['id']]);
             }
         }    
 
@@ -172,30 +149,9 @@
 
     <div class="m-1 m-md-2 row g-md-2">        
     <?php
-
         require_once('script/common/checkboxes/servizi.php');
-
-       /* if ($mn_servizi->num_rows === 0) { 
-            echo alert('danger', 'Popolare la tabella servizi cliccando sul bottone "Popola tabelle" sottostante');
-        }
-
-        while ( $value = $mn_servizi->fetch_assoc()) {
-
-            echo "
-            <div class=\"form-check col-md-3\">
-                <input class=\"form-check-input\" type=\"checkbox\" name=\"op{$value["id"]}\" >
-                <label class=\"form-check-label\" for=\"op{$value["id"]}\">
-                    {$value["nome"]};
-                </label>
-            </div>";
-        }           */
     ?>
     </div>
-
-    
-
-
-
     <div class="m-1 m-md-2 row g-md-2 align-items-center">
         <div class="col-12 text-center">
             <input type="hidden" name="oper" value="0">

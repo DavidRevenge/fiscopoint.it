@@ -1,9 +1,11 @@
-BODY {
+body {
     background-color: lightgreen;
     margin-top: 0;
 }
 
-.navbar .dropdown-menu{ 
+label.form-check-label, input.form-check-input { cursor: pointer; }
+
+.navbar .dropdown-menu { 
     background-color: white; 
 }
 

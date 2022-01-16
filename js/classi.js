@@ -120,7 +120,7 @@ class alert_view {
     }
 
     show() {
-        $("BODY").append('<div id="overlay" class="overlay"></div>');
+        $("body").append('<div id="overlay" class="overlay"></div>');
         $("#overlay").append('<div class="card centered text-center"><div class="card-title"><h2>'+ this.titolo +'</h2></div><div class="card-body">' + this.msg + '</div><div class="card-footer"><a class="btn btn-primary" href="' + this.url + '" onclick="clear_alert()";>OK</a></div></div>');
     }
 }

@@ -1,5 +1,10 @@
 <?php
 
+function getOperatoreCedServizioDelete($id_operatore, $id_servizio, $id_operatore_ced) {
+    $sql = "DELETE FROM servizio_operatori_ced
+            WHERE id_operatore = ? AND id_servizio = ? AND id_operatore_ced = ?";
+    return $sql;
+}
 function getServizioOperatoreDelete($id_operatore, $id_servizio) {
     $sql = "DELETE FROM operatori_servizio
             WHERE id_operatore = ? AND id_servizio = ?";
@@ -10,8 +15,15 @@ function getServizioOperatoreInsert($id_operatore, $id_servizio) {
              VALUES (?, ?);";
     return $sql;
 }
-function getOperatoreCedServizioSelect() {
-    $sql = "SELECT * from servizio_operatori_ced WHERE id_operatore = ? AND id_servizio = ?;";
+
+function getOperatoreCedServizioInsert($id_operatore, $id_servizio, $id_operatore_ced) {
+    $sql = "INSERT INTO servizio_operatori_ced (id_operatore, id_servizio, id_operatore_ced)
+             VALUES (?, ?, ?);";
+    return $sql;
+}
+
+function getOperatoreCedServiziSelect() {
+    $sql = "SELECT * from servizio_operatori_ced WHERE id_operatore = ?";
     return $sql;
 }
 function getServiziOperatoreSelect() {
@@ -45,6 +57,15 @@ function getOperatoriCedEditSelect() {
     return $sql;
 }
 
+function getOperatoreCedServizioUpdate () {
+    $sql = "
+        UPDATE servizio_operatori_ced
+        SET id_operatore_ced = ?
+        WHERE id_operatore = ?
+        AND id_servizio = ?
+    ";
+    return $sql;
+}
 function getOperatoriCedEditUpdate($fields) {
 
     $fields = explode(',', $fields);
