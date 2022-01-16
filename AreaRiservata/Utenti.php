@@ -80,7 +80,7 @@
         <?php   
 
         
-        $opr = ($livello == 0) ? "" : "AND utenti.id_Operatore = $id_operatore";
+        $opr = ($livello == 0) ? "" : " AND utenti.id_Operatore = $id_operatore";
             
         $sql = "SELECT utenti.*, utenti.id as utente_id, operatori.Nome as Operatore_Nome, operatori.Cognome as Operatore_Cognome, ";
      // $sql .= "uffici.Sigla as Sigla_Ufficio, concat(utenti.Cognome, ' ' , utenti.Nome) as CognomeNome FROM utenti JOIN operatori ON "; //La tabella prima il nome e poi il cognome :-D!

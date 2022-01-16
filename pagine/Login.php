@@ -16,14 +16,14 @@
             $user = $row["Username"];
             $psw = $row["Password"];
             $livello = $row["Livello"];
-            if (isset($row["Servizi"])) $servizi = $row["Servizi"];
+          //  if (isset($row["Servizi"])) $servizi = $row["Servizi"];
             $id_operatore = $row["id"];
         }
 
 
         if (isset($psw) and password_verify($password, $psw)) {
             $_SESSION["livello"] = $livello;
-            if (isset($row["Servizi"])) $_SESSION["servizi"] = $servizi;
+      //      if (isset($row["Servizi"])) $_SESSION["servizi"] = $servizi;
             $_SESSION["id_operatore"] = $id_operatore;
             echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
         }else{
