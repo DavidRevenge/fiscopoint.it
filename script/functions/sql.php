@@ -26,6 +26,10 @@ function getOperatoreCedServiziSelect() {
     $sql = "SELECT * from servizio_operatori_ced WHERE id_operatore = ?";
     return $sql;
 }
+function getTipologiePraticaSelect() {
+    $sql = "SELECT id, nome, id_sezione from tipologia_pratica";
+    return $sql;
+}
 function getServiziOperatoreSelect() {
     $sql = "SELECT * from operatori_servizio WHERE id_operatore = ?;";
     return $sql;

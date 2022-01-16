@@ -1,12 +1,19 @@
 <?php
+
     if($livello == 100) { 
         echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
         return;        
     } 
 
+    require_once 'script/functions.php';
     
-    $json_pratiche = json_decode(file_get_contents("json/pratiche.json"), true);   
-    $pratiche = $json_pratiche["Pratiche"];
+   // $json_pratiche = json_decode(file_get_contents("json/pratiche.json"), true);   
+    //$pratiche = $json_pratiche["Pratiche"];
+
+    $db_pratiche =  getTipologiePratica();
+    $pratiche = [];
+    
+    while ($p = $db_pratiche->fetch_assoc()) $pratiche[] = $p;
     
 
     $id = (isset($_GET["id"])) ? $_GET["id"] : 0;

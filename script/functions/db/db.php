@@ -2,6 +2,15 @@
 
 require_once 'create.php';
 
+function getTipologiePratica() {
+    global $conn;
+
+    $sql = getTipologiePraticaSelect();    
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->get_result();
+}
 
 function getOperatoreCedServizi($id_operatore) {
     global $conn;
