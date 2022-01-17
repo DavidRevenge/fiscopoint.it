@@ -37,6 +37,14 @@
             $_SESSION["livello"] = $livello;
       //      if (isset($row["Servizi"])) $_SESSION["servizi"] = $servizi;
             $_SESSION["id_operatore"] = $id_operatore;
+
+            /** Verifico se l'utente è operatore ced */
+            $resultOperatoreCed = getOperatoreCedByOperatore($id_operatore);
+            if ( $resultOperatoreCed->num_rows > 0) {
+                $resultOperatoreCed = getArrayFromDbQuery($resultOperatoreCed);
+                $_SESSION["id_operatore_ced"] = $resultOperatoreCed[0]['id'];
+            }
+
             echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
         }else{
             echo "

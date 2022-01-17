@@ -207,9 +207,11 @@ foreach ($livelli_json as $value) {
 
     <div class="m-1 m-md-2 row g-md-2">
     <?php
-if (isset($_POST["oper"])) {
-    $mn_servizi = getServizi();
-}
+    if (isset($_POST["oper"])) {
+        //$mn_servizi = getServizi();
+        $mn_servizi = getTipologiePratica();
+        
+    }
 
 require_once 'script/common/checkboxes/servizi.php';
 ?>

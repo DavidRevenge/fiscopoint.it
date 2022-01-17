@@ -2,6 +2,33 @@
 
 require_once 'create.php';
 
+function getPraticheOperatoreCed($id_operatore_ced) {
+    global $conn;
+    $sql = getPraticheOperatoreCedSelect();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $id_operatore_ced);
+    $stmt->execute();
+
+    return $stmt->get_result();
+}
+function getPraticheOperatoreCedByUtente($id_utente, $id_operatore_ced) {
+    global $conn;
+    $sql = getPraticheOperatoreCedByUtenteSelect();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $id_utente, $id_operatore_ced);
+    $stmt->execute();
+
+    return $stmt->get_result();
+}
+function getUtentiOperatoreCed($id_operatore_ced) {
+    global $conn;
+    $sql = getUtentiOperatoreCedSelect();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $id_operatore_ced);
+    $stmt->execute();
+
+    return $stmt->get_result();
+}
 function getTipologiePratica() {
     global $conn;
 
@@ -44,6 +71,16 @@ function getServizi() {
     
     $sql = getServiziSelect();
     $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result;
+}
+function getOperatoreCedByOperatore($id_operatore) {
+    global $conn;
+    $sql = getOperatoreCedByOperatoreSelect();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $id_operatore);
     $stmt->execute();
     $result = $stmt->get_result();
 

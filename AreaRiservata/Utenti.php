@@ -83,7 +83,6 @@
         $opr = ($livello == 0) ? "" : " AND utenti.id_Operatore = $id_operatore";
             
         $sql = "SELECT utenti.*, utenti.id as utente_id, operatori.Nome as Operatore_Nome, operatori.Cognome as Operatore_Cognome, ";
-     // $sql .= "uffici.Sigla as Sigla_Ufficio, concat(utenti.Cognome, ' ' , utenti.Nome) as CognomeNome FROM utenti JOIN operatori ON "; //La tabella prima il nome e poi il cognome :-D!
         $sql .= "uffici.Sigla as Sigla_Ufficio, concat(utenti.Nome, ' ' , utenti.Cognome) as NomeCognome FROM utenti JOIN operatori ON ";
         $sql .= "utenti.id_Operatore = operatori.id JOIN uffici ON uffici.id = operatori.Ufficio "; // INNER JOIN utenti_operatore as uo ON utenti.id = uo.id_utente ";
         $sql .= "WHERE utenti.CodiceFiscale like concat('%', ?, '%')";
@@ -100,6 +99,24 @@
         /** Task - Ogni operatore deve vedere solo gli utenti e le pratiche da lui registrate. */
         $operator_users_result = getOperatorUsers($id_operatore);
         if ( !! $operator_users_result) while ($row = $operator_users_result->fetch_assoc())  $merged_result[] = $row;
+
+       // $merged_result = removeDuplicateArrayElement($merged_result, 'utente_id');
+
+        /** OPERATORE CED */       
+        $isOperatoreCed = isset($_SESSION["id_operatore_ced"]);
+        if ($isOperatoreCed) {
+            
+            $id_operatore_ced = $_SESSION["id_operatore_ced"];
+
+            $utenti_operatore_ced = getUtentiOperatoreCed($id_operatore_ced);
+    
+            $utenti_operatore_ced = getArrayFromDbQuery($utenti_operatore_ced);
+    
+            $merged_result = array_merge($utenti_operatore_ced, $merged_result);
+
+        }
+
+        /** FINE OPERATORE CED */        
 
         $merged_result = removeDuplicateArrayElement($merged_result, 'utente_id');
 

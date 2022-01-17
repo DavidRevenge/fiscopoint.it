@@ -6,6 +6,12 @@ require_once 'functions/sql.php';
 require_once 'functions/db/db.php';
 require_once 'functions/alerts.php';
 
+function getArrayFromDbQuery($dbQuery) {
+    $array = [];
+    while ($row = $dbQuery->fetch_assoc()) $array[] = $row;
+    return $array;
+
+}
 function getJsonSelect($value, $optionToSelect = false)
 {
     global $conn;
