@@ -152,7 +152,32 @@
             <tbody>   
             <?php   
 
-            $sql = "SELECT documenti.*, operatori.* FROM documenti JOIN operatori ON operatori.id = documenti.id_Operatore WHERE Protocollo = ? ORDER BY data DESC";
+            $sql = "SELECT `documenti`.`id` as id,
+            `documenti`.`id_Operatore`,
+            `documenti`.`Protocollo`,
+            `documenti`.`Nome_File`,
+            `documenti`.`Tipo`,
+            `documenti`.`Nome_Documento`,
+            `documenti`.`Data`,
+            `documenti`.`Operazione`,
+            `documenti`.`Note`, 
+            `operatori`.`id` as op_id,
+            `operatori`.`Username`,
+            `operatori`.`Password`,
+            `operatori`.`Nome`,
+            `operatori`.`Cognome`,
+            `operatori`.`Indirizzo`,
+            `operatori`.`Localita`,
+            `operatori`.`Cap`,
+            `operatori`.`CodiceFiscale`,
+            `operatori`.`PartitaIva`,
+            `operatori`.`Email`,
+            `operatori`.`Telefono`,
+            `operatori`.`Cellulare`,
+            `operatori`.`Pec`,
+            `operatori`.`Livello`,
+            `operatori`.`Ufficio`,
+            `operatori`.`Stato` FROM documenti JOIN operatori ON operatori.id = documenti.id_Operatore WHERE Protocollo = ? ORDER BY data DESC";
             $stmt = $conn->prepare($sql);   
             $stmt->bind_param("s", $protocollo);     
             $stmt->execute();
