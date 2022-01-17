@@ -88,3 +88,10 @@ function getOperatoriCedEditUpdate($fields) {
 
     return $sql;
 }
+function getChangeIndexOperatoreToIdAlter () {
+    $sql = "
+        ALTER TABLE `operatori` 
+        CHANGE COLUMN `indice` `id` BIGINT NOT NULL AUTO_INCREMENT
+    ";
+    return $sql;
+}

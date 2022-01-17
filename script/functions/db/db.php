@@ -120,3 +120,14 @@ function deleteOperatoreCedServizio($id_operatore, $id_servizio, $id_operatore_c
      $stmt->bind_param('ss', $id_operatore, $id_servizio);
      $stmt->execute();
  }
+
+ function changeIndexOperatoriToId() {
+      global $conn;
+
+      $sql = getChangeIndexOperatoreToIdAlter();
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+  
+      if ($stmt->sqlstate === '00000') return true;
+      else return $stmt->error;
+ }

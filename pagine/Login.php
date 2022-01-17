@@ -4,6 +4,8 @@
         return;
     } 
 
+    require_once 'script/functions.php';
+
     if(isset($_POST["Username"])) {   
         $username = $_POST["Username"];
         $password = $_POST["Password"];
@@ -16,8 +18,18 @@
             $user = $row["Username"];
             $psw = $row["Password"];
             $livello = $row["Livello"];
-          //  if (isset($row["Servizi"])) $servizi = $row["Servizi"];
-            $id_operatore = $row["id"];
+
+            //if (isset($row["Servizi"])) $servizi = $row["Servizi"];
+
+            if ( ! isset($row["id"])) {
+                $result = changeIndexOperatoriToId();
+                if ($result === true) {
+                    $id_operatore = $row["id"];
+                } else {
+                    alert('danger', 'C\'è stato un errore durante durante il cambio indice: contattare l\'amministratore (errore: '.$result.'');
+                }
+            }
+            else $id_operatore = $row["id"];
         }
 
 
