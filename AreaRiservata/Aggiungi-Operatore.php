@@ -20,7 +20,7 @@
     
     $operatori = json_decode(file_get_contents("json/operatori.json"), true);
     //$mn_servizi = json_decode(file_get_contents("json/servizi.json"), true);
-    $mn_servizi = getServizi();
+    $mn_servizi = getTipologiePratica(); //getServizi();
 
     if(isset($_POST["oper"])) {
         // leggi i menu         
