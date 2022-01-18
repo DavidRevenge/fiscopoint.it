@@ -68,12 +68,18 @@ $sql = "SELECT pratiche.*, utenti.* FROM
         pratiche JOIN utenti ON utenti.id = pratiche.id_Utente
         JOIN utenti_operatore AS uo ON uo.id_utente = utenti.id
         JOIN operatori AS o ON o.id = uo.id_operatore
-        WHERE pratiche.id = ?
-        AND o.Ufficio = ?
-        limit 1";
+        WHERE pratiche.id = ?";
+
+
+        if ($livello > 0) $sql = "AND o.Ufficio = ?";
+        
+        $sql .= " limit 1";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("is", $id, $_SESSION['id_ufficio']);
+
+if ($livello > 0) $stmt->bind_param("is", $id, $_SESSION['id_ufficio']);
+else $stmt->bind_param("i", $id);
+
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
