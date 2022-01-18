@@ -39,22 +39,6 @@ if (isset($_POST["operatori_ced"])) {
 
     $insert = substr_replace($insert, "", -2);
     $values = substr_replace($values, "", -1);
-    // $insert .= ", Servizi";
-    // $val_par .= "s";
-    // $values .= " ?";
-    // array_push($pm, $servizi);
-
-    // if (isset($_POST["ced"])) {
-    //     $insert .= ", id_ced";
-    //     $val_par .= "s";
-    //     $values .= ", ?";
-    //     array_push($pm, intval($_POST["ced"]));
-    // }
-
-    // $insert .= ", Livello";
-    // $val_par .= "s";
-    // $values .= ", ?";
-    // array_push($pm, intval($_POST["livello"]));
 
     if (isset($_POST['opc_edit'])) {
 
@@ -119,31 +103,6 @@ foreach ($operatori as $value) {
     }
 }
 ?>
-
-    <!-- livello operatore
-    <div class="m-1 m-md-2 row g-md-2 align-items-center">
-        <div class="col-md-2 text-md-end">
-            <label for="nick" class="col-form-label">Livello Operatore</label>
-        </div>
-        <div class="col-md-10">
-            <select name="livello" class="form-select">
-    <?php
-// $livelli_json = json_decode(file_get_contents("json/livelli.json"), true);
-// foreach ($livelli_json as $value) {
-//     echo "
-//                 <option value=\"{$value["livello"]}\">
-//                     {$value["descrizione"]}
-//                 </option>
-//             ";
-// }
-?>
-            </select>
-        </div>
-    </div>
- -->
-
-
-
 
 
 <!--

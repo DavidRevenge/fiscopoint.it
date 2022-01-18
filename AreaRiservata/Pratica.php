@@ -39,7 +39,7 @@ if ($livello != 0) {
                 echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
                 return;
             }
-        }    
+        }
  
          /** FINE OPERATORE CED */
 
@@ -63,9 +63,17 @@ while ($row = $result->fetch_assoc()) {
 ;
 
 // lettura dal database dei documenti della pratica
-$sql = "SELECT pratiche.*, utenti.* FROM pratiche JOIN utenti ON utenti.id = pratiche.id_Utente WHERE pratiche.id = ? limit 1";
+//$sql = "SELECT pratiche.*, utenti.* FROM pratiche JOIN utenti ON utenti.id = pratiche.id_Utente WHERE pratiche.id = ? limit 1";
+$sql = "SELECT pratiche.*, utenti.* FROM
+        pratiche JOIN utenti ON utenti.id = pratiche.id_Utente
+        JOIN utenti_operatore AS uo ON uo.id_utente = utenti.id
+        JOIN operatori AS o ON o.id = uo.id_operatore
+        WHERE pratiche.id = ?
+        AND o.Ufficio = ?
+        limit 1";
+
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
+$stmt->bind_param("is", $id, $_SESSION['id_ufficio']);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();

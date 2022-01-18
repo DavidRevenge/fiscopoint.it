@@ -69,7 +69,10 @@ if (isset($_POST["oper"])) {
     if ( $userExists === false) {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param($val_par, ...$pm);
-        $stmt->execute();
+        $stmt->execute();        
+
+        /** Inserisco anche nella tabella utenti_operatore */
+        assignUserToOperator($conn, $stmt->insert_id, $id_operatore);
     }
 
     //echo $stmt->error;//var_dump($stmt->execute());// $stmt->errorCode();

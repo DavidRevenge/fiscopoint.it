@@ -20,15 +20,6 @@ function getPraticheOperatoreCedByUtente($id_utente, $id_operatore_ced) {
 
     return $stmt->get_result();
 }
-function getUtentiOperatoreCed($id_operatore_ced) {
-    global $conn;
-    $sql = getUtentiOperatoreCedSelect();
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $id_operatore_ced);
-    $stmt->execute();
-
-    return $stmt->get_result();
-}
 function getTipologiePratica() {
     global $conn;
 
@@ -72,6 +63,36 @@ function getServizi() {
     
     $sql = getServiziSelect();
     $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result;
+}
+function getUfficioByOperatore($id_operatore) {
+    global $conn;
+    $sql = getUfficioByOperatoreSelect();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $id_operatore);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result;
+}
+
+function getUtentiOperatoreCed($id_operatore_ced) {
+    global $conn;
+    $sql = getUtentiOperatoreCedSelect();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $id_operatore_ced);
+    $stmt->execute();
+
+    return $stmt->get_result();
+}
+function getUtentiByUfficio($id_ufficio) {
+    global $conn;
+    $sql = getUtentiByUfficioSelect();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $id_ufficio);
     $stmt->execute();
     $result = $stmt->get_result();
 

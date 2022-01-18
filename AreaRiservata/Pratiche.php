@@ -113,8 +113,15 @@ if ($livello == 0) {
             <tbody>
         <?php
 
-$opr = ($livello == 0) ? "" : "AND pratiche.id_Operatore = $id_operatore";
-$sql = "SELECT pratiche.*, pratiche.id as idPratica, utenti.*, operatori.* FROM pratiche JOIN utenti ON utenti.id = pratiche.id_Utente JOIN operatori ON pratiche.id_Operatore = operatori.id WHERE id_utente = ? $opr ORDER BY data DESC";
+// $opr = ($livello == 0) ? "" : "AND pratiche.id_Operatore = $id_operatore";
+/**  Aggiunta - Task - Operatori - condividere utenti e pratiche con lo stesso ufficio. */
+$opr = ($livello == 0) ? "" : "AND operatori.Ufficio = {$_SESSION['id_ufficio']}";
+$sql = "SELECT pratiche.*, pratiche.id as idPratica, utenti.*, operatori.*
+        FROM pratiche
+        JOIN utenti ON utenti.id = pratiche.id_Utente 
+        JOIN operatori ON pratiche.id_Operatore = operatori.id
+        WHERE id_utente = ? $opr 
+        ORDER BY data DESC";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);

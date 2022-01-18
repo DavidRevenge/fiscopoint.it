@@ -38,6 +38,10 @@
       //      if (isset($row["Servizi"])) $_SESSION["servizi"] = $servizi;
             $_SESSION["id_operatore"] = $id_operatore;
 
+            /** Task - Operatori - condividere utenti e pratiche con lo stesso ufficio. */
+            $id_ufficio = getArrayFromDbQuery(getUfficioByOperatore($id_operatore))[0]['Ufficio'];
+            $_SESSION["id_ufficio"] = $id_ufficio;
+
             /** Verifico se l'utente è operatore ced */
             $resultOperatoreCed = getOperatoreCedByOperatore($id_operatore);
             if ( $resultOperatoreCed->num_rows > 0) {

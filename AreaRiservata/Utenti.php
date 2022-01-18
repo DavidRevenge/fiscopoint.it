@@ -96,8 +96,12 @@
         $merged_result = [];
 
         while ($row = $result->fetch_assoc())  $merged_result[] = $row;
+
         /** Task - Ogni operatore deve vedere solo gli utenti e le pratiche da lui registrate. */
-        $operator_users_result = getOperatorUsers($id_operatore);
+        /**  Aggiunta - Task - Operatori - condividere utenti e pratiche con lo stesso ufficio. */
+        //$operator_users_result = getOperatorUsers($id_operatore);
+        $operator_users_result = getUtentiByUfficio($_SESSION['id_ufficio']);
+
         if ( !! $operator_users_result) while ($row = $operator_users_result->fetch_assoc())  $merged_result[] = $row;
 
        // $merged_result = removeDuplicateArrayElement($merged_result, 'utente_id');
