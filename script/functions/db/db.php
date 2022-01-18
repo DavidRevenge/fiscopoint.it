@@ -34,7 +34,8 @@ function getTipologiePratica() {
 
     $sql = getTipologiePraticaSelect();    
     $stmt = $conn->prepare($sql);
-    $stmt->execute();
+    if ( ! $stmt) return false;
+    else $stmt->execute();
 
     return $stmt->get_result();
 }

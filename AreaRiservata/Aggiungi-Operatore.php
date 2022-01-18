@@ -161,7 +161,7 @@
         </div>
     </div>
 </form>
-<?php if ($mn_servizi->num_rows === 0) : ?>
+<?php if (! $mn_servizi || $mn_servizi->num_rows === 0) : ?>
     <form action="<?php echo $sito ?>Area-Riservata/Aggiungi-Operatore.html" method="POST">  
         <input type="hidden" name="popolaTabelle" value="1">
         <button type="submit" class="btn btn-primary w-100 my-4">Popola tabelle</button>
