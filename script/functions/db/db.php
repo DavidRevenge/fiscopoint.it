@@ -49,7 +49,6 @@ class OperatoreDb extends FPDatabase
     }
     public function getServizi()
     {
-
         if (NEED_CREATE_TABLES) {
             create_operatori_servizio_table();
         }
@@ -63,12 +62,8 @@ class OperatoreDb extends FPDatabase
         $sql = OperatoreSql::getChangeIndexToIdAlter();
         $stmt = parent::executeStmt($sql);
 
-        if ($stmt->sqlstate === '00000') {
-            return true;
-        } else {
-            return $stmt->error;
-        }
-
+        if ($stmt->sqlstate === '00000') return true;
+        else return $stmt->error;
     }
 }
 
