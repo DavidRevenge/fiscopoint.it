@@ -1,6 +1,42 @@
 <?php
 
 require_once 'create.php';
+class FPDatabase {
+    function prepareAndBind($sql, $bind = array()) {
+        global $conn;
+        $stmt = $conn->prepare($sql);
+        if ( ! empty($bind)) $stmt->bind_param($bind['types'], ...$bind['vars']);
+        return $stmt;
+    }
+    function executeStmt($sql, $bind = array()) {    
+        $stmt = $this->prepareAndBind($sql, $bind);
+        if ( ! $stmt) return false;
+        else $stmt->execute();
+        return $stmt;
+    }
+    function getStmtResult($sql, $bind = array()) {
+        $stmt = $this->executeStmt($sql, $bind);
+        return $stmt->get_result();
+    }
+}
+class OperatoreDb extends FPDatabase {
+    protected $id;
+    function __construct($id) {
+        $this->id = $id;
+    }
+    function insertServizio($id_servizio) {
+        $sql = OperatoreSql::getServizioOperatoreInsert($this->id, $id_servizio);
+        parent::executeStmt($sql, array('types' => 'ss', 'vars' => array($this->id, $id_servizio)));
+    }
+    function getServizi() {
+    
+        if (NEED_CREATE_TABLES) create_operatori_servizio_table();
+    
+        $sql = OperatoreSql::getServiziOperatoreSelect();
+        return getStmtResult($sql, array('types' => 's', 'vars' => array($this->id)));
+    
+    }
+}
 
 function executeStmt($sql, $bind = array()) {    
     $stmt = prepareAndBind($sql, $bind);
@@ -17,14 +53,6 @@ function prepareAndBind($sql, $bind = array()) {
 function getStmtResult($sql, $bind = array()) {
     $stmt = executeStmt($sql, $bind);
     return $stmt->get_result();
-}
-function getServiziOperatore($id) {
-    
-    if (NEED_CREATE_TABLES) create_operatori_servizio_table();
-
-    $sql = getServiziOperatoreSelect();
-    return getStmtResult($sql, array('types' => 's', 'vars' => array($id)));
-
 }
 function getPraticheOperatoreCed($id_operatore_ced) {
     $sql = getPraticheOperatoreCedSelect();
@@ -88,10 +116,6 @@ function updateOperatoreCedServizio($id_operatore_ced, $id_operatore, $id_serviz
     executeStmt($sql, array('types' => 'sss', 'vars' => array($id_operatore_ced, $id_operatore, $id_servizio)));
 }
 
-function insertServizioOperatore($id_operatore, $id_servizio) {
-    $sql = getServizioOperatoreInsert($id_operatore, $id_servizio);
-    executeStmt($sql, array('types' => 'ss', 'vars' => array($id_operatore, $id_servizio)));
-}
 function insertOperatoreCedServizio($id_operatore, $id_servizio, $id_operatore_ced) {
     $sql = getOperatoreCedServizioInsert($id_operatore, $id_servizio, $id_operatore_ced);
     return getStmtResult($sql, array('types' => 'sss', 'vars' => array($id_operatore, $id_servizio, $id_operatore_ced)));
@@ -112,3 +136,19 @@ function deleteOperatoreCedServizio($id_operatore, $id_servizio, $id_operatore_c
       if ($stmt->sqlstate === '00000') return true;
       else return $stmt->error;
  }
+
+ /** FATTO */
+ 
+function insertServizioOperatore($id_operatore, $id_servizio) {
+    $sql = getServizioOperatoreInsert($id_operatore, $id_servizio);
+    executeStmt($sql, array('types' => 'ss', 'vars' => array($id_operatore, $id_servizio)));
+}
+
+function getServiziOperatore($id) {
+    
+    if (NEED_CREATE_TABLES) create_operatori_servizio_table();
+
+    $sql = getServiziOperatoreSelect();
+    return getStmtResult($sql, array('types' => 's', 'vars' => array($id)));
+
+}

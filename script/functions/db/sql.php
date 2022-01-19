@@ -1,5 +1,16 @@
 <?php
 
+class OperatoreSql {    
+    public static function getServizioOperatoreInsert($id_operatore, $id_servizio) {
+        $sql = "INSERT INTO operatori_servizio (id_operatore, id_servizio)
+                 VALUES (?, ?);";
+        return $sql;
+    }
+    public static function getServiziOperatoreSelect() {
+        $sql = "SELECT * from operatori_servizio WHERE id_operatore = ?;";
+        return $sql;
+    }    
+}
 
 function getOperatoreCedServizioDelete($id_operatore, $id_servizio, $id_operatore_ced) {
     $sql = "DELETE FROM servizio_operatori_ced
