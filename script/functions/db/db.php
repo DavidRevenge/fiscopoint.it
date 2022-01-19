@@ -4,13 +4,14 @@ require_once 'create.php';
 
 function executeStmt($sql, $bind = array()) {    
     $stmt = prepareAndBind($sql, $bind);
-    $stmt->execute();
+    if ( ! $stmt) return false;
+    else $stmt->execute();
     return $stmt;
 }
 function prepareAndBind($sql, $bind = array()) {
     global $conn;
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param($bind['types'], ...$bind['vars']);
+    if ( ! empty($bind)) $stmt->bind_param($bind['types'], ...$bind['vars']);
     return $stmt;
 }
 function getStmtResult($sql, $bind = array()) {
@@ -26,103 +27,51 @@ function getServiziOperatore($id) {
 
 }
 function getPraticheOperatoreCed($id_operatore_ced) {
-    global $conn;
     $sql = getPraticheOperatoreCedSelect();
     return getStmtResult($sql, array('types' => 's', 'vars' => array($id_operatore_ced)));
 }
 function getPraticheOperatoreCedByUtente($id_utente, $id_operatore_ced) {
-    global $conn;
     $sql = getPraticheOperatoreCedByUtenteSelect();
-    $stmt = prepareAndBind($sql, array('types' => 'ss', 'vars' => array($id_utente, $id_operatore_ced)));
-    $stmt->execute();
-
-    return $stmt->get_result();
+    return getStmtResult($sql, array('types' => 'ss', 'vars' => array($id_utente, $id_operatore_ced)));
 }
 function getTipologiePratica() {
-    global $conn;
-
-    $sql = getTipologiePraticaSelect();    
-    $stmt = $conn->prepare($sql);
-    if ( ! $stmt) return false;
-    else $stmt->execute();
-
-    return $stmt->get_result();
+    $sql = getTipologiePraticaSelect();
+    return getStmtResult($sql);
 }
-
 function getOperatoreCedServizi($id_operatore) {
-    global $conn;
 
     if (NEED_CREATE_TABLES) create_servizio_operatori_ced_table();
 
     $sql = getOperatoreCedServiziSelect();
-    $stmt = prepareAndBind($sql, array('types' => 's', 'vars' => array($id_operatore)));
-
-    $stmt->execute();
-
-    return $stmt->get_result();
+    return getStmtResult($sql, array('types' => 's', 'vars' => array($id_operatore)));
 }
 function getServizi() {
-    global $conn;
 
     if (NEED_CREATE_TABLES) create_servizi_table();
-    
-    $sql = getServiziSelect();
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->get_result();
 
-    return $result;
+    $sql = getServiziSelect();
+    return getStmtResult($sql);
 }
 function getUfficioByOperatore($id_operatore) {
-    global $conn;
     $sql = getUfficioByOperatoreSelect();
-    $stmt = prepareAndBind($sql, array('types' => 's', 'vars' => array($id_operatore)));
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    return $result;
+    return getStmtResult($sql, array('types' => 's', 'vars' => array($id_operatore)));
 }
 
 function getUtentiOperatoreCed($id_operatore_ced) {
-    global $conn;
     $sql = getUtentiOperatoreCedSelect();
-    $stmt = prepareAndBind($sql, array('types' => 's', 'vars' => array($id_operatore_ced)));
-
-    $stmt->execute();
-
-    return $stmt->get_result();
+    return getStmtResult($sql, array('types' => 's', 'vars' => array($id_operatore_ced)));
 }
 function getUtentiByUfficio($id_ufficio) {
-    global $conn;
     $sql = getUtentiByUfficioSelect();
-    $stmt = prepareAndBind($sql, array('types' => 's', 'vars' => array($id_ufficio)));
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    return $result;
+    return getStmtResult($sql, array('types' => 's', 'vars' => array($id_ufficio)));
 }
 function getOperatoreCedByOperatore($id_operatore) {
-    global $conn;
     $sql = getOperatoreCedByOperatoreSelect();
-    $stmt = prepareAndBind($sql, array('types' => 's', 'vars' => array($id_operatore)));
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    return $result;
+    return getStmtResult($sql, array('types' => 's', 'vars' => array($id_operatore)));
 }
 function getOperatoriCedResult($extraParam = false) {
-    global $conn;
-    $cond = '';
     $sql = getOperatoriCedSelect($extraParam);
-    $stmt = prepareAndBind($sql, array('types' => 'sss', 'vars' => array($cond, $cond, $cond)));
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    return $result;
+    return getStmtResult($sql, array('types' => 'sss', 'vars' => array('', '', '')));
 }
 function getOperatoriCedEditResult($id) {
     global $conn;
