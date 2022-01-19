@@ -74,70 +74,40 @@ function getOperatoriCedResult($extraParam = false) {
     return getStmtResult($sql, array('types' => 'sss', 'vars' => array('', '', '')));
 }
 function getOperatoriCedEditResult($id) {
-    global $conn;
     $sql = getOperatoriCedEditSelect();
-    $stmt = prepareAndBind($sql, array('types' => 's', 'vars' => array($id)));
-
-    $stmt->execute();
-
-    return $stmt->get_result();
+    return getStmtResult($sql, array('types' => 's', 'vars' => array($id)));
 }
 function updateOperatoriCedEdit($id, $insert, $val_par, $pm) {
-    global $conn;
     $sql = getOperatoriCedEditUpdate($insert);
-
     $pm[] = $id;
     $val_par .= 'i';
-    $stmt = prepareAndBind($sql, array('types' => $val_par, 'vars' => $pm));
-
-    $stmt->execute();
+    executeStmt($sql, array('types' => $val_par, 'vars' => $pm));
 }
 function updateOperatoreCedServizio($id_operatore_ced, $id_operatore, $id_servizio) {
-    global $conn;
     $sql = getOperatoreCedServizioUpdate();
-    $stmt = prepareAndBind($sql, array('types' => 'sss', 'vars' => array($id_operatore_ced, $id_operatore, $id_servizio)));
-
-    $stmt->execute();
+    executeStmt($sql, array('types' => 'sss', 'vars' => array($id_operatore_ced, $id_operatore, $id_servizio)));
 }
 
 function insertServizioOperatore($id_operatore, $id_servizio) {
-    
-    global $conn;
     $sql = getServizioOperatoreInsert($id_operatore, $id_servizio);
-    $stmt = prepareAndBind($sql, array('types' => 'ss', 'vars' => array($id_operatore, $id_servizio)));
-
-    $stmt->execute();
+    executeStmt($sql, array('types' => 'ss', 'vars' => array($id_operatore, $id_servizio)));
 }
 function insertOperatoreCedServizio($id_operatore, $id_servizio, $id_operatore_ced) {
-    global $conn;
     $sql = getOperatoreCedServizioInsert($id_operatore, $id_servizio, $id_operatore_ced);
-    $stmt = prepareAndBind($sql, array('types' => 'sss', 'vars' => array($id_operatore, $id_servizio, $id_operatore_ced)));
-
-    $stmt->execute();
-    return $stmt->get_result();
+    return getStmtResult($sql, array('types' => 'sss', 'vars' => array($id_operatore, $id_servizio, $id_operatore_ced)));
 }
 function deleteOperatoreCedServizio($id_operatore, $id_servizio, $id_operatore_ced) {
-    global $conn;
      $sql = getOperatoreCedServizioDelete($id_operatore, $id_servizio, $id_operatore_ced);
-    $stmt = prepareAndBind($sql, array('types' => 'sss', 'vars' => array($id_operatore, $id_servizio, $id_operatore_ced)));
-
-     $stmt->execute();
+     executeStmt($sql, array('types' => 'sss', 'vars' => array($id_operatore, $id_servizio, $id_operatore_ced)));
 }
  function deleteServizioOperatore($id_operatore, $id_servizio) {
-    
-     global $conn;
      $sql = getServizioOperatoreDelete($id_operatore, $id_servizio);
-    $stmt = prepareAndBind($sql, array('types' => 'ss', 'vars' => array($id_operatore, $id_servizio)));
-
-     $stmt->execute();
+     executeStmt($sql, array('types' => 'ss', 'vars' => array($id_operatore, $id_servizio)));
  }
 
  function changeIndexOperatoriToId() {
-      global $conn;
-
       $sql = getChangeIndexOperatoreToIdAlter();
-      $stmt = $conn->prepare($sql);
-      $stmt->execute();
+      $stmt = executeStmt($sql);
   
       if ($stmt->sqlstate === '00000') return true;
       else return $stmt->error;
