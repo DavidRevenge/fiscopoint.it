@@ -1,30 +1,32 @@
 <?php
 
 class OperatoreSql {    
-    public static function getServizioOperatoreInsert($id_operatore, $id_servizio) {
+    public static function getServizioInsert() {
         $sql = "INSERT INTO operatori_servizio (id_operatore, id_servizio)
                  VALUES (?, ?);";
         return $sql;
     }
-    public static function getServiziOperatoreSelect() {
+    public static function getServiziSelect() {
         $sql = "SELECT * from operatori_servizio WHERE id_operatore = ?;";
         return $sql;
     }    
+    public static function getChangeIndexToIdAlter () {
+        $sql = "
+            ALTER TABLE `operatori` 
+            CHANGE COLUMN `indice` `id` BIGINT NOT NULL AUTO_INCREMENT
+        ";
+        return $sql;
+    }
+    public static function getServizioDelete() {
+        $sql = "DELETE FROM operatori_servizio
+                WHERE id_operatore = ? AND id_servizio = ?";
+        return $sql;
+    }
 }
 
 function getOperatoreCedServizioDelete($id_operatore, $id_servizio, $id_operatore_ced) {
     $sql = "DELETE FROM servizio_operatori_ced
             WHERE id_operatore = ? AND id_servizio = ? AND id_operatore_ced = ?";
-    return $sql;
-}
-function getServizioOperatoreDelete($id_operatore, $id_servizio) {
-    $sql = "DELETE FROM operatori_servizio
-            WHERE id_operatore = ? AND id_servizio = ?";
-    return $sql;
-}
-function getServizioOperatoreInsert($id_operatore, $id_servizio) {
-    $sql = "INSERT INTO operatori_servizio (id_operatore, id_servizio)
-             VALUES (?, ?);";
     return $sql;
 }
 
@@ -95,10 +97,6 @@ function getOperatoreCedServiziSelect() {
 }
 function getTipologiePraticaSelect() {
     $sql = "SELECT id, nome, id_sezione from tipologia_pratica";
-    return $sql;
-}
-function getServiziOperatoreSelect() {
-    $sql = "SELECT * from operatori_servizio WHERE id_operatore = ?;";
     return $sql;
 }
 function getServiziSelect() {
@@ -179,10 +177,29 @@ function getOperatoriCedEditUpdate($fields) {
 
     return $sql;
 }
+
+/** FATTO */
+
+function getServizioOperatoreDelete($id_operatore, $id_servizio) {
+    $sql = "DELETE FROM operatori_servizio
+            WHERE id_operatore = ? AND id_servizio = ?";
+    return $sql;
+}
 function getChangeIndexOperatoreToIdAlter () {
     $sql = "
         ALTER TABLE `operatori` 
         CHANGE COLUMN `indice` `id` BIGINT NOT NULL AUTO_INCREMENT
     ";
+    return $sql;
+}
+
+function getServizioOperatoreInsert($id_operatore, $id_servizio) {
+    $sql = "INSERT INTO operatori_servizio (id_operatore, id_servizio)
+             VALUES (?, ?);";
+    return $sql;
+}
+
+function getServiziOperatoreSelect() {
+    $sql = "SELECT * from operatori_servizio WHERE id_operatore = ?;";
     return $sql;
 }
