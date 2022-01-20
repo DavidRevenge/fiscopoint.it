@@ -20,7 +20,8 @@
     
     $operatori = json_decode(file_get_contents("json/operatori.json"), true);
     //$mn_servizi = json_decode(file_get_contents("json/servizi.json"), true);
-    $mn_servizi = getTipologiePratica(); //getServizi();
+
+    $mn_servizi = TipologiaPratica::getAll();
 
     if(isset($_POST["oper"])) {
         // leggi i menu         
@@ -148,7 +149,7 @@
     <?php
         if (isset($_POST["oper"])) {
             //$mn_servizi = getServizi();
-            $mn_servizi = getTipologiePratica();
+            $mn_servizi = TipologiaPratica::getAll();
             
         }
         require_once('script/common/checkboxes/servizi.php');

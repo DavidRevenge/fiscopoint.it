@@ -100,7 +100,11 @@
         /** Task - Ogni operatore deve vedere solo gli utenti e le pratiche da lui registrate. */
         /**  Aggiunta - Task - Operatori - condividere utenti e pratiche con lo stesso ufficio. */
         //$operator_users_result = getOperatorUsers($id_operatore);
-        $operator_users_result = getUtentiByUfficio($_SESSION['id_ufficio']);
+        //$operator_users_result = getUtentiByUfficio($_SESSION['id_ufficio']);
+
+        $operator_users_result = new Ufficio($_SESSION['id_ufficio']);
+        $operator_users_result = $operator_users_result->getUtenti();
+
 
         if ( !! $operator_users_result) while ($row = $operator_users_result->fetch_assoc())  $merged_result[] = $row;
 

@@ -3,25 +3,20 @@
 require_once 'create.php';
 
 spl_autoload_register(function ($class_name) {
-    include $class_name . '.php';
+    if (file_exists(__DIR__ . '/' . $class_name . '.php')) {
+        require_once __DIR__ . '/' . $class_name . '.php';
+    } else if (file_exists(__DIR__ . '/sql/' . $class_name . '.php')) {
+        require_once __DIR__ . '/sql/' . $class_name . '.php';
+    }
 });
-
-
-
 
 /** FATTO */
 
-function getTipologiePratica()
-{
-    $sql = getTipologiePraticaSelect();
-    return getStmtResult($sql);
-}
 function getUtentiByUfficio($id_ufficio)
 {
     $sql = getUtentiByUfficioSelect();
     return getStmtResult($sql, array('types' => 's', 'vars' => array($id_ufficio)));
 }
-
 
 function getServizi()
 {

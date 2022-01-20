@@ -22,7 +22,8 @@ include "template/titolo_pagina.php";
 
 $anagrafica = json_decode(file_get_contents("json/operatori.json"), true);
 //  $mn_servizi = getServizi();
-$mn_servizi = getTipologiePratica();
+$mn_servizi = TipologiaPratica::getAll();
+
 $servizi_checked = [];
 $servizi_operatore = getServiziOperatore($_GET['id']);
 while ($row = $servizi_operatore->fetch_assoc()) {
@@ -209,7 +210,7 @@ foreach ($livelli_json as $value) {
     <?php
     if (isset($_POST["oper"])) {
         //$mn_servizi = getServizi();
-        $mn_servizi = getTipologiePratica();
+       $mn_servizi = TipologiaPratica::getAll();
         
     }
 

@@ -1,5 +1,6 @@
 <?php
-
+require_once 'FPDatabase.php';
+require_once 'sql/TipologiaPraticaSql.php';
 class TipologiaPratica extends FPDatabase
 {
     protected $id;
@@ -10,6 +11,6 @@ class TipologiaPratica extends FPDatabase
     public static function getAll()
     {
         $sql = TipologiaPraticaSql::getAllSelect();
-        return parent::getStmtResult($sql);
+        return parent::getStmtResultStatic($sql);
     }
 }

@@ -9,7 +9,8 @@ require_once 'script/functions.php';
 // $json_pratiche = json_decode(file_get_contents("json/pratiche.json"), true);
 // $pratiche = $json_pratiche["Pratiche"];
 
-$db_pratiche = getTipologiePratica();
+$db_pratiche = TipologiaPratica::getAll();
+
 $pratiche = [];
 
 while ($p = $db_pratiche->fetch_assoc()) {
@@ -28,10 +29,9 @@ if ($livello != 0) {
     $stmt->store_result();
     if ($stmt->num_rows <= 0) {
 
-        
         /** OPERATORE CED */
         $isOperatoreCed = isset($_SESSION["id_operatore_ced"]);
-   
+
         if ($isOperatoreCed) {
             $id_operatore_ced = $_SESSION["id_operatore_ced"];
             $result = getPraticheOperatoreCed($id_operatore_ced);
@@ -40,12 +40,12 @@ if ($livello != 0) {
                 return;
             }
         }
- 
-         /** FINE OPERATORE CED */
+
+        /** FINE OPERATORE CED */
 
         // echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
         // return;
-    } 
+    }
 
 }
 
@@ -70,15 +70,19 @@ $sql = "SELECT pratiche.*, utenti.* FROM
         JOIN operatori AS o ON o.id = uo.id_operatore
         WHERE pratiche.id = ?";
 
+if ($livello > 0) {
+    $sql = "AND o.Ufficio = ?";
+}
 
-        if ($livello > 0) $sql = "AND o.Ufficio = ?";
-        
-        $sql .= " limit 1";
+$sql .= " limit 1";
 
 $stmt = $conn->prepare($sql);
 
-if ($livello > 0) $stmt->bind_param("is", $id, $_SESSION['id_ufficio']);
-else $stmt->bind_param("i", $id);
+if ($livello > 0) {
+    $stmt->bind_param("is", $id, $_SESSION['id_ufficio']);
+} else {
+    $stmt->bind_param("i", $id);
+}
 
 $stmt->execute();
 $result = $stmt->get_result();

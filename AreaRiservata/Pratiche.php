@@ -10,7 +10,7 @@ require_once 'script/functions.php';
 // $json_pratiche = json_decode(file_get_contents("json/pratiche.json"), true);
 //$pratiche = $json_pratiche["Pratiche"];
 
-$db_pratiche = getTipologiePratica();
+$db_pratiche = TipologiaPratica::getAll();
 $pratiche = [];
 
 while ($p = $db_pratiche->fetch_assoc()) {
