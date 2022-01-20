@@ -1,28 +1,28 @@
 <?php
 
-class OperatoreSql {    
-    public static function getServizioInsert() {
-        $sql = "INSERT INTO operatori_servizio (id_operatore, id_servizio)
-                 VALUES (?, ?);";
-        return $sql;
-    }
-    public static function getServiziSelect() {
-        $sql = "SELECT * from operatori_servizio WHERE id_operatore = ?;";
-        return $sql;
-    }    
-    public static function getChangeIndexToIdAlter () {
-        $sql = "
-            ALTER TABLE `operatori` 
-            CHANGE COLUMN `indice` `id` BIGINT NOT NULL AUTO_INCREMENT
-        ";
-        return $sql;
-    }
-    public static function getServizioDelete() {
-        $sql = "DELETE FROM operatori_servizio
-                WHERE id_operatore = ? AND id_servizio = ?";
-        return $sql;
-    }
+
+
+
+
+/** FATTO */
+function getTipologiePraticaSelect() {
+    $sql = "SELECT id, nome, id_sezione from tipologia_pratica";
+    return $sql;
 }
+function getUtentiByUfficioSelect() {
+    $sql = "SELECT u.*, u.id as utente_id, concat(u.Nome, ' ' , u.Cognome) as NomeCognome, u.CodiceFiscale, u.DataNascita,
+            o.Nome as Operatore_Nome, o.Cognome as Operatore_Cognome, uffici.Sigla as Sigla_Ufficio FROM operatori as o
+            JOIN utenti_operatore AS uo ON uo.id_operatore = o.id
+            JOIN utenti AS u ON u.id = uo.id_utente
+            JOIN uffici ON uffici.id = o.Ufficio
+            WHERE Ufficio = ?;";
+    return $sql;
+}
+function getServiziSelect() {
+    $sql = "SELECT * FROM servizi;";
+    return $sql;
+}
+
 
 function getOperatoreCedServizioDelete($id_operatore, $id_servizio, $id_operatore_ced) {
     $sql = "DELETE FROM servizio_operatori_ced
@@ -36,31 +36,7 @@ function getOperatoreCedServizioInsert($id_operatore, $id_servizio, $id_operator
     return $sql;
 }
 
-function getPraticheOperatoreCedSelect() {
-    $sql = "SELECT `pratiche`.`id`,
-        `pratiche`.`id_Operatore`,
-        `pratiche`.`id_Utente`,
-        `pratiche`.`Protocollo`,
-        `pratiche`.`id_Pratica`,
-        `pratiche`.`Data`,
-        `pratiche`.`Note` 
-        FROM pratiche
-        JOIN servizio_operatori_ced AS soc ON soc.id_servizio = pratiche.id_Pratica
-        WHERE soc.id_operatore_ced = ?;";
-    return $sql;
-}
 
-function getPraticheOperatoreCedByUtenteSelect() {
-    $sql = "SELECT pratiche.*, pratiche.id as idPratica, utenti.*, operatori.*
-        FROM pratiche 
-        JOIN utenti ON utenti.id = pratiche.id_Utente
-        JOIN operatori ON pratiche.id_Operatore = operatori.id  
-        JOIN servizio_operatori_ced AS soc ON soc.id_servizio = pratiche.id_Pratica
-        WHERE id_utente = ?
-        AND id_operatore_ced = ?
-        ORDER BY data DESC;";
-    return $sql;
-}
 function getUtentiOperatoreCedSelect() {
     $sql = "SELECT `utenti`.`id` as utente_id,
             CONCAT(utenti.Nome, ' ', utenti.Cognome) as NomeCognome,
@@ -93,38 +69,6 @@ function getUtentiOperatoreCedSelect() {
 }
 function getOperatoreCedServiziSelect() {
     $sql = "SELECT * from servizio_operatori_ced WHERE id_operatore = ?";
-    return $sql;
-}
-function getTipologiePraticaSelect() {
-    $sql = "SELECT id, nome, id_sezione from tipologia_pratica";
-    return $sql;
-}
-function getServiziSelect() {
-    $sql = "SELECT * FROM servizi;";
-    return $sql;
-}
-function getUfficioByOperatoreSelect() {
-    $sql = "SELECT Ufficio
-            FROM operatori
-            WHERE id = ?;";
-    return $sql;
-}
-function getUtentiByUfficioSelect() {
-    $sql = "SELECT u.*, u.id as utente_id, concat(u.Nome, ' ' , u.Cognome) as NomeCognome, u.CodiceFiscale, u.DataNascita,
-            o.Nome as Operatore_Nome, o.Cognome as Operatore_Cognome, uffici.Sigla as Sigla_Ufficio FROM operatori as o
-            JOIN utenti_operatore AS uo ON uo.id_operatore = o.id
-            JOIN utenti AS u ON u.id = uo.id_utente
-            JOIN uffici ON uffici.id = o.Ufficio
-            WHERE Ufficio = ?;";
-    return $sql;
-}
-function getOperatoreCedByOperatoreSelect() {
-    $sql = "SELECT `operatori_ced`.`id`,
-            `operatori_ced`.`Username`,
-            `operatori_ced`.`id_ced`,
-            `operatori_ced`.`id_operatore` 
-            FROM operatori_ced
-            WHERE id_operatore = ?;";
     return $sql;
 }
 function getOperatoriCedSelect($extraParam = false) {
@@ -178,8 +122,47 @@ function getOperatoriCedEditUpdate($fields) {
     return $sql;
 }
 
-/** FATTO */
+function getOperatoreCedByOperatoreSelect() {
+    $sql = "SELECT `operatori_ced`.`id`,
+            `operatori_ced`.`Username`,
+            `operatori_ced`.`id_ced`,
+            `operatori_ced`.`id_operatore` 
+            FROM operatori_ced
+            WHERE id_operatore = ?;";
+    return $sql;
+}
 
+function getPraticheOperatoreCedSelect() {
+    $sql = "SELECT `pratiche`.`id`,
+        `pratiche`.`id_Operatore`,
+        `pratiche`.`id_Utente`,
+        `pratiche`.`Protocollo`,
+        `pratiche`.`id_Pratica`,
+        `pratiche`.`Data`,
+        `pratiche`.`Note` 
+        FROM pratiche
+        JOIN servizio_operatori_ced AS soc ON soc.id_servizio = pratiche.id_Pratica
+        WHERE soc.id_operatore_ced = ?;";
+    return $sql;
+}
+
+function getPraticheOperatoreCedByUtenteSelect() {
+    $sql = "SELECT pratiche.*, pratiche.id as idPratica, utenti.*, operatori.*
+        FROM pratiche 
+        JOIN utenti ON utenti.id = pratiche.id_Utente
+        JOIN operatori ON pratiche.id_Operatore = operatori.id  
+        JOIN servizio_operatori_ced AS soc ON soc.id_servizio = pratiche.id_Pratica
+        WHERE id_utente = ?
+        AND id_operatore_ced = ?
+        ORDER BY data DESC;";
+    return $sql;
+}
+function getUfficioByOperatoreSelect() {
+    $sql = "SELECT Ufficio
+            FROM operatori
+            WHERE id = ?;";
+    return $sql;
+}
 function getServizioOperatoreDelete($id_operatore, $id_servizio) {
     $sql = "DELETE FROM operatori_servizio
             WHERE id_operatore = ? AND id_servizio = ?";
