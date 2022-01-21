@@ -96,11 +96,6 @@ function getChangeIndexOperatoreToIdAlter () {
     return $sql;
 }
 
-function getServizioOperatoreInsert($id_operatore, $id_servizio) {
-    $sql = "INSERT INTO operatori_servizio (id_operatore, id_servizio)
-             VALUES (?, ?);";
-    return $sql;
-}
 
 function getServiziOperatoreSelect() {
     $sql = "SELECT * from operatori_servizio WHERE id_operatore = ?;";

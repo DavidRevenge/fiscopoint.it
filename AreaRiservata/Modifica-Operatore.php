@@ -107,7 +107,7 @@ if (isset($_POST["oper"])) {
         $servizi_checked[$id_servizio] = true;
         
         if (!in_array($id_servizio, $pre_servizi_checked_key)) {
-            insertServizioOperatore($_GET["id"], $id_servizio);
+            $operatoreObj->insertServizio($id_servizio);
             if ($_POST['opced_' . $id_servizio] !== 'false') $operatoreCedObj->insertServizio($_GET["id"], $id_servizio);
         } else {
             if ($_POST['opced_' . $id_servizio] === 'false') {

@@ -59,7 +59,8 @@
 
         while ( $s = $mn_servizi->fetch_assoc()) {
             if (isset($_POST['op' . $s['id']])) {
-                insertServizioOperatore($stmt->insert_id, $s['id']);
+                $operatoreObj = new Operatore($stmt->insert_id);
+                $operatoreObj->insertServizio($s['id']);
                 
                 $operatoreCedObj = new OperatoreCed($_POST['opced_' . $s['id']]);
                 if ($_POST['opced_' . $s['id']] !== 'false') $operatoreCedObj->insertServizio($stmt->insert_id, $s['id']);
