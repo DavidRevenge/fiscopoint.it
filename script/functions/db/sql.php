@@ -9,11 +9,6 @@ function getOperatoreCedServizioDelete($id_operatore, $id_servizio, $id_operator
     return $sql;
 }
 
-function getOperatoreCedServizioInsert($id_operatore, $id_servizio, $id_operatore_ced) {
-    $sql = "INSERT INTO servizio_operatori_ced (id_operatore, id_servizio, id_operatore_ced)
-             VALUES (?, ?, ?);";
-    return $sql;
-}
 
 function getOperatoreCedServiziSelect() {
     $sql = "SELECT * from servizio_operatori_ced WHERE id_operatore = ?";

@@ -24,11 +24,6 @@ function updateOperatoriCedEdit($id, $insert, $val_par, $pm)
     $val_par .= 'i';
     executeStmt($sql, array('types' => $val_par, 'vars' => $pm));
 }
-function insertOperatoreCedServizio($id_operatore, $id_servizio, $id_operatore_ced)
-{
-    $sql = getOperatoreCedServizioInsert($id_operatore, $id_servizio, $id_operatore_ced);
-    return getStmtResult($sql, array('types' => 'sss', 'vars' => array($id_operatore, $id_servizio, $id_operatore_ced)));
-}
 function deleteOperatoreCedServizio($id_operatore, $id_servizio, $id_operatore_ced)
 {
     $sql = getOperatoreCedServizioDelete($id_operatore, $id_servizio, $id_operatore_ced);
