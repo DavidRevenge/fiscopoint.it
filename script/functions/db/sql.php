@@ -3,21 +3,6 @@
 
 /** FATTO */
 
-function getUtentiByUfficioSelect() {
-    $sql = "SELECT u.*, u.id as utente_id, concat(u.Nome, ' ' , u.Cognome) as NomeCognome, u.CodiceFiscale, u.DataNascita,
-            o.Nome as Operatore_Nome, o.Cognome as Operatore_Cognome, uffici.Sigla as Sigla_Ufficio FROM operatori as o
-            JOIN utenti_operatore AS uo ON uo.id_operatore = o.id
-            JOIN utenti AS u ON u.id = uo.id_utente
-            JOIN uffici ON uffici.id = o.Ufficio
-            WHERE Ufficio = ?;";
-    return $sql;
-}
-function getServiziSelect() {
-    $sql = "SELECT * FROM servizi;";
-    return $sql;
-}
-
-
 function getOperatoreCedServizioDelete($id_operatore, $id_servizio, $id_operatore_ced) {
     $sql = "DELETE FROM servizio_operatori_ced
             WHERE id_operatore = ? AND id_servizio = ? AND id_operatore_ced = ?";
@@ -30,53 +15,8 @@ function getOperatoreCedServizioInsert($id_operatore, $id_servizio, $id_operator
     return $sql;
 }
 
-
-function getUtentiOperatoreCedSelect() {
-    $sql = "SELECT `utenti`.`id` as utente_id,
-            CONCAT(utenti.Nome, ' ', utenti.Cognome) as NomeCognome,
-            `utenti`.`DataNascita`,
-            `utenti`.`Email`,
-            `utenti`.`Residenza`,
-            `utenti`.`Localita`,
-            `utenti`.`Cap`,
-            `utenti`.`CodiceFiscale`,
-            `utenti`.`PartitaIva`,
-            `utenti`.`Telefono`,
-            `utenti`.`Cellulare`,
-            `utenti`.`Pec`,
-            `utenti`.`Documento`,
-            `utenti`.`Sigla`,
-            `utenti`.`Scadenza`,
-            `utenti`.`Rilasciato`,
-            `utenti`.`DataRegistrazione`,
-            `utenti`.`id_Operatore`, 
-            `operatori`.`Nome` as Operatore_Nome,
-            `operatori`.`Cognome` as Operatore_Cognome,
-            uffici.Sigla as Sigla_Ufficio
-        FROM pratiche
-        JOIN servizio_operatori_ced AS soc ON soc.id_servizio = pratiche.id_Pratica
-        JOIN utenti ON utenti.id = pratiche.id_Utente
-        JOIN operatori ON operatori.id = soc.id_operatore
-        JOIN uffici ON uffici.id = operatori.Ufficio
-        WHERE id_operatore_ced = ?;";
-    return $sql;
-}
 function getOperatoreCedServiziSelect() {
     $sql = "SELECT * from servizio_operatori_ced WHERE id_operatore = ?";
-    return $sql;
-}
-function getOperatoriCedSelect($extraParam = false) {
-    $sql = "
-        SELECT op_ced.id as id, op_ced.Username, op.Nome as NomeOperatore, op.Cognome as CognomeOperatore, ced.Sigla as SiglaCed FROM operatori_ced as op_ced
-        JOIN operatori as op on op.id = op_ced.id_operatore
-        JOIN ced on ced.id = op_ced.id_ced
-        WHERE (op_ced.Username like CONCAT('%', ?, '%') OR CONCAT(op.Nome, ' ', Op.Cognome) like CONCAT('%', ?, '%') OR ced.Sigla like CONCAT('%', ?, '%'))
-    ";
-
-    if (isset($extraParam['where'])){
-        $sql .= ' ' . $extraParam['where'];
-    }
-
     return $sql;
 }
 function getOperatoriCedEditSelect() {
@@ -88,15 +28,6 @@ function getOperatoriCedEditSelect() {
     return $sql;
 }
 
-function getOperatoreCedServizioUpdate () {
-    $sql = "
-        UPDATE servizio_operatori_ced
-        SET id_operatore_ced = ?
-        WHERE id_operatore = ?
-        AND id_servizio = ?
-    ";
-    return $sql;
-}
 function getOperatoriCedEditUpdate($fields) {
 
     $fields = explode(',', $fields);

@@ -1,6 +1,6 @@
 <?php
 
-class OperatoreDb extends FPDatabase
+class Operatore extends FPDatabase
 {
     protected $id;
     public function __construct($id)

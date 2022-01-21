@@ -60,7 +60,10 @@
         while ( $s = $mn_servizi->fetch_assoc()) {
             if (isset($_POST['op' . $s['id']])) {
                 insertServizioOperatore($stmt->insert_id, $s['id']);
-                if ($_POST['opced_' . $s['id']] !== 'false') insertOperatoreCedServizio($stmt->insert_id, $s['id'], $_POST['opced_' . $s['id']]);
+                
+                $operatoreCedObj = new OperatoreCed($_POST['opced_' . $s['id']]);
+                if ($_POST['opced_' . $s['id']] !== 'false') $operatoreCedObj->insertServizio($stmt->insert_id, $s['id']);
+
             }
         }    
 
@@ -148,7 +151,6 @@
     <div class="m-1 m-md-2 row g-md-2">        
     <?php
         if (isset($_POST["oper"])) {
-            //$mn_servizi = getServizi();
             $mn_servizi = TipologiaPratica::getAll();
             
         }

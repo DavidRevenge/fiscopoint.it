@@ -12,33 +12,6 @@ spl_autoload_register(function ($class_name) {
 
 /** FATTO */
 
-function getUtentiByUfficio($id_ufficio)
-{
-    $sql = getUtentiByUfficioSelect();
-    return getStmtResult($sql, array('types' => 's', 'vars' => array($id_ufficio)));
-}
-
-function getServizi()
-{
-
-    if (NEED_CREATE_TABLES) {
-        create_servizi_table();
-    }
-
-    $sql = getServiziSelect();
-    return getStmtResult($sql);
-}
-
-function getUtentiOperatoreCed($id_operatore_ced)
-{
-    $sql = getUtentiOperatoreCedSelect();
-    return getStmtResult($sql, array('types' => 's', 'vars' => array($id_operatore_ced)));
-}
-function getOperatoriCedResult($extraParam = false)
-{
-    $sql = getOperatoriCedSelect($extraParam);
-    return getStmtResult($sql, array('types' => 'sss', 'vars' => array('', '', '')));
-}
 function getOperatoriCedEditResult($id)
 {
     $sql = getOperatoriCedEditSelect();
@@ -50,11 +23,6 @@ function updateOperatoriCedEdit($id, $insert, $val_par, $pm)
     $pm[] = $id;
     $val_par .= 'i';
     executeStmt($sql, array('types' => $val_par, 'vars' => $pm));
-}
-function updateOperatoreCedServizio($id_operatore_ced, $id_operatore, $id_servizio)
-{
-    $sql = getOperatoreCedServizioUpdate();
-    executeStmt($sql, array('types' => 'sss', 'vars' => array($id_operatore_ced, $id_operatore, $id_servizio)));
 }
 function insertOperatoreCedServizio($id_operatore, $id_servizio, $id_operatore_ced)
 {

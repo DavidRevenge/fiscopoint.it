@@ -1,6 +1,8 @@
 <?php
 
-$operatoriCed = getOperatoriCedResult();
+$operatoriCed = new OperatoreCed('');
+$operatoriCed = $operatoriCed->getOperatoriCedResult();
+
 
 $opced_array = [];
 $opced_servizio_array = [];

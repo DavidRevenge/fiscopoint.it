@@ -21,11 +21,16 @@ $titolo_pagina = "Modifica operatore";
 include "template/titolo_pagina.php";
 
 $anagrafica = json_decode(file_get_contents("json/operatori.json"), true);
-//  $mn_servizi = getServizi();
+
 $mn_servizi = TipologiaPratica::getAll();
 
 $servizi_checked = [];
-$servizi_operatore = getServiziOperatore($_GET['id']);
+
+$operatoreObj = new Operatore($_GET['id']);
+
+$servizi_operatore = $operatoreObj;
+$servizi_operatore = $servizi_operatore->getServizi();
+
 while ($row = $servizi_operatore->fetch_assoc()) {
     $servizi_checked[$row['id_servizio']] = true;
 }
@@ -96,25 +101,22 @@ if (isset($_POST["oper"])) {
         }
     }
     foreach ($post_servizi_checked_key as $id_servizio) {
+
+        $operatoreCedObj = new OperatoreCed($_POST['opced_' . $id_servizio]);
+
         $servizi_checked[$id_servizio] = true;
+        
         if (!in_array($id_servizio, $pre_servizi_checked_key)) {
             insertServizioOperatore($_GET["id"], $id_servizio);
-            if ($_POST['opced_' . $id_servizio] !== 'false') {
-                insertOperatoreCedServizio($_GET["id"], $id_servizio, $_POST['opced_' . $id_servizio]);
-            }
-
+            if ($_POST['opced_' . $id_servizio] !== 'false') $operatoreCedObj->insertServizio($_GET["id"], $id_servizio);
         } else {
             if ($_POST['opced_' . $id_servizio] === 'false') {
                 if (isset($_SESSION["opced_servizio_array"][$id_servizio])) {
                     deleteOperatoreCedServizio($_GET["id"], $id_servizio, $_SESSION["opced_servizio_array"][$id_servizio]['id_operatore_ced']);
                 }
             } else {
-                if (isset($_SESSION["opced_servizio_array"][$id_servizio])) {
-                    updateOperatoreCedServizio($_POST['opced_' . $id_servizio], $_GET["id"], $id_servizio);
-                } else {
-                    insertOperatoreCedServizio($_GET["id"], $id_servizio, $_POST['opced_' . $id_servizio]);
-                }
-
+                if (isset($_SESSION["opced_servizio_array"][$id_servizio])) $operatoreCedObj->updateServizio($_GET["id"], $id_servizio);
+                else $operatoreCedObj->insertServizio($_GET["id"], $id_servizio);
             }
         }
     }
@@ -209,7 +211,6 @@ foreach ($livelli_json as $value) {
     <div class="m-1 m-md-2 row g-md-2">
     <?php
     if (isset($_POST["oper"])) {
-        //$mn_servizi = getServizi();
        $mn_servizi = TipologiaPratica::getAll();
         
     }

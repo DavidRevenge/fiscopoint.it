@@ -100,7 +100,6 @@
         /** Task - Ogni operatore deve vedere solo gli utenti e le pratiche da lui registrate. */
         /**  Aggiunta - Task - Operatori - condividere utenti e pratiche con lo stesso ufficio. */
         //$operator_users_result = getOperatorUsers($id_operatore);
-        //$operator_users_result = getUtentiByUfficio($_SESSION['id_ufficio']);
 
         $operator_users_result = new Ufficio($_SESSION['id_ufficio']);
         $operator_users_result = $operator_users_result->getUtenti();
@@ -116,7 +115,8 @@
             
             $id_operatore_ced = $_SESSION["id_operatore_ced"];
 
-            $utenti_operatore_ced = getUtentiOperatoreCed($id_operatore_ced);
+            $utenti_operatore_ced = new OperatoreCed($id_operatore_ced);
+            $utenti_operatore_ced = $utenti_operatore_ced->getUtenti();
     
             $utenti_operatore_ced = getArrayFromDbQuery($utenti_operatore_ced);
     
