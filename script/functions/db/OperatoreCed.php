@@ -3,7 +3,7 @@
 class OperatoreCed extends FPDatabase
 {
     protected $id;
-    public function __construct($id)
+    public function __construct($id = '')
     {
         $this->id = $id;
     }
@@ -51,7 +51,24 @@ class OperatoreCed extends FPDatabase
     }
     public function deleteServizio($id_operatore, $id_servizio)
     {
-        $sql = OperatoreCedSql::getServizioDelete($id_operatore, $id_servizio, $this->id);
+        $sql = OperatoreCedSql::getServizioDelete();
         parent::executeStmt($sql, array('types' => 'sss', 'vars' => array($id_operatore, $id_servizio, $this->id)));
+    }
+    public function rimuoviPraticaLavorata($id_pratica)
+    {
+        $sql = OperatoreCedSql::rimuoviPraticaLavorata();
+        return parent::executeStmt($sql, array('types' => 'ss', 'vars' => array($id_pratica, $this->id)));
+    }
+    public function lavoraPratica($id_pratica)
+    {
+        if (NEED_CREATE_TABLES) create_pratiche_lavorate_table();
+        $sql = OperatoreCedSql::getLavoraPratica();
+        return parent::executeStmt($sql, array('types' => 'ss', 'vars' => array($id_pratica, $this->id)));
+    }
+    public function getPraticaLavorata($id_pratica)
+    {
+        if (NEED_CREATE_TABLES) create_pratiche_lavorate_table();
+        $sql = OperatoreCedSql::getPraticaLavorata();
+        return parent::getStmtResult($sql, array('types' => 's', 'vars' => array($id_pratica)));
     }
 }

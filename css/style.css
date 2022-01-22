@@ -5,6 +5,10 @@ body {
 
 label.form-check-label, input.form-check-input, select.form-select { cursor: pointer; }
 
+.pratica.lavorata.icon {
+    width: 30px;
+    margin-left: 1rem;
+}
 .navbar .dropdown-menu { 
     background-color: white; 
 }

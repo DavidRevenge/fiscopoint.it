@@ -108,6 +108,7 @@ if ($livello == 0) {
 }
 ?>
                     <th scope="col">Azione</th>
+                    <th scope="col">Lavorata</th>
                 </tr>
             </thead>
             <tbody>
@@ -165,8 +166,17 @@ foreach ($op_pratiche as $row) {
                     <td>$pratica</td>
                     <td>$protocollo</td>";
     if ($livello == 0) {echo "<td>$user_oper</td>";}
-    echo "<td>$status</td>
-                </tr>";
+
+  //  if (isset($_SESSION["id_operatore_ced"])) {
+        $operatoreCedObj = new OperatoreCed();
+        $pratica_lavorata = $operatoreCedObj->getPraticaLavorata($id);
+
+   // }
+
+    echo "<td>$status</td>";
+    if ($pratica_lavorata->num_rows > 0) echo '<td><img class="pratica lavorata icon" src="'.$sito.'/media/icon/success.svg"></td>';
+    else if ($pratica_lavorata->num_rows === 0) echo '<td><img class="pratica lavorata icon" src="'.$sito.'/media/icon/failure.svg"></td>';
+    echo "</tr>";
 }
 ?>
 

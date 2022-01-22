@@ -97,12 +97,12 @@ $data = utf8_encode(strftime('%A %d %B %Y', $row["Data"]));
 $protocollo = $row["Protocollo"];
 $id_utente = "ID{$row["id"]}";
 
-$operatoreCedObj = new OperatoreCed($id_operatore_ced);
-$result = $operatoreCedObj->getPraticheByUtente($row["id"]);
-if ($result->num_rows <= 0) {
-    echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
-    return;
-}
+// $operatoreCedObj = new OperatoreCed($_SESSION['id_operatore_ced']);
+// $result = $operatoreCedObj->getPraticheByUtente($row["id"]);
+// if ($result->num_rows <= 0) {
+//     echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
+//     return;
+// }
 
 $title = str_replace("-", " ", $page);
 echo "
@@ -114,6 +114,27 @@ echo "
 
 <script src="<?php echo $sito ?>js/upload.js"></script>
 
+<?php 
+
+if (isset($_POST['lavoraPratica']) && $_POST['lavoraPratica'] === '1' && $is_operatore_ced) {
+
+    
+    $operatoreCedObj = new OperatoreCed($_SESSION['id_operatore_ced']);
+    $result = $operatoreCedObj->lavoraPratica($_GET["id"]);
+
+    if ($result->sqlstate === '00000') alert('success', 'Pratica lavorata con successo!');
+    else if ($result->sqlstate === '23000') alert('warning', 'Pratica già lavorata!');
+    else alert('danger', 'C\'è stato un errore nel database: contattare l\'amministratore!');
+} else if (isset($_POST['rimuoviPraticaLavorata']) && $_POST['rimuoviPraticaLavorata'] === '1' && $is_operatore_ced) {
+    $operatoreCedObj = new OperatoreCed($_SESSION['id_operatore_ced']);
+    $result = $operatoreCedObj->rimuoviPraticaLavorata($_GET["id"]);
+
+    if ($result->sqlstate === '00000') alert('success', 'Pratica rimossa dalle lavorate con successo!');
+    else if ($result->sqlstate === '23000') alert('warning', 'Pratica già rimossa!');
+    else alert('danger', 'C\'è stato un errore nel database: contattare l\'amministratore!');
+}
+
+?>
 
 
 <!-- sezione note della pratica pratica -->
@@ -194,61 +215,78 @@ echo "
                 </tr>
             </thead>
             <tbody>
-            <?php
-
-$sql = "SELECT `documenti`.`id` as id,
-            `documenti`.`id_Operatore`,
-            `documenti`.`Protocollo`,
-            `documenti`.`Nome_File`,
-            `documenti`.`Tipo`,
-            `documenti`.`Nome_Documento`,
-            `documenti`.`Data`,
-            `documenti`.`Operazione`,
-            `documenti`.`Note`,
-            `operatori`.`id` as op_id,
-            `operatori`.`Username`,
-            `operatori`.`Password`,
-            `operatori`.`Nome`,
-            `operatori`.`Cognome`,
-            `operatori`.`Indirizzo`,
-            `operatori`.`Localita`,
-            `operatori`.`Cap`,
-            `operatori`.`CodiceFiscale`,
-            `operatori`.`PartitaIva`,
-            `operatori`.`Email`,
-            `operatori`.`Telefono`,
-            `operatori`.`Cellulare`,
-            `operatori`.`Pec`,
-            `operatori`.`Livello`,
-            `operatori`.`Ufficio`,
-            `operatori`.`Stato` FROM documenti JOIN operatori ON operatori.id = documenti.id_Operatore WHERE Protocollo = ? ORDER BY data DESC";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $protocollo);
-$stmt->execute();
-$result = $stmt->get_result();
-while ($row = $result->fetch_assoc()) {
-    $id = $row["id"];
-    $nome_documento = $row["Nome_Documento"];
-    $caricato = $row["Username"];
-    $file = $row["Nome_File"];
-    $data = utf8_encode(strftime('%A %d %B %Y', $row["Data"]));
-    $var = rand();
-    $note = $row["Note"];
-    $status = "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Anteprima-$id.html?var=$var\" target=\"_blank\">Visualizza</a>";
-    //$notifiche = ($note != "" ) ? "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Nota-$id.html\" target=\"_blank\">Notifiche</a>" : "";
-    $notifiche = ($note != "") ? "<button onclick=\"showUser($id)\" class=\"ms-2 btn btn-primary lista_operatori\" \">Notifiche</a>" : "";
-    echo "<tr>
-                        <td>$data</td>
-                        <td>$nome_documento</td>
-                        <td>$caricato</td>
-                        <td>$status</td>
-                    </tr>";
-}
-?>
+                <?php
+                    $sql = "SELECT `documenti`.`id` as id,
+                                `documenti`.`id_Operatore`,
+                                `documenti`.`Protocollo`,
+                                `documenti`.`Nome_File`,
+                                `documenti`.`Tipo`,
+                                `documenti`.`Nome_Documento`,
+                                `documenti`.`Data`,
+                                `documenti`.`Operazione`,
+                                `documenti`.`Note`,
+                                `operatori`.`id` as op_id,
+                                `operatori`.`Username`,
+                                `operatori`.`Password`,
+                                `operatori`.`Nome`,
+                                `operatori`.`Cognome`,
+                                `operatori`.`Indirizzo`,
+                                `operatori`.`Localita`,
+                                `operatori`.`Cap`,
+                                `operatori`.`CodiceFiscale`,
+                                `operatori`.`PartitaIva`,
+                                `operatori`.`Email`,
+                                `operatori`.`Telefono`,
+                                `operatori`.`Cellulare`,
+                                `operatori`.`Pec`,
+                                `operatori`.`Livello`,
+                                `operatori`.`Ufficio`,
+                                `operatori`.`Stato` FROM documenti JOIN operatori ON operatori.id = documenti.id_Operatore WHERE Protocollo = ? ORDER BY data DESC";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->bind_param("s", $protocollo);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+                                while ($row = $result->fetch_assoc()) {
+                                    $id = $row["id"];
+                                    $nome_documento = $row["Nome_Documento"];
+                                    $caricato = $row["Username"];
+                                    $file = $row["Nome_File"];
+                                    $data = utf8_encode(strftime('%A %d %B %Y', $row["Data"]));
+                                    $var = rand();
+                                    $note = $row["Note"];
+                                    $status = "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Anteprima-$id.html?var=$var\" target=\"_blank\">Visualizza</a>";
+                                    //$notifiche = ($note != "" ) ? "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Nota-$id.html\" target=\"_blank\">Notifiche</a>" : "";
+                                    $notifiche = ($note != "") ? "<button onclick=\"showUser($id)\" class=\"ms-2 btn btn-primary lista_operatori\" \">Notifiche</a>" : "";
+                                    echo "<tr>
+                                                        <td>$data</td>
+                                                        <td>$nome_documento</td>
+                                                        <td>$caricato</td>
+                                                        <td>$status</td>
+                                                    </tr>";
+                                }
+                ?>
 
             </tbody>
         </table>
     </div>
+    <?php 
+        if ($is_operatore_ced) {
+            $operatoreCedObj = new OperatoreCed($_SESSION['id_operatore_ced']);
+            $pratica_lavorata = $operatoreCedObj->getPraticaLavorata($_GET["id"]);
+
+        }
+    ?>
+    <?php if ($is_operatore_ced && $pratica_lavorata->num_rows === 0): ?>
+        <form action="<?php echo $sito ?>Area-Riservata/Pratica-<?php echo $_GET["id"]; ?>.html" method="POST">
+            <input type="hidden" name="lavoraPratica" value="1">
+            <button type="submit" class="btn btn-primary w-100 my-4">Lavora pratica</button>
+        </form>
+    <?php elseif ($is_operatore_ced && $pratica_lavorata->num_rows > 0): ?>
+        <form action="<?php echo $sito ?>Area-Riservata/Pratica-<?php echo $_GET["id"]; ?>.html" method="POST">
+            <input type="hidden" name="rimuoviPraticaLavorata" value="1">
+            <button type="submit" class="btn btn-danger w-100 my-4">Rimuovi dalle lavorate</button>
+        </form>
+    <?php endif;?>
 </div>
 
 
