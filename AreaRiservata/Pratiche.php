@@ -107,8 +107,8 @@ if ($livello == 0) {
     echo "<th scope=\"col\">Creato Da</th>";
 }
 ?>
-                    <th scope="col">Azione</th>
                     <th scope="col">Lavorata</th>
+                    <th scope="col">Azione</th>
                 </tr>
             </thead>
             <tbody>
@@ -167,15 +167,13 @@ foreach ($op_pratiche as $row) {
                     <td>$protocollo</td>";
     if ($livello == 0) {echo "<td>$user_oper</td>";}
 
-  //  if (isset($_SESSION["id_operatore_ced"])) {
-        $operatoreCedObj = new OperatoreCed();
-        $pratica_lavorata = $operatoreCedObj->getPraticaLavorata($id);
-
-   // }
-
-    echo "<td>$status</td>";
+    $operatoreCedObj = new OperatoreCed();
+    $pratica_lavorata = $operatoreCedObj->getPraticaLavorata($id);
+    
     if ($pratica_lavorata->num_rows > 0) echo '<td><img class="pratica lavorata icon" src="'.$sito.'/media/icon/success.svg"></td>';
     else if ($pratica_lavorata->num_rows === 0) echo '<td><img class="pratica lavorata icon" src="'.$sito.'/media/icon/failure.svg"></td>';
+
+    echo "<td>$status</td>";
     echo "</tr>";
 }
 ?>
