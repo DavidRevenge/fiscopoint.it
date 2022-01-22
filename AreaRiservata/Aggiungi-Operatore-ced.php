@@ -42,10 +42,11 @@ if (isset($_POST["operatori_ced"])) {
 
     if (isset($_POST['opc_edit'])) {
 
-        updateOperatoriCedEdit($_GET['id'], $insert,  $val_par, $pm);
+        $operatoreCedObj = new OperatoreCed($_GET['id']);
+        $operatoreCedObj->updateEdit($insert, $val_par, $pm);
 
         echo "
-            <div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
+            <div class=\"alert alert-success alert-dismissible fade show mt-3\" role=\"alert\">
                 <strong>Operatore {$_POST["Username"]} modificato con successo</strong>.
                 <button type=\button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
             </div>";
@@ -56,17 +57,20 @@ if (isset($_POST["operatori_ced"])) {
         $stmt->execute();
 
         echo "
-            <div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">
+            <div class=\"alert alert-warning alert-dismissible fade show mt-3\" role=\"alert\">
                 <strong>Operatore {$_POST["Username"]} aggiunto</strong>.
                 <button type=\button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
             </div>";
     }
 }
 
-$actionPage = ($is_opc_edit) ? 'Modifica-Operatore-ced-'.$_GET['id'].'.html' : 'Aggiungi-Operatore-ced.html';
+$actionPage = ($is_opc_edit) ? 'Modifica-Operatore-ced-' . $_GET['id'] . '.html' : 'Aggiungi-Operatore-ced.html';
 
 if ($is_opc_edit) {
-    $operatoriCedEditResult = getOperatoriCedEditResult($_GET['id']);
+
+    $operatoreCedObj = new OperatoreCed($_GET['id']);
+    $operatoriCedEditResult = $operatoreCedObj->getEdit();
+
     $operatoriCedEditResult = $operatoriCedEditResult->fetch_assoc();
 }
 

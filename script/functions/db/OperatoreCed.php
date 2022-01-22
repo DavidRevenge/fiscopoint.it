@@ -27,15 +27,15 @@ class OperatoreCed extends FPDatabase
         $sql = OperatoreCedSql::getOperatoriCedSelect($extraParam);
         return parent::getStmtResult($sql, array('types' => 'sss', 'vars' => array('', '', '')));
     }
-    public function getOperatoriCedEditResult($id)
+    public function getEdit()
     {
         $sql = OperatoreCedSql::getOperatoriCedEditSelect();
-        return parent::getStmtResult($sql, array('types' => 's', 'vars' => array($id)));
+        return parent::getStmtResult($sql, array('types' => 's', 'vars' => array($this->id)));
     }
-    public function updateOperatoriCedEdit($id, $insert, $val_par, $pm)
+    public function updateEdit($insert, $val_par, $pm)
     {
         $sql = OperatoreCedSql::getOperatoriCedEditUpdate($insert);
-        $pm[] = $id;
+        $pm[] = $this->id;
         $val_par .= 'i';
         parent::executeStmt($sql, array('types' => $val_par, 'vars' => $pm));
     }

@@ -34,7 +34,8 @@ if ($livello != 0) {
 
         if ($isOperatoreCed) {
             $id_operatore_ced = $_SESSION["id_operatore_ced"];
-            $result = getPraticheOperatoreCed($id_operatore_ced);
+            $operatoreCedObj = new OperatoreCed($id_operatore_ced);
+            $result = $operatoreCedObj->getPratiche();
             if ($result->num_rows <= 0) {
                 echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
                 return;
@@ -68,17 +69,20 @@ $sql = "SELECT pratiche.*, utenti.* FROM
         pratiche JOIN utenti ON utenti.id = pratiche.id_Utente
         JOIN utenti_operatore AS uo ON uo.id_utente = utenti.id
         JOIN operatori AS o ON o.id = uo.id_operatore
-        WHERE pratiche.id = ?";
+        WHERE pratiche.id = ? ";
 
-if ($livello > 0) {
-    $sql = "AND o.Ufficio = ?";
+$is_admin = $livello > 0;
+$is_operatore_ced = isset($_SESSION['id_operatore_ced']);
+
+if ($is_admin && !$is_operatore_ced) {
+    $sql .= "AND o.Ufficio = ?";
 }
 
 $sql .= " limit 1";
 
 $stmt = $conn->prepare($sql);
 
-if ($livello > 0) {
+if ($is_admin && !$is_operatore_ced) {
     $stmt->bind_param("is", $id, $_SESSION['id_ufficio']);
 } else {
     $stmt->bind_param("i", $id);
@@ -92,6 +96,13 @@ $pratica = $pratiche[$key]["nome"];
 $data = utf8_encode(strftime('%A %d %B %Y', $row["Data"]));
 $protocollo = $row["Protocollo"];
 $id_utente = "ID{$row["id"]}";
+
+$operatoreCedObj = new OperatoreCed($id_operatore_ced);
+$result = $operatoreCedObj->getPraticheByUtente($row["id"]);
+if ($result->num_rows <= 0) {
+    echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
+    return;
+}
 
 $title = str_replace("-", " ", $page);
 echo "

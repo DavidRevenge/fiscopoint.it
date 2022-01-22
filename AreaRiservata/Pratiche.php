@@ -136,7 +136,8 @@ $isOperatoreCed = isset($_SESSION["id_operatore_ced"]);
 
 if ($isOperatoreCed) {
     $id_operatore_ced = $_SESSION["id_operatore_ced"];
-    $resultOC = getPraticheOperatoreCedByUtente($id, $id_operatore_ced);
+    $operatoreCedObj = new OperatoreCed($id_operatore_ced);
+    $resultOC = $operatoreCedObj->getPraticheByUtente($id);
 
     $opc_pratiche = getArrayFromDbQuery($resultOC);
 

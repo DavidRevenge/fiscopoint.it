@@ -11,7 +11,10 @@ while ($row = $operatoriCed->fetch_assoc()) {
 }
 
 if (isset($_GET["id"])) {
-    $operatoriCedServizio = getOperatoreCedServizi($_GET["id"]);
+
+    $operatoreObj = new Operatore($_GET["id"]);
+    $operatoriCedServizio =  $operatoreObj->getOperatoreCedServizi();
+
     if ($operatoriCedServizio->num_rows > 0) {
         while ($row_opced_servizio = $operatoriCedServizio->fetch_assoc()) {
             $opced_servizio_array[$row_opced_servizio['id_servizio']] = $row_opced_servizio;

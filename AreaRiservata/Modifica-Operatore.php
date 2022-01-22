@@ -93,9 +93,12 @@ if (isset($_POST["oper"])) {
     foreach ($pre_servizi_checked_key as $id_servizio) {
         unset($servizi_checked[$id_servizio]);
         if (!in_array($id_servizio, $post_servizi_checked_key)) {
-            deleteServizioOperatore($_GET["id"], $id_servizio);
+
+            $operatoreObj->deleteServizio($id_servizio);
+
             if ($_POST['opced_' . $id_servizio] !== 'false') {
-                deleteOperatoreCedServizio($_GET["id"], $id_servizio, $_POST['opced_' . $id_servizio]);
+                $operatoreCedObj = new OperatoreCed($_POST['opced_' . $id_servizio]);
+                $operatoreCedObj->deleteServizio($_GET["id"], $id_servizio);
             }
 
         }
@@ -112,7 +115,8 @@ if (isset($_POST["oper"])) {
         } else {
             if ($_POST['opced_' . $id_servizio] === 'false') {
                 if (isset($_SESSION["opced_servizio_array"][$id_servizio])) {
-                    deleteOperatoreCedServizio($_GET["id"], $id_servizio, $_SESSION["opced_servizio_array"][$id_servizio]['id_operatore_ced']);
+                    $operatoreCedObj = new OperatoreCed($_SESSION["opced_servizio_array"][$id_servizio]['id_operatore_ced']);
+                    $operatoreCedObj->deleteServizio($_GET["id"], $id_servizio);
                 }
             } else {
                 if (isset($_SESSION["opced_servizio_array"][$id_servizio])) $operatoreCedObj->updateServizio($_GET["id"], $id_servizio);

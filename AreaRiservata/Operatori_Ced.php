@@ -73,7 +73,7 @@ if (NEED_CREATE_TABLES) {
 
 // $sql = "SELECT * FROM operatori_ced WHERE (Username like CONCAT('%', ?, '%') OR Nome like CONCAT('%', ?, '%') OR Cognome like CONCAT('%', ?, '%')) AND id > 1";
 // $sql = "SELECT * FROM operatori_ced WHERE (Username like CONCAT('%', ?, '%') OR Operatore like CONCAT('%', ?, '%') OR Ced like CONCAT('%', ?, '%'))";
-$sql = getOperatoriCedSelect();
+$sql = OperatoreCedSql::getOperatoriCedSelect();
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("sss", $cond, $cond, $cond);
 $stmt->execute();

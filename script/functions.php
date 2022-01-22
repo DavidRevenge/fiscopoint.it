@@ -1,8 +1,6 @@
 <?php
 
 require_once('functions/constants.php');
-
-require_once 'functions/db/sql.php';
 require_once 'functions/db/db.php';
 require_once 'functions/alerts.php';
 
