@@ -122,7 +122,7 @@ if (isset($_POST['lavoraPratica']) && $_POST['lavoraPratica'] === '1' && $is_ope
     $operatoreCedObj = new OperatoreCed($_SESSION['id_operatore_ced']);
     $result = $operatoreCedObj->lavoraPratica($_GET["id"]);
 
-    if ($result->sqlstate === '00000') alert('success', 'Pratica lavorata con successo!');
+    if ($result->sqlstate === '00000') alert('success', 'Pratica aggiunta alle lavorate con successo!');
     else if ($result->sqlstate === '23000') alert('warning', 'Pratica già lavorata!');
     else alert('danger', 'C\'è stato un errore nel database: contattare l\'amministratore!');
 } else if (isset($_POST['rimuoviPraticaLavorata']) && $_POST['rimuoviPraticaLavorata'] === '1' && $is_operatore_ced) {
@@ -279,7 +279,7 @@ if (isset($_POST['lavoraPratica']) && $_POST['lavoraPratica'] === '1' && $is_ope
     <?php if ($is_operatore_ced && $pratica_lavorata->num_rows === 0): ?>
         <form action="<?php echo $sito ?>Area-Riservata/Pratica-<?php echo $_GET["id"]; ?>.html" method="POST">
             <input type="hidden" name="lavoraPratica" value="1">
-            <button type="submit" class="btn btn-primary w-100 my-4">Lavora pratica</button>
+            <button type="submit" class="btn btn-primary w-100 my-4">Aggiungi alle lavorate</button>
         </form>
     <?php elseif ($is_operatore_ced && $pratica_lavorata->num_rows > 0): ?>
         <form action="<?php echo $sito ?>Area-Riservata/Pratica-<?php echo $_GET["id"]; ?>.html" method="POST">
