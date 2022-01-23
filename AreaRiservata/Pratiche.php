@@ -18,22 +18,33 @@ while ($p = $db_pratiche->fetch_assoc()) {
 }
 
 $id = (isset($_GET["id"])) ? $_GET["id"] : 0;
-$sql = "SELECT * FROM utenti WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
-$nome = $row["Nome"];
-$cognome = $row["Cognome"];
 
-echo "
-    <div class=\"row p-3 titolo_pagina text-center\">
-        <h1>Pratiche<br></h1>
-        <h1 style=\"color:white\";>{$row["Nome"]} {$row["Cognome"]}</h1>
-    </div>";
+if ($id !== 'all') {
 
-if (isset($_POST["new_pratica"])) {
+    $sql = "SELECT * FROM utenti WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $nome = $row["Nome"];
+    $cognome = $row["Cognome"];
+
+    echo "
+        <div class=\"row p-3 titolo_pagina text-center\">
+            <h1>Pratiche<br></h1>
+            <h1 style=\"color:white\";>{$row["Nome"]} {$row["Cognome"]}</h1>
+        </div>";
+
+} else {
+    echo "
+        <div class=\"row p-3 titolo_pagina text-center\">
+            <h1>Pratiche<br></h1>
+            <h1 style=\"color:white\";>Archivio</h1>
+        </div>";
+}
+
+if (isset($_POST["new_pratica"]) && $id !== 'all') {
     if ($_POST["new_pratica"] != "0") {
         $id_pratica = $_POST["new_pratica"];
         $protocollo = "$id_operatore-$id_pratica-$id-" . time();
@@ -67,25 +78,38 @@ if (isset($_POST["new_pratica"])) {
 
 <div class="card p-2 m-2">
     <div class="card-body">
+    <?php if ($id !== 'all'): ?>
         <form action="<?php echo "{$sito}Area-Riservata/Pratiche-$id.html" ?>" method="POST">
+    <?php else : ?>
+        <form action="<?php echo "{$sito}Area-Riservata/Pratiche-all.html" ?>" method="POST">
+    <?php endif; ?>
             <div class="row align-items-center">
                 <div class="col-auto">
                     <label>Seleziona tipo di pratica</label>
                 </div>
                 <div class="col-auto">
                     <select name="new_pratica" class="form-select">
+                    <?php if ($id !== 'all'): ?>
                         <option value="0">Seleziona il tipo di pratica</option>
+                    <?php else : ?>
+                        <option value="all">Tutte</option>
+                    <?php endif;?>
                         <?php
 foreach ($pratiche as $pratica) {
+    $selected = isset($_POST['new_pratica']) && $_POST['new_pratica'] == $pratica["id"] ? 'selected': '';
     echo "
-                                    <option class=\"form-control\" value=\"{$pratica["id"]}\">{$pratica["nome"]}</option>
+                                    <option class=\"form-control\" value=\"{$pratica["id"]}\" $selected>{$pratica["nome"]}</option>
                                 ";
 }
 ?>
                     </select>
                 </div>
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">Aggiungi Nuova Pratica</a>
+                    <?php if ($id !== 'all'): ?>
+                        <button type="submit" class="btn btn-primary">Aggiungi Nuova Pratica</a>
+                     <?php else : ?>
+                        <button type="submit" class="btn btn-primary">Filtra</a>
+                    <?php endif;?>
                 </div>
             </div>
         </form>
@@ -114,28 +138,32 @@ if ($livello == 0) {
             <tbody>
         <?php
 
-// $opr = ($livello == 0) ? "" : "AND pratiche.id_Operatore = $id_operatore";
-/**  Aggiunta - Task - Operatori - condividere utenti e pratiche con lo stesso ufficio. */
-$opr = ($livello == 0) ? "" : "AND operatori.Ufficio = {$_SESSION['id_ufficio']}";
-$sql = "SELECT pratiche.*, pratiche.id as idPratica, utenti.*, operatori.*
-        FROM pratiche
-        JOIN utenti ON utenti.id = pratiche.id_Utente 
-        JOIN operatori ON pratiche.id_Operatore = operatori.id
-        WHERE id_utente = ? $opr 
-        ORDER BY data DESC";
+if ($id !== 'all') {
+    /**  Aggiunta - Task - Operatori - condividere utenti e pratiche con lo stesso ufficio. */
+    $opr = ($livello == 0) ? "" : "AND operatori.Ufficio = {$_SESSION['id_ufficio']}";
+    $sql = "SELECT pratiche.*, pratiche.id as idPratica, utenti.*, operatori.*
+            FROM pratiche
+            JOIN utenti ON utenti.id = pratiche.id_Utente
+            JOIN operatori ON pratiche.id_Operatore = operatori.id
+            WHERE id_utente = ? $opr
+            ORDER BY data DESC";
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$result = $stmt->get_result();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+} else {
+    $ufficioObj = new Ufficio($_SESSION['id_ufficio']);
+    if (isset($_POST['new_pratica']) && $_POST['new_pratica'] !== 'all') $result = $ufficioObj->getPraticheByTipologia($_POST['new_pratica']);
+    else $result = $ufficioObj->getPratiche();
+}
 
-$op_pratiche =  getArrayFromDbQuery($result);
-
+$op_pratiche = getArrayFromDbQuery($result);
 
 /** OPERATORE CED */
 $isOperatoreCed = isset($_SESSION["id_operatore_ced"]);
 
-if ($isOperatoreCed) {
+if ($isOperatoreCed && $id !== 'all') {
     $id_operatore_ced = $_SESSION["id_operatore_ced"];
     $operatoreCedObj = new OperatoreCed($id_operatore_ced);
     $resultOC = $operatoreCedObj->getPraticheByUtente($id);
@@ -146,7 +174,7 @@ if ($isOperatoreCed) {
 
     $op_pratiche = removeDuplicateArrayElement($op_pratiche, 'idPratica');
 
-} 
+}
 
 /** FINE OPERATORE CED */
 
@@ -169,13 +197,17 @@ foreach ($op_pratiche as $row) {
 
     $praticaObj = new Pratica($id);
     $pratica_lavorata = $praticaObj->getPraticaLavorata();
-    
-    if ($pratica_lavorata->num_rows > 0) echo '<td><img class="pratica lavorata icon" src="'.$sito.'/media/icon/success.svg"></td>';
-    else if ($pratica_lavorata->num_rows === 0) echo '<td><img class="pratica lavorata icon" src="'.$sito.'/media/icon/failure.svg"></td>';
+
+    if ($pratica_lavorata->num_rows > 0) {
+        echo '<td><img class="pratica lavorata icon" src="' . $sito . '/media/icon/success.svg"></td>';
+    } else if ($pratica_lavorata->num_rows === 0) {
+        echo '<td><img class="pratica lavorata icon" src="' . $sito . '/media/icon/failure.svg"></td>';
+    }
 
     echo "<td>$status</td>";
     echo "</tr>";
 }
+if (empty($op_pratiche)) alert('warning', 'Nessuna pratica presente');
 ?>
 
             </tbody>

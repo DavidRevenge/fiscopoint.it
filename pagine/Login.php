@@ -34,21 +34,21 @@ if (isset($_POST["Username"])) {
     }
 
     if (isset($psw) and password_verify($password, $psw)) {
-        $_SESSION["livello"] = $livello;
-        //      if (isset($row["Servizi"])) $_SESSION["servizi"] = $servizi;
-        $_SESSION["id_operatore"] = $id_operatore;
+        $_SESSION['livello'] = $livello;
+        //      if (isset($row['Servizi'])) $_SESSION['servizi'] = $servizi;
+        $_SESSION['id_operatore'] = $id_operatore;
         
         $operatoreObj = new Operatore($id_operatore);
 
         /** Task - Operatori - condividere utenti e pratiche con lo stesso ufficio. */        
         $id_ufficio = getArrayFromDbQuery($operatoreObj->getUfficio())[0]['Ufficio'];
-        $_SESSION["id_ufficio"] = $id_ufficio;
+        $_SESSION['id_ufficio'] = $id_ufficio;
 
         /** Verifico se l'utente è operatore ced */
         $resultOperatoreCed = $operatoreObj->getOperatoreCed();
         if ($resultOperatoreCed->num_rows > 0) {
             $resultOperatoreCed = getArrayFromDbQuery($resultOperatoreCed);
-            $_SESSION["id_operatore_ced"] = $resultOperatoreCed[0]['id'];
+            $_SESSION['id_operatore_ced'] = $resultOperatoreCed[0]['id'];
         }
 
         echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";

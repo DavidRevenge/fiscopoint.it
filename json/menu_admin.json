@@ -19,5 +19,9 @@
         {
             "etichetta" : "Operatori_CED",
             "sito" : "Operatori_Ced.html"
+        },
+        {
+            "etichetta" : "Archivio Pratiche",
+            "sito" : "Pratiche-all.html"
         }
 ]
