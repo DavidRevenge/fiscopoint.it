@@ -15,15 +15,20 @@ class Ufficio extends FPDatabase
     public function getPratiche() {
         global $livello;
         $sql = UfficioSql::getPratiche();
-        if ($livello > 0) return parent::getStmtResult($sql, array('types' => 's', 'vars' => array($this->id)));
-        else return parent::getStmtResult($sql);
+
+        $anno = isset($_POST['anno_filtro']) ? $_POST['anno_filtro'] : date('Y');
+
+        if ($livello > 0) return parent::getStmtResult($sql, array('types' => 'ss', 'vars' => array($this->id, $anno)));
+        else return parent::getStmtResult($sql, array('types' => 's', 'vars' => array($anno)));
     }
     public function getPraticheByTipologia($tipologia) {
         global $livello;
         $sql = UfficioSql::getPraticheByTipologia();
-        if ($livello > 0) return parent::getStmtResult($sql, array('types' => 'ss', 'vars' => array($this->id, $tipologia)));
-        else return parent::getStmtResult($sql, array('types' => 's', 'vars' => array($tipologia)));
 
+        $anno = isset($_POST['anno_filtro']) ? $_POST['anno_filtro'] : date('Y');
+
+        if ($livello > 0) return parent::getStmtResult($sql, array('types' => 'sss', 'vars' => array($this->id, $tipologia, $anno)));
+        else return parent::getStmtResult($sql, array('types' => 'ss', 'vars' => array($tipologia, $anno)));
     }
 
 }

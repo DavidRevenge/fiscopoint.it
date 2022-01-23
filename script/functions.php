@@ -4,6 +4,13 @@ require_once('functions/constants.php');
 require_once 'functions/db/db.php';
 require_once 'functions/alerts.php';
 
+function getAnniArray($year) {
+    $anni = [--$year];
+    for ($i = 0; $i < ANNI_SELECT; $i++) {
+        $anni[] = --$year;
+    }
+    return $anni;
+}
 function getArrayFromDbQuery($dbQuery) {
     $array = [];
     while ($row = $dbQuery->fetch_assoc()) $array[] = $row;

@@ -105,6 +105,23 @@ foreach ($pratiche as $pratica) {
                     </select>
                 </div>
                 <div class="col-auto">
+                    <label>Anno</label>
+                </div>
+                <div class="col-auto">
+                    <select name="anno_filtro" class="form-select">
+                        <option value="<?php echo date('Y'); ?>"><?php $currentYear = date('Y'); echo $currentYear; ?></option>
+                        <?php
+                        $anni = getAnniArray($currentYear);
+                        foreach ($anni as $anno) {
+                            $selected = isset($_POST['anno_filtro']) && $_POST['anno_filtro'] == $anno ? 'selected': '';
+                            echo "
+                                                            <option class=\"form-control\" value=\"{$anno}\" $selected>{$anno}</option>
+                                                        ";
+                        }
+                    ?>
+                                        </select>
+                 </div>
+                <div class="col-auto">
                     <?php if ($id !== 'all'): ?>
                         <button type="submit" class="btn btn-primary">Aggiungi Nuova Pratica</a>
                      <?php else : ?>

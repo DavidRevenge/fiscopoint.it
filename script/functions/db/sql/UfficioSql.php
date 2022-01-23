@@ -13,7 +13,10 @@ class UfficioSql {
     public static function getPratiche() {
         global $livello;
         $opr = ($livello == 0) ? "" : " WHERE Ufficio = ?";
-        $sql = "SELECT pratiche.*, pratiche.id as idPratica, operatori.*
+
+        $opr .= ' AND FROM_UNIXTIME(Data, \'%Y\') = ?';
+
+        $sql = "SELECT FROM_UNIXTIME(Data, '%Y'), pratiche.*, pratiche.id as idPratica, operatori.*
         FROM pratiche
         JOIN operatori ON pratiche.id_Operatore = operatori.id
         $opr
@@ -22,8 +25,11 @@ class UfficioSql {
     }
     public static function getPraticheByTipologia() {
         global $livello;
-        $opr = ($livello == 0) ? 'WHERE '.UfficioSql::$tipologia.' = ? ' : ' WHERE Ufficio = ? AND '.UfficioSql::$tipologia.' = ? ';
-        $sql = "SELECT pratiche.*, pratiche.id as idPratica, operatori.*
+        $opr = ($livello == 0) ? 'WHERE '.UfficioSql::$tipologia.' = ? ' : ' WHERE Ufficio = ? AND '.UfficioSql::$tipologia.' = ?';
+
+        $opr .=  ' AND FROM_UNIXTIME(Data, \'%Y\') = ?';
+
+        $sql = "SELECT FROM_UNIXTIME(Data, '%Y'), pratiche.*, pratiche.id as idPratica, operatori.*
         FROM pratiche
         JOIN operatori ON pratiche.id_Operatore = operatori.id 
         $opr
