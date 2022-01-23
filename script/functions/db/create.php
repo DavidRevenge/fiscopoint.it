@@ -81,8 +81,7 @@ function create_pratiche_lavorate_table()
     global $conn;
     $sql = "CREATE TABLE IF NOT EXISTS `pratiche_lavorate` (
         `id_pratica` INT NOT NULL,
-        `id_operatore_ced` INT NOT NULL,
-        PRIMARY KEY (`id_pratica`, `id_operatore_ced`)
+        PRIMARY KEY (`id_pratica`)
       )";
 
     $conn->query($sql);

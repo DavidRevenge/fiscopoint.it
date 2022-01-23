@@ -1,25 +1,6 @@
 <?php
 class OperatoreCedSql
 {
-    public static function rimuoviPraticaLavorata()
-     {
-         $sql = "DELETE FROM pratiche_lavorate
-             WHERE id_pratica = ? AND id_operatore_ced = ?";
-         return $sql;
-     }
-    public static function getPraticaLavorata()
-    {
-        $sql = "SELECT `id_pratica`, `id_operatore_ced`
-        FROM pratiche_lavorate
-        WHERE id_pratica = ?";
-        return $sql;
-    }
-    public static function getLavoraPratica()
-    {
-        $sql = "INSERT INTO pratiche_lavorate (id_pratica, id_operatore_ced)
-        VALUES (?, ?);";
-        return $sql;
-    }
     public static function getPraticheSelect()
     {
         $sql = "SELECT `pratiche`.`id`,

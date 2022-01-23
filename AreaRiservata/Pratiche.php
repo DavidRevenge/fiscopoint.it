@@ -167,8 +167,8 @@ foreach ($op_pratiche as $row) {
                     <td>$protocollo</td>";
     if ($livello == 0) {echo "<td>$user_oper</td>";}
 
-    $operatoreCedObj = new OperatoreCed();
-    $pratica_lavorata = $operatoreCedObj->getPraticaLavorata($id);
+    $praticaObj = new Pratica($id);
+    $pratica_lavorata = $praticaObj->getPraticaLavorata();
     
     if ($pratica_lavorata->num_rows > 0) echo '<td><img class="pratica lavorata icon" src="'.$sito.'/media/icon/success.svg"></td>';
     else if ($pratica_lavorata->num_rows === 0) echo '<td><img class="pratica lavorata icon" src="'.$sito.'/media/icon/failure.svg"></td>';
