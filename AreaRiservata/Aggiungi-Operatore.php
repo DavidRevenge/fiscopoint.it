@@ -15,8 +15,9 @@
         return;
     } 
     // titolo della pagina
-    $titolo_pagina = "Operatori";
-    include("template/titolo_pagina.php");
+    $titolo_pagina = "Aggiungi Operatore";
+    include("template/titolo_pagina.php");    
+    include("template/breadcrumb.php");
     
     $operatori = json_decode(file_get_contents("json/operatori.json"), true);
     //$mn_servizi = json_decode(file_get_contents("json/servizi.json"), true);

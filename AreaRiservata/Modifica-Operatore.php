@@ -19,6 +19,7 @@ if ($livello != 0) {
 // titolo della pagina
 $titolo_pagina = "Modifica operatore";
 include "template/titolo_pagina.php";
+include("template/breadcrumb.php");
 
 $anagrafica = json_decode(file_get_contents("json/operatori.json"), true);
 

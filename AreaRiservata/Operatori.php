@@ -5,7 +5,15 @@
     } 
     // titolo della pagina
     $titolo_pagina = "Operatori";
+    
+    //breadcrumb
+    unset($_SESSION['breadcrumb']);
+
     include("template/titolo_pagina.php");
+    include("template/breadcrumb.php");
+
+    //breadcrumb
+    $_SESSION['breadcrumb'] = array($titolo_pagina => 'Area-Riservata/'.$titolo_pagina.'.html');
 
     $livelli_json = json_decode(file_get_contents("json/livelli.json"), true);
 

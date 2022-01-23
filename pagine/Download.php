@@ -1,4 +1,4 @@
-<<?php 
+<?php 
     // titolo della pagina
     $titolo_pagina = "Download";
     include("template/titolo_pagina.php"); 

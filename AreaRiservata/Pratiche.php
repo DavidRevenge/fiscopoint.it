@@ -18,8 +18,13 @@ while ($p = $db_pratiche->fetch_assoc()) {
 }
 
 $id = (isset($_GET["id"])) ? $_GET["id"] : 0;
+     
 
 if ($id !== 'all') {
+
+    $_SESSION['breadcrumb'] = array(
+        'Utenti' => 'Area-Riservata/Utenti.html'
+    );
 
     $sql = "SELECT * FROM utenti WHERE id = ?";
     $stmt = $conn->prepare($sql);
@@ -30,19 +35,56 @@ if ($id !== 'all') {
     $nome = $row["Nome"];
     $cognome = $row["Cognome"];
 
+    $titolo_pagina = 'Pratiche';
+
     echo "
         <div class=\"row p-3 titolo_pagina text-center\">
-            <h1>Pratiche<br></h1>
+            <h1>$titolo_pagina<br></h1>
             <h1 style=\"color:white\";>{$row["Nome"]} {$row["Cognome"]}</h1>
         </div>";
 
 } else {
+    
+    //breadcrumb
+    unset($_SESSION['breadcrumb']);
+
+    $titolo_pagina = 'Archivio Pratiche';
+    $titolo_pagina_explode = explode(' ', $titolo_pagina);
     echo "
         <div class=\"row p-3 titolo_pagina text-center\">
-            <h1>Pratiche<br></h1>
-            <h1 style=\"color:white\";>Archivio</h1>
+            <h1>{$titolo_pagina_explode[1]}<br></h1>
+            <h1 style=\"color:white\";>{$titolo_pagina_explode[0]}</h1>
         </div>";
 }
+
+?>
+
+<!-- Breadcrumb -->
+<div class="row breadcrumbBox">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb fp">
+            <li class="breadcrumb-item"><a href="<?php echo $sito ?>">Home</a></li>
+
+            <?php 
+                if (isset($_SESSION['breadcrumb'])) {
+                    foreach ($_SESSION['breadcrumb'] as $name => $url) echo '<li class="breadcrumb-item"><a href="'.$sito.$url.'">'.$name.'</a></li>';
+                }
+            ?>
+
+            <li class="breadcrumb-item active" aria-current="page"><?php echo $titolo_pagina; ?></li>
+        </ol>
+    </nav>
+</div>
+
+<?php
+//breadcrumb
+if ($id !== 'all') {
+    $_SESSION['breadcrumb'] = array(
+        'Utenti' => 'Area-Riservata/Utenti.html',
+        $titolo_pagina => 'Area-Riservata/Pratiche-'.$_GET["id"].'.html'
+    );
+} else $_SESSION['breadcrumb'] = array($titolo_pagina => 'Area-Riservata/Pratiche-all.html');
+
 
 if (isset($_POST["new_pratica"]) && $id !== 'all') {
     if ($_POST["new_pratica"] != "0") {
@@ -104,23 +146,26 @@ foreach ($pratiche as $pratica) {
 ?>
                     </select>
                 </div>
-                <div class="col-auto">
-                    <label>Anno</label>
-                </div>
-                <div class="col-auto">
-                    <select name="anno_filtro" class="form-select">
-                        <option value="<?php echo date('Y'); ?>"><?php $currentYear = date('Y'); echo $currentYear; ?></option>
-                        <?php
-                        $anni = getAnniArray($currentYear);
-                        foreach ($anni as $anno) {
-                            $selected = isset($_POST['anno_filtro']) && $_POST['anno_filtro'] == $anno ? 'selected': '';
-                            echo "
-                                                            <option class=\"form-control\" value=\"{$anno}\" $selected>{$anno}</option>
-                                                        ";
-                        }
-                    ?>
-                                        </select>
-                 </div>
+
+                <?php if ($id === 'all'): ?>
+                    <div class="col-auto">
+                        <label>Anno</label>
+                    </div>
+                    <div class="col-auto">
+                        <select name="anno_filtro" class="form-select">
+                            <option value="<?php echo date('Y'); ?>"><?php $currentYear = date('Y'); echo $currentYear; ?></option>
+                            <?php
+                            $anni = getAnniArray($currentYear);
+                            foreach ($anni as $anno) {
+                                $selected = isset($_POST['anno_filtro']) && $_POST['anno_filtro'] == $anno ? 'selected': '';
+                                echo "
+                                                                <option class=\"form-control\" value=\"{$anno}\" $selected>{$anno}</option>
+                                                            ";
+                            }
+                        ?>
+                                            </select>
+                    </div>
+                <?php endif;?>          
                 <div class="col-auto">
                     <?php if ($id !== 'all'): ?>
                         <button type="submit" class="btn btn-primary">Aggiungi Nuova Pratica</a>

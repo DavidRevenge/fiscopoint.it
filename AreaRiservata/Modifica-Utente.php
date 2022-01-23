@@ -6,6 +6,7 @@
     // titolo della pagina
     $titolo_pagina = "Modifica utente";
     include("template/titolo_pagina.php");
+    include("template/breadcrumb.php");
     
     $utenti = json_decode(file_get_contents("json/utenti.json"), true);    
 

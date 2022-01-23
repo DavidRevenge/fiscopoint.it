@@ -97,20 +97,34 @@ $data = utf8_encode(strftime('%A %d %B %Y', $row["Data"]));
 $protocollo = $row["Protocollo"];
 $id_utente = "ID{$row["id"]}";
 
-// $operatoreCedObj = new OperatoreCed($_SESSION['id_operatore_ced']);
-// $result = $operatoreCedObj->getPraticheByUtente($row["id"]);
-// if ($result->num_rows <= 0) {
-//     echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
-//     return;
-// }
 
 $title = str_replace("-", " ", $page);
+
+$titolo_pagina = $title.' '.$pratica;
+
 echo "
     <div class=\"row p-3 titolo_pagina text-center\">
         <h1>$title: $pratica</h1>
         <h1>$data<br>{$row["Nome"]} {$row["Cognome"]}</h1>
     </div>";
 ?>
+
+<!-- Breadcrumb -->
+<div class="row breadcrumbBox">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb fp">
+            <li class="breadcrumb-item"><a href="<?php echo $sito ?>">Home</a></li>
+
+            <?php 
+                if (isset($_SESSION['breadcrumb'])) {
+                    foreach ($_SESSION['breadcrumb'] as $name => $url) echo '<li class="breadcrumb-item"><a href="'.$sito.$url.'">'.$name.'</a></li>';
+                }
+            ?>
+
+            <li class="breadcrumb-item active" aria-current="page"><?php echo $titolo_pagina; ?></li>
+        </ol>
+    </nav>
+</div>
 
 <script src="<?php echo $sito ?>js/upload.js"></script>
 

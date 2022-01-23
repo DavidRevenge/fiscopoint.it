@@ -6,9 +6,17 @@ if ($livello != 0) {
     echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
     return;
 }
+
+//breadcrumb
+unset($_SESSION['breadcrumb']);
+
 // titolo della pagina
 $titolo_pagina = "Operatori CED";
 include "template/titolo_pagina.php";
+include("template/breadcrumb.php");
+
+//breadcrumb
+$_SESSION['breadcrumb'] = array($titolo_pagina => 'Area-Riservata/Operatori_Ced.html');
 
 $livelli_json = json_decode(file_get_contents("json/livelli.json"), true);
 

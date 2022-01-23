@@ -3,6 +3,11 @@ body {
     margin-top: 0;
 }
 
+.fp.breadcrumb {
+    margin-top: 1rem;
+    padding-left: 0.6rem;
+}
+
 label.form-check-label, input.form-check-input, select.form-select { cursor: pointer; }
 
 .pratica.lavorata.icon {

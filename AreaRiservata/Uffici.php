@@ -4,9 +4,17 @@
         return;
     } 
 
-    // titolo della pagina
-    $titolo_pagina = "Uffici";
-    include("template/titolo_pagina.php");
+
+     //breadcrumb
+     unset($_SESSION['breadcrumb']);
+
+     // titolo della pagina
+     $titolo_pagina = "Uffici";
+     include("template/titolo_pagina.php");
+     include("template/breadcrumb.php");
+     
+     //breadcrumb
+     $_SESSION['breadcrumb'] = array($titolo_pagina => 'Area-Riservata/'.$titolo_pagina.'.html');
 
 ?>
 <div class="card p-2 m-2">  

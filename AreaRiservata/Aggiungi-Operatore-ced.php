@@ -11,6 +11,7 @@ if ($livello != 0) {
 // titolo della pagina
 $titolo_pagina = "Operatori CED";
 include "template/titolo_pagina.php";
+include("template/breadcrumb.php");
 
 $operatori = json_decode(file_get_contents("json/operatori_ced.json"), true);
 $mn_servizi = json_decode(file_get_contents("json/servizi.json"), true);
