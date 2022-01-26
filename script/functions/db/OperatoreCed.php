@@ -12,6 +12,11 @@ class OperatoreCed extends FPDatabase
         $sql = OperatoreCedSql::getPraticheSelect();
         return parent::getStmtResult($sql, array('types' => 's', 'vars' => array($this->id)));
     }
+    public function getPraticheArchivio()
+    {
+        $sql = OperatoreCedSql::getPraticheArchivioSelect();
+        return parent::getStmtResult($sql, array('types' => 's', 'vars' => array($this->id)));
+    }
     public function getPraticheByUtente($id_utente)
     {
         $sql = OperatoreCedSql::getPraticheByUtenteSelect();
@@ -53,5 +58,11 @@ class OperatoreCed extends FPDatabase
     {
         $sql = OperatoreCedSql::getServizioDelete();
         parent::executeStmt($sql, array('types' => 'sss', 'vars' => array($id_operatore, $id_servizio, $this->id)));
+    }
+    public function lavoraPratica($id_pratica)
+    {
+        if (NEED_CREATE_TABLES) create_pratiche_lavorate_ced_table();
+        $sql = OperatoreCedSql::getLavoraPratica();
+        return parent::executeStmt($sql, array('types' => 'ss', 'vars' => array($id_pratica, $this->id)));
     }
 }

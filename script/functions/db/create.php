@@ -76,6 +76,16 @@ function create_operatori_ced_table()
 
     $conn->query($sql);
 }
+function create_pratiche_lavorate_ced_table()
+{
+    global $conn;
+    $sql = "CREATE TABLE `pratiche_lavorate_ced` (
+        `id_pratica` int DEFAULT NULL,
+        `id_operatore_ced` varchar(45) DEFAULT NULL
+        )";
+
+    $conn->query($sql);
+}
 function create_pratiche_lavorate_table()
 {
     global $conn;
@@ -90,8 +100,8 @@ function populateServiziSezioniTipologiaPratica()
 {
     global $livello;
     if (isset($_POST['popolaTabelle']) && $_POST['popolaTabelle'] === "1" && $livello === 0) {
-        global $conn;   
-        $commands = file_get_contents(__DIR__.'/export/new_tables_servizi_sezioni_tipologia_pratica.sql');
+        global $conn;
+        $commands = file_get_contents(__DIR__ . '/export/new_tables_servizi_sezioni_tipologia_pratica.sql');
         $conn->multi_query($commands);
     }
 }

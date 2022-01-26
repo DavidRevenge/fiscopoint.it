@@ -6,8 +6,10 @@
             <?php
                 if($livello == 0) {
                     $mn_riservato = json_decode(file_get_contents("json/menu_admin.json"), true);
-                } else if ($livello >= 1 ) {
+                } else if ($livello == 1 ) {
                     $mn_riservato = json_decode(file_get_contents("json/menu_operatori.json"), true);
+                } else if ($livello == 2 ) {
+                    $mn_riservato = json_decode(file_get_contents("json/menu_operatori_ced.json"), true);
                 }
                 
 

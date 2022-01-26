@@ -288,12 +288,17 @@ if (isset($_POST['lavoraPratica']) && $_POST['lavoraPratica'] === '1') {
         $praticaObj = new Pratica($_GET["id"]);
         $pratica_lavorata = $praticaObj->getPraticaLavorata();
 
+        if ($pratica_lavorata->num_rows > 0 && $livello === 2) {
+            echo '<script type="text/javascript">window.location.replace("'.$sito.'Area-Riservata/Pratiche-all.html");</script>';
+            return;
+        }
+
        // }
     ?>
     <?php if ($pratica_lavorata->num_rows === 0): ?>
         <form action="<?php echo $sito ?>Area-Riservata/Pratica-<?php echo $_GET["id"]; ?>.html" method="POST">
             <input type="hidden" name="lavoraPratica" value="1">
-            <button type="submit" class="btn btn-primary w-100 my-4">Aggiungi alle lavorate</button>
+            <button onclick="if(confirm('Lavorare la pratica?')) { return true; } else { return false; }" type="submit" class="btn btn-primary w-100 my-4">Aggiungi alle lavorate</button>
         </form>
     <?php elseif ($pratica_lavorata->num_rows > 0): ?>
         <form action="<?php echo $sito ?>Area-Riservata/Pratica-<?php echo $_GET["id"]; ?>.html" method="POST">

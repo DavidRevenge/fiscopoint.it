@@ -225,10 +225,11 @@ $op_pratiche = getArrayFromDbQuery($result);
 /** OPERATORE CED */
 $isOperatoreCed = isset($_SESSION["id_operatore_ced"]);
 
-if ($isOperatoreCed && $id !== 'all') {
+if ($isOperatoreCed) {
     $id_operatore_ced = $_SESSION["id_operatore_ced"];
     $operatoreCedObj = new OperatoreCed($id_operatore_ced);
-    $resultOC = $operatoreCedObj->getPraticheByUtente($id);
+   // $resultOC = $operatoreCedObj->getPraticheByUtente($id);
+    $resultOC = $operatoreCedObj->getPraticheArchivio();
 
     $opc_pratiche = getArrayFromDbQuery($resultOC);
 
@@ -250,15 +251,19 @@ foreach ($op_pratiche as $row) {
     $protocollo = explode("-", $row["Protocollo"])[3];
     $user_oper = $row["Username"];
 
+    
+
+    $praticaObj = new Pratica($id);
+    $pratica_lavorata = $praticaObj->getPraticaLavorata();
+
+    if ($pratica_lavorata->num_rows > 0 && $livello == 2) continue;
+
     $status = "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Area-Riservata/Pratica-$id.html\">Entra</a>";
     echo "<tr>
                     <td>$data</td>
                     <td>$pratica</td>
                     <td>$protocollo</td>";
     if ($livello == 0) {echo "<td>$user_oper</td>";}
-
-    $praticaObj = new Pratica($id);
-    $pratica_lavorata = $praticaObj->getPraticaLavorata();
 
     if ($pratica_lavorata->num_rows > 0) {
         echo '<td><img class="pratica lavorata icon" src="' . $sito . '/media/icon/success.svg"></td>';

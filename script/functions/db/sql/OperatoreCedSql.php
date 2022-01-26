@@ -1,6 +1,22 @@
 <?php
 class OperatoreCedSql
 {
+    public static function getLavoraPratica()
+    {
+        $sql = "INSERT INTO pratiche_lavorate_ced (id_pratica, id_operatore_ced)
+        VALUES (?, ?);";
+        return $sql;
+    }
+    public static function getPraticheArchivioSelect()
+    {
+        $sql = "SELECT pratiche.*, pratiche.id as idPratica, operatori.*
+            FROM pratiche
+            JOIN operatori ON pratiche.id_Operatore = operatori.id
+            JOIN servizio_operatori_ced AS soc ON soc.id_servizio = pratiche.id_Pratica
+            WHERE id_operatore_ced = ?
+            ORDER BY data DESC;";
+        return $sql;
+    }
     public static function getPraticheSelect()
     {
         $sql = "SELECT `pratiche`.`id`,

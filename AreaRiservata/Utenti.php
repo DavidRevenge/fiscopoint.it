@@ -2,7 +2,8 @@
 
     require_once('script/functions.php');
 
-    if($livello == 100) {
+    /** Se un profilo è solo operatore ced, non dovrebbe vedere nel menu la voce Utenti - https://trello.com/c/JVLoUyX9/24-operatore-ced*/
+    if($livello == 100 || $livello == 2) {
         echo "<script type=\"text/javascript\">window.location.replace(\"$sito\");</script>";
         return;
     } 
