@@ -5,7 +5,10 @@
 
             <?php 
                 if (isset($_SESSION['breadcrumb'])) {
-                    foreach ($_SESSION['breadcrumb'] as $name => $url) echo '<li class="breadcrumb-item"><a href="'.$sito.$url.'">'.$name.'</a></li>';
+                    foreach ($_SESSION['breadcrumb'] as $name => $url) {
+						if (strpos($url, 'CED')) $url = str_replace('CED', 'Ced', $url);
+						echo '<li class="breadcrumb-item"><a href="'.$sito.$url.'">'.$name.'</a></li>';
+					} 
                 }
             ?>
 
