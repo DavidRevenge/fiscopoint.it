@@ -164,8 +164,25 @@ foreach ($pratiche as $pratica) {
                             }
                         ?>
                                             </select>
+                    </div> 
+                
+                <div class="col-auto">
+                        <label>Stato</label>
                     </div>
-                <?php endif;?>          
+                    <div class="col-auto">
+                        <select name="stato_filtro" class="form-select">
+                            <?php
+                            $stato = ['Tutte', 'Lavorate', 'Da Lavorare'];
+                            foreach ($stato as $s) {
+                                $selected = isset($_POST['stato_filtro']) && $_POST['stato_filtro'] == $s ? 'selected': '';
+                                echo "
+                                                                <option class=\"form-control\" value=\"{$s}\" $selected>{$s}</option>
+                                                            ";
+                            }
+                        ?>
+                                            </select>
+                    </div>   
+                <?php endif;?>      
                 <div class="col-auto">
                     <?php if ($id !== 'all'): ?>
                         <button type="submit" class="btn btn-primary">Aggiungi Nuova Pratica</a>
@@ -260,6 +277,9 @@ foreach ($op_pratiche as $row) {
     $utente = getArrayFromDbQuery($praticaObj->getUtente())[0];
 
     if ($pratica_lavorata->num_rows > 0 && $livello == 2) continue;
+
+    if ( $pratica_lavorata->num_rows === 0 && $_POST['stato_filtro'] === 'Lavorate') continue;
+    else if ( $pratica_lavorata->num_rows > 0 && $_POST['stato_filtro'] === 'Da Lavorare') continue;
 
     $status = "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Area-Riservata/Pratica-$id.html\">Entra</a>";
     echo "<tr>
