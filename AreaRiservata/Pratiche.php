@@ -185,6 +185,7 @@ foreach ($pratiche as $pratica) {
         <table class="table table-hover align-middle">
             <thead>
                 <tr>
+                    <th scope="col">Utente</th>
                     <th scope="col">Data di inserimento</th>
                     <th scope="col">Pratica</th>
                     <th scope="col">Protocollo</th>
@@ -251,15 +252,18 @@ foreach ($op_pratiche as $row) {
     $protocollo = explode("-", $row["Protocollo"])[3];
     $user_oper = $row["Username"];
 
-    
+    $utente_pratica = '';    
 
     $praticaObj = new Pratica($id);
     $pratica_lavorata = $praticaObj->getPraticaLavorata();
+
+    $utente = getArrayFromDbQuery($praticaObj->getUtente())[0];
 
     if ($pratica_lavorata->num_rows > 0 && $livello == 2) continue;
 
     $status = "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Area-Riservata/Pratica-$id.html\">Entra</a>";
     echo "<tr>
+                    <td>{$utente['Nome']} {$utente['Cognome']}</td>
                     <td>$data</td>
                     <td>$pratica</td>
                     <td>$protocollo</td>";

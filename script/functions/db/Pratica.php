@@ -25,4 +25,9 @@ class Pratica extends FPDatabase
         $sql = PraticaSql::getPraticaLavorata();
         return parent::getStmtResult($sql, array('types' => 's', 'vars' => array($this->id)));
     }
+    public function getUtente()
+    {
+        $sql = PraticaSql::getUtente();
+        return parent::getStmtResult($sql, array('types' => 's', 'vars' => array($this->id)));
+    }    
 }

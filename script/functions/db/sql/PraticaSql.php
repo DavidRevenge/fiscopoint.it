@@ -20,4 +20,12 @@ class PraticaSql
         VALUES (?);";
         return $sql;
     }
+    public static function getUtente()
+    {
+        $sql = "SELECT u.id, u.Nome, u.Cognome
+        FROM pratiche
+        JOIN utenti as u ON u.id = pratiche.id_Utente
+        WHERE pratiche.id = ?";
+        return $sql;
+    }
 }
