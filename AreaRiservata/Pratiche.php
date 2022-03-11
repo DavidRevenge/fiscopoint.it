@@ -278,8 +278,10 @@ foreach ($op_pratiche as $row) {
 
     if ($pratica_lavorata->num_rows > 0 && $livello == 2) continue;
 
-    if ( $pratica_lavorata->num_rows === 0 && $_POST['stato_filtro'] === 'Lavorate') continue;
-    else if ( $pratica_lavorata->num_rows > 0 && $_POST['stato_filtro'] === 'Da Lavorare') continue;
+    if (isset($_POST['stato_filtro'])) {
+        if ( $pratica_lavorata->num_rows === 0 && $_POST['stato_filtro'] === 'Lavorate') continue;
+        else if ( $pratica_lavorata->num_rows > 0 && $_POST['stato_filtro'] === 'Da Lavorare') continue;
+    }
 
     $status = "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Area-Riservata/Pratica-$id.html\">Entra</a>";
     echo "<tr>
