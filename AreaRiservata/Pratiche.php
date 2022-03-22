@@ -255,6 +255,12 @@ if ($isOperatoreCed) {
 
     $op_pratiche = removeDuplicateArrayElement($op_pratiche, 'idPratica');
 
+    /** Task -> https://trello.com/c/zT0M62bK/32-sono-entrato-online-con-il-profilo-enrico-e-lho-modificato-da-operatore-ced-a-operatore-ufficio-sono-andato-in-archivio-pratiche */
+    if ($_POST['new_pratica'] !== 'all') {
+		$op_pratiche = array_filter($op_pratiche, function($p) {
+			return $p['id_Pratica'] == $_POST['new_pratica'];
+		});
+	}
 }
 
 /** FINE OPERATORE CED */
