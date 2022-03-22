@@ -243,7 +243,7 @@ $op_pratiche = getArrayFromDbQuery($result);
 /** OPERATORE CED */
 $isOperatoreCed = isset($_SESSION["id_operatore_ced"]);
 
-if ($isOperatoreCed && $_POST['new_pratica'] === 'all') {
+if ($isOperatoreCed) {
     $id_operatore_ced = $_SESSION["id_operatore_ced"];
     $operatoreCedObj = new OperatoreCed($id_operatore_ced);
    // $resultOC = $operatoreCedObj->getPraticheByUtente($id);
