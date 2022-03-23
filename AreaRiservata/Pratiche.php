@@ -260,6 +260,20 @@ if ($isOperatoreCed) {
 		$op_pratiche = array_filter($op_pratiche, function($p) {
 			return $p['id_Pratica'] == $_POST['new_pratica'];
 		});
+        if (isset($_POST['anno_filtro'])) {
+            $op_pratiche = array_filter($op_pratiche, function($p) {
+				$data =  date('Y', $p['Data']);
+                return $data === $_POST['anno_filtro'];
+            });
+        }
+        
+	} else {
+        if (isset($_POST['anno_filtro'])) {
+            $op_pratiche = array_filter($op_pratiche, function($p) {
+				$data =  date('Y', $p['Data']);
+                return $data === $_POST['anno_filtro'];
+            });
+        }		
 	}
 }
 

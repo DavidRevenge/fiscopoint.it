@@ -29,7 +29,7 @@ class UfficioSql {
 
         $opr .=  ' AND FROM_UNIXTIME(Data, \'%Y\') = ?';
 
-        $sql = "SELECT FROM_UNIXTIME(Data, '%Y'), pratiche.*, pratiche.id as idPratica, operatori.*
+        $sql = "SELECT FROM_UNIXTIME(Data, '%Y') as data_pratica, pratiche.*, pratiche.id as idPratica, operatori.*
         FROM pratiche
         JOIN operatori ON pratiche.id_Operatore = operatori.id 
         $opr
