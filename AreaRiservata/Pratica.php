@@ -58,7 +58,16 @@ $stmt->execute();
 $result = $stmt->get_result();
 $notifiche = "";
 while ($row = $result->fetch_assoc()) {
-    $dt = utf8_encode(strftime('%A %d %B %Y - %H:%M:%S', $row["Data"]));
+
+    $fmt = new IntlDateFormatter('IT',
+    IntlDateFormatter::FULL, 
+    IntlDateFormatter::FULL
+    );
+    $fmt->setPattern('EEEE dd LLL yyyy - HH:mm:ss');
+    $dt =  $fmt->format($row["Data"]);// display venerdì 15 apr 2022
+
+    //$dt = utf8_encode(strftime('%A %d %B %Y - %H:%M:%S', $row["Data"]));
+
     $notifiche .= "<strong>{$row["NomeCognome"]}</strong> - $dt<br>{$row["Testo"]}<br><hr>";
 }
 ;
@@ -93,7 +102,18 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $key = array_search($row["id_Pratica"], array_column($pratiche, 'id'));
 $pratica = $pratiche[$key]["nome"];
-$data = utf8_encode(strftime('%A %d %B %Y', $row["Data"]));
+
+$fmt = new IntlDateFormatter('IT',
+    IntlDateFormatter::FULL, 
+    IntlDateFormatter::FULL
+    );
+    $fmt->setPattern('EEEE dd LLL yyyy');
+    $data =  $fmt->format($row["Data"]);// display venerdì 15 apr 2022
+
+
+//$data = utf8_encode(strftime('%A %d %B %Y', $row["Data"]));
+
+
 $protocollo = $row["Protocollo"];
 $id_utente = "ID{$row["id"]}";
 
@@ -265,7 +285,16 @@ if (isset($_POST['lavoraPratica']) && $_POST['lavoraPratica'] === '1') {
                                     $nome_documento = $row["Nome_Documento"];
                                     $caricato = $row["Username"];
                                     $file = $row["Nome_File"];
-                                    $data = utf8_encode(strftime('%A %d %B %Y', $row["Data"]));
+
+                                    $fmt = new IntlDateFormatter('IT',
+                                    IntlDateFormatter::FULL, 
+                                    IntlDateFormatter::FULL
+                                    );
+                                    $fmt->setPattern('EEEE dd LLL yyyy');
+                                    $data =  $fmt->format($row["Data"]);// display venerdì 15 apr 2022
+                                    
+                                   // $data = utf8_encode(strftime('%A %d %B %Y', $row["Data"]));
+
                                     $var = rand();
                                     $note = $row["Note"];
                                     $status = "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Anteprima-$id.html?var=$var\" target=\"_blank\">Visualizza</a>";

@@ -285,7 +285,22 @@ foreach ($op_pratiche as $row) {
     $id_pratica = $row["id_Pratica"];
     $key = array_search($id_pratica, array_column($pratiche, 'id'));
     $pratica = $pratiche[$key]["nome"];
-    $data = utf8_encode(strftime('%A %d %B %Y', $row["Data"]));
+
+    // $date = DateTimeImmutable::createFromFormat('U', $row["Data"]);
+    // $strftime =  $date->format('D d F Y');    
+
+   // $data = utf8_encode(strftime('%A %d %B %Y', $row["Data"]));
+
+    $fmt = new IntlDateFormatter('IT',
+    IntlDateFormatter::FULL, 
+    IntlDateFormatter::FULL
+    );
+    $fmt->setPattern('EEEE dd LLL yyyy');
+    $data =  $fmt->format($row["Data"]);// display venerdì 15 apr 2022
+
+
+    //$data = $strftime;
+
     $protocollo = explode("-", $row["Protocollo"])[3];
     $user_oper = $row["Username"];
 
@@ -298,10 +313,19 @@ foreach ($op_pratiche as $row) {
 
     if ($pratica_lavorata->num_rows > 0 && $livello == 2) continue;
 
+    /* Non vado avanti se l'operatore ced non è collegato all'operatore ed il servizio */
+    $operatoreCedObj = new OperatoreCed($id_operatore_ced);
+    $result = $operatoreCedObj->findOperatoreServizio($row["id_Operatore"], $row["id_Pratica"]);
+
+    if ($result->num_rows === 0) continue;
+
     if (isset($_POST['stato_filtro'])) {
         if ( $pratica_lavorata->num_rows === 0 && $_POST['stato_filtro'] === 'Lavorate') continue;
         else if ( $pratica_lavorata->num_rows > 0 && $_POST['stato_filtro'] === 'Da Lavorare') continue;
     }
+
+
+   //echo '<pre>'; var_dump($row); echo '</pre>';
 
     $status = "<a class=\"ms-2 btn btn-primary lista_operatori\" href=\"{$sito}Area-Riservata/Pratica-$id.html\">Entra</a>";
     echo "<tr>

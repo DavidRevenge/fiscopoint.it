@@ -1,6 +1,13 @@
 <?php
 class OperatoreCedSql
 {
+    public static function getFindOperatoreServizioSelect()
+    {
+        $sql = "SELECT id_operatore, id_servizio, id_operatore_ced
+            FROM servizio_operatori_ced
+            WHERE id_operatore = ? and id_servizio = ? and id_operatore_ced = ?";
+        return $sql;
+    }
     public static function getLavoraPratica()
     {
         $sql = "INSERT INTO pratiche_lavorate_ced (id_pratica, id_operatore_ced)

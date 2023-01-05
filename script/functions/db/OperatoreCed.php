@@ -7,6 +7,10 @@ class OperatoreCed extends FPDatabase
     {
         $this->id = $id;
     }
+    public function findOperatoreServizio($id_operatore, $id_servizio) {
+        $sql = OperatoreCedSql::getFindOperatoreServizioSelect();
+        return parent::getStmtResult($sql, array('types' => 'sss', 'vars' => array($id_operatore, $id_servizio, $this->id)));
+    }
     public function getPratiche()
     {
         $sql = OperatoreCedSql::getPraticheSelect();
