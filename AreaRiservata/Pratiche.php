@@ -313,11 +313,15 @@ foreach ($op_pratiche as $row) {
 
     if ($pratica_lavorata->num_rows > 0 && $livello == 2) continue;
 
-    /* Non vado avanti se l'operatore ced non è collegato all'operatore ed il servizio */
-    $operatoreCedObj = new OperatoreCed($id_operatore_ced);
-    $result = $operatoreCedObj->findOperatoreServizio($row["id_Operatore"], $row["id_Pratica"]);
+    if (isset($id_operatore_ced)) {
 
-    if ($result->num_rows === 0) continue;
+        /* Non vado avanti se l'operatore ced non è collegato all'operatore ed il servizio */
+        $operatoreCedObj = new OperatoreCed($id_operatore_ced);
+        $result = $operatoreCedObj->findOperatoreServizio($row["id_Operatore"], $row["id_Pratica"]);
+    
+        if ($result->num_rows === 0) continue;
+
+    }
 
     if (isset($_POST['stato_filtro'])) {
         if ( $pratica_lavorata->num_rows === 0 && $_POST['stato_filtro'] === 'Lavorate') continue;
